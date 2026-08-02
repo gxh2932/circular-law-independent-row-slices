@@ -1,0 +1,219 @@
+\section{Introduction}
+
+\subsection{The model and the main result}
+
+For integers $1\le d\le n$, let
+\[
+  \Omega_{n,d}:=\set{x\in\set{0,1}^n:\ \sum_{j=1}^n x_j=d}.
+\]
+We consider an $n\times n$ random matrix $M_n$ whose rows are independent and each is uniformly distributed on $\Omega_{n,d}$. Thus every row has exactly $d$ nonzero entries, while the column sums fluctuate. We call this the \emph{independent row-slice model}.
+
+For a square matrix $A$, write
+\[
+  \mu_A:=\frac1n\sum_{j=1}^n\delta_{\lambda_j(A)}
+\]
+for its empirical spectral distribution, with algebraic multiplicity. The circular law $\mu_{\mathrm{circ}}$ is the uniform probability measure on the unit disk in $\C$.
+
+Put $p=d/n$. Each entry of $M_n$ has variance $p(1-p)$, so the natural bulk scale is
+\[
+  \sqrt{np(1-p)}=\sqrt{d(1-d/n)}.
+\]
+The exact row sums also give
+\[
+  M_n\1=d\1.
+\]
+Thus $d$ is a deterministic eigenvalue, which becomes a deterministic outlier at
+\[
+  \sqrt{\frac{d}{1-d/n}}
+\]
+under the bulk normalization. This single forced eigenvalue contributes only $1/n$ to the empirical spectral distribution, so it does not affect the limiting law.
+
+The circular law for the row-slice model was established by Li, Litvak, and Yu~\cite{LLY26a} under the condition $d\ge \log^{2+\eps}n$, $d=o(n)$. Their smallest-singular-value theorem already reaches the logarithmic invertibility threshold $d\ge C\log n$. The gap between these two ranges is caused by the logarithmic contribution of intermediate singular values. The purpose of this paper is to close that gap throughout the sparse range above a sufficiently large logarithmic constant.
+
+\begin{theorem}[Main theorem]\label{thm:main}
+There exists an absolute constant $C_*>0$ with the following property. Let $d=d(n)$ be any integer sequence satisfying
+\[
+  C_*\log n\le d,
+  \qquad
+  d=o(n).
+\]
+If $M_n$ is the independent row-slice matrix described above, then
+\[
+  \mu_{M_n/\sqrt{d(1-d/n)}}\xrightarrow{\Pp}\mu_{\mathrm{circ}}.
+\]
+\end{theorem}
+
+The constant $C_*$ is chosen large enough for the support-diameter estimate in the max-weight lemma, the imported smallest-singular-value and restricted-norm estimates, and the rectangular witness and net arguments in \cref{sec:kernels}; see \cref{rem:large-log-constant,rem:final-Cstar}. The proof does not establish the result for every positive constant multiplying $\log n$.
+
+The proof uses two complementary regimes. For every fixed $\sigma\in(0,1)$, the new structural and intermediate-singular-value argument is uniform for
+\begin{equation}\label{eq:lower-band-intro}
+  C_*\log n\le d\le (\log n)^{1+\sigma}.
+\end{equation}
+For every fixed $\eps>0$, a separate superlogarithmic bridge treats
+\begin{equation}\label{eq:superlog-intro}
+  (\log n)^{1+\eps}\le d,
+  \qquad d=o(n).
+\end{equation}
+The two regimes use the same regularized row-replacement comparison but different controls on the bottom singular values:
+\begin{center}
+\begin{tabular}{p{0.40\textwidth}p{0.23\textwidth}p{0.28\textwidth}}
+\toprule
+Degree regime & Prefix codimension & Bottom-tail input\\
+\midrule
+$C_*\log n\le d\le(\log n)^{1+\sigma}$ & $r=\ceil{n/\sqrt d}$ & new intermediate-singular-value bound\\
+$(\log n)^{1+\eps}\le d$, $d=o(n)$ & $r=\ceil{n/d^{a_\eps}}$ & uniform polynomial smallest-singular-value bound\\
+\bottomrule
+\end{tabular}
+\end{center}
+Here
+\[
+  a_\eps=\frac{2+\eps}{2(1+\eps)}.
+\]
+In both rows, the comparison transfers the relevant prefix log volume to an i.i.d. Bernoulli matrix; interlacing and hermitization then recover the square-matrix spectral law.
+
+For example, take $\sigma=\eps=1/2$ and split an arbitrary sequence at $(\log n)^{3/2}$. The lower-band theorem applies below the cutoff and the superlogarithmic bridge applies above it. This two-regime argument yields \cref{thm:main}. More generally, any common fixed exponent may be used. For degrees above $\log^{2+\eta}n$, with any fixed $\eta\in(0,1)$, the circular-law theorem of Li--Litvak--Yu~\cite[Theorem~1.3]{LLY26a} also applies directly, providing an independent overlap with the bridge rather than a third logically necessary piece of the proof.
+
+\subsection{Context}
+
+Girko introduced the hermitization and logarithmic-potential approach to the circular law in~\cite{Gir85}; modern accounts include~\cite{BC12,TV10}. For matrices with independent entries, the classical sequence of results includes Bai's theorem~\cite{Bai97} and the optimal finite-variance circular law of Tao and Vu~\cite{TV10}. In the sparse i.i.d. Bernoulli model, the optimal divergence condition $np\to\infty$ is known from~\cite{RT19,SSS25}.
+
+Circular-law questions with fixed linear constraints have a separate history. Nguyen and Vu proved the circular law for matrices whose rows are independent random $\{-1,1\}$ vectors with a prescribed row sum~\cite{NV13}. For directed matrices with both row and column sums fixed, the sparse circular law was established in~\cite{Coo19,LLTTY21}. Related invertibility and singularity results for combinatorial and sparse matrices include~\cite{Tra20,FKS22,LLY26a}. We abbreviate Litvak--Lytova--Tikhomirov--Tomczak-Jaegermann--Youssef as LLTTY.
+
+The present independent row-slice model has exact row sums and independent rows, but no exact column regularity. Li, Litvak, and Yu proved its circular law when $d\ge\log^{2+\eps}n$, $d=o(n)$, and obtained smallest-singular-value estimates down to $d\ge C\log n$~\cite{LLY26a}. The remaining gap is therefore not an invertibility threshold; it is the logarithmic contribution of a block of intermediate singular values. In the doubly regular model, exact column regularity supplies deterministic identities for aggregate row profiles. Those identities disappear here because the column sums fluctuate, and replacing them is the main new task.
+
+\subsection{Proof architecture and new ingredients}
+
+The proof separates imported mechanisms from arguments specific to the independent row-slice model:
+\begin{center}
+\begin{tabular}{p{0.43\textwidth}p{0.49\textwidth}}
+\toprule
+Imported interfaces & New arguments proved here\\
+\midrule
+LLTTY discretization and gradual-vector decomposition & Averaging the one-row multinomial profile before tensorization\\
+LLTTY fixed-subspace Gaussian-normal estimates & Direct rectangular exclusion of the shifted steep and almost-constant classes\\
+Li--Litvak--Yu smallest-singular-value and restricted-norm estimates & Exact-slice double counting and the $O(n/d^2)$ intermediate-singular-value bound\\
+Sparse i.i.d. Bernoulli circular law and hermitization interface & Arbitrary-codimension regularized row replacement and the two-regime synthesis\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Fix $\sigma\in(0,1)$ and work first in the lower band~\eqref{eq:lower-band-intro}. Set
+\[
+  m=\floor{n/d^3}-1,
+  \qquad
+  \gamma=\frac1{288},
+  \qquad
+  \rho=\exp[-C(n/m)^\gamma],
+  \qquad
+  \delta_{\mathrm{cl}}=(m/n)^{\gamma/2}.
+\]
+Thus $(n/m)^\gamma=d^{1/96+o(1)}$ and $\delta_{\mathrm{cl}}=d^{-1/192+o(1)}$. The lower-band proof has six steps.
+
+\smallskip
+\noindent\textbf{1. Averaged row profiles.}
+For a canonical approximation $y$, let $B$ be the dyadic order of the truncated LLTTY weight attached to a uniformly chosen coordinate. A with-replacement row has a multinomial profile $Q$, and the LLTTY one-row small-ball estimate remains valid conditional on $Q$. Averaging before tensorization gives
+\[
+  \E_Q\operatorname{SB}(Q)
+  \le Ce^{-cD(B)}\prod_q\wt w_q^{-p_q}+e^{-cd^{2/3}},
+  \qquad
+  D(B)=\E\abs{B-B'},
+\]
+where $B'$ is an independent copy. The key input is
+\[
+  \E 2^{-\max_{a\le d}B_a}
+  \le 2^{-\E B}\exp\bigl(-c\E\abs{B-B'}\bigr)
+\]
+under the support-diameter condition proved in \cref{sec:profiles}. Conditioning the sampled coordinates to be distinct costs only $e^{O(d^2)}=e^{o(n)}$.
+
+\smallskip
+\noindent\textbf{2. Structural control of rectangular kernels.}
+The averaged estimate is inserted into the LLTTY decomposition
+\[
+  S_L=\bigcup_{u=4}^{v}K_u(L)\cup P_v(L).
+\]
+In the $K_u$ cases, either the truncated weights already supply a factor $d^{-cn}$ or two constant-mass weight populations are separated by $cd^\kappa$. In the clustered $P_v$ case, the separation is comparable to $v$, where
+\[
+  v\asymp \frac{d^{1/96}}{\log d},
+  \qquad
+  \delta_{\mathrm{cl}}v\gg\log d.
+\]
+The resulting energy factor pays for the remaining profile entropy. A separate rectangular right-kernel argument excludes the codimension-dependent steep and almost-constant classes and identifies the remaining vectors with the exact normalized gradual class. This yields the row-slice structural theorem for codimensions $m$ and $m+1$.
+
+\smallskip
+\noindent\textbf{3. Random normals and intermediate singular values.}
+The Gaussian-normal argument of~\cite[Section~4]{LLTTY21} is model-independent once the exposed row span has the structural property. Outside $O(n\delta_{\mathrm{cl}})$ exceptional coordinates, a Gaussian normal has no $\rho$-disk containing more than $m$ coordinates. Exact-slice double counting then gives one-row concentration
+\[
+  O(m/n)+e^{-cd}=O(d^{-3}).
+\]
+Leave-one-row-out distances and the negative second-moment identity give the following bound.
+
+\begin{theorem}[Intermediate singular values]\label{thm:intro-intermediate}
+Fix $\sigma\in(0,1)$ and assume~\eqref{eq:lower-band-intro}. For every fixed $z\in\C$, there are constants $C_{\isv}(z),C'_{\isv}(z)>0$ and integers $q_0=q_0(n,z)$ with
+\[
+  q_0\le C'_{\isv}(z)\frac{n}{d^2}
+\]
+such that
+\[
+  \Pp\set{
+    s_{n-q_0}(M_n-z\sqrt d\,I_n)
+    \ge e^{-C_{\isv}(z)d^{1/96}}
+  }=1-o(1).
+\]
+\end{theorem}
+
+The quantitative feature needed later is the deletion count $q_0=O(n/d^2)$, not merely $q_0=o(n)$. At the lower-band prefix codimension $r\asymp n/\sqrt d$, only the bottom $q_0$ singular values pay the full smallest-singular-value cost, while the remaining omitted singular values pay the intermediate scale. After division by $n$, the two negative-log contributions are
+\[
+  O\!\left(\frac{\log n\,\log\log n}{d^2}\right)=o(1),
+  \qquad
+  O\!\left(d^{-1/2}d^{1/96}\right)=O(d^{-47/96})=o(1).
+\]
+This is the point at which the $O(n/d^2)$ bound closes the circular-law argument at logarithmic degree.
+
+\smallskip
+\noindent\textbf{4. Regularized row replacement.}
+For a prefix with $k=n-r$ rows, a Schur-complement hybrid reduces each row replacement to a regularized distance associated with a positive contraction of trace at least $r+1$. Bernoulli convex concentration followed by conditioning on the exact row sum yields
+\begin{align*}
+  \frac1n\E\abs{\Psi_\eta(H_{\mathrm{slice}})-\Psi_\eta(H_{\mathrm{iid}})}
+  &\le C\sqrt{\frac{\log(ed)}{Q}}
+  +C\sqrt d\log\frac U\eta\,e^{-cQ},\\
+  Q&=p(1-p)(r+1).
+\end{align*}
+For the lower band, $r=\ceil{n/\sqrt d}$ gives $Q\asymp\sqrt d$.
+
+\smallskip
+\noindent\textbf{5. Lower-band hermitization.}
+Only $q_0=O(n/d^2)$ singular values pay the full smallest-singular-value cost. The intermediate bound controls the rest of the omitted block. Weak singular-measure convergence, full logarithmic-potential convergence, and Hilbert--Schmidt control give the corresponding Bernoulli bottom-tail estimate. Interlacing then converts the prefix comparison into a square log-determinant comparison, and the replacement principle closes the lower band.
+
+\smallskip
+\noindent\textbf{6. The superlogarithmic bridge.}
+For fixed $\eps>0$, the refined Li--Litvak--Yu smallest-singular-value threshold is uniformly polynomial when $d\ge(\log n)^{1+\eps}$. With
+\[
+  a_\eps=\frac{2+\eps}{2(1+\eps)},
+  \qquad
+  r=\ceil{n/d^{a_\eps}},
+\]
+one has
+\[
+  Q\asymp d^{1-a_\eps}\to\infty,
+  \qquad
+  d^{-a_\eps}\log n\le(\log n)^{-\eps/2}=o(1).
+\]
+Thus all $r$ omitted singular values may pay the polynomial lower bound, so the same replacement theorem covers the full superlogarithmic range. Its overlap with the lower-band theorem proves \cref{thm:main}.
+
+The logical dependency of the lower-band argument may be summarized as
+\[
+\begin{gathered}
+\text{row-local small ball}\Longrightarrow\text{averaged profiles},\\
+\text{averaged profiles}\Longrightarrow\text{rectangular structure},\\
+\text{rectangular structure}\Longrightarrow\text{Gaussian normals},\\
+\text{Gaussian normals}\Longrightarrow\text{intermediate singular values},\\
+\text{intermediate singular values}\Longrightarrow\text{regularized replacement},\\
+\text{regularized replacement}\Longrightarrow\text{determinants}
+\Longrightarrow\text{circular law}.
+\end{gathered}
+\]
+Appendices~\ref{app:LLTTY-extraction} and~\ref{app:dependencies} give the source map and probability bookkeeping for each arrow.
+
+\subsection{Organization}
+
+\Cref{sec:preliminaries} fixes notation, the lower-band regime, and the imported deterministic and probabilistic ingredients. \Cref{sec:profiles} proves the averaged profile estimate. \Cref{sec:kernels} proves the rectangular right-kernel compatibility theorem for the exact LLTTY classes. \Cref{sec:structural} closes the $K_u$ and $P_v$ branches and derives the row-slice structural theorem. \Cref{sec:normals} treats Gaussian normals and exact-slice anti-concentration. \Cref{sec:intermediate} proves \cref{thm:intro-intermediate}. \Cref{sec:replacement} proves the generalized regularized row-replacement estimate. \Cref{sec:hermitization} proves the lower-band circular law, establishes the superlogarithmic bridge, and assembles \cref{thm:main}. \Cref{sec:further-directions} discusses the remaining sublogarithmic obstruction. The appendices give a lemma-by-lemma extraction of the LLTTY deterministic consequences and a dependency ledger for all imported results.

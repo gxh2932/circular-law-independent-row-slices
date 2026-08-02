@@ -1,0 +1,414 @@
+\section{The row-slice structural theorem}\label{sec:structural}
+
+We now insert the averaged profile estimate into the deterministic LLTTY decomposition of the exact gradual class $S_L$. Assume~\eqref{eq:lower-band} and set
+\begin{equation}\label{eq:structural-parameters-basic}
+  m=\floor{\frac n{d^3}}-1,
+  \qquad
+  L\in\set{m,m+1},
+  \qquad
+  K=n-L,
+  \qquad
+  \theta_L=\frac Kn.
+\end{equation}
+Thus
+\begin{equation}\label{eq:theta-L}
+  1-\theta_L=\frac Ln=d^{-3}+O(n^{-1}),
+  \qquad
+  -\log\theta_L=O(d^{-3}).
+\end{equation}
+The lower-band upper bound gives, uniformly in $d$,
+\begin{equation}\label{eq:lower-band-budgets}
+  d^2=o(n),
+  \qquad
+  \frac n{d^3}\gg\log n,
+  \qquad
+  d^{1/96}=o(\log n).
+\end{equation}
+
+Let $\gamma=1/288$ and define the exact codimension-dependent parameters
+\begin{equation}\label{eq:u-rho-delta-v}
+  u_L=\left(\frac nL\right)^\gamma,
+  \qquad
+  \rho_L=e^{-u_L},
+  \qquad
+  \delta_L=\left(\frac Ln\right)^{\gamma/2},
+  \qquad
+  v_L=\floor{\frac{u_L}{\log d}}.
+\end{equation}
+Then $\rho_L\le d^{-v_L}$ and, uniformly for $L=m,m+1$,
+\begin{equation}\label{eq:delta-v-growth}
+  \delta_Lv_L\asymp\frac{d^{1/192}}{\log d}\gg\log d.
+\end{equation}
+More explicitly,
+\[
+  \delta_L=d^{-1/192+o(1)},
+  \qquad
+  v_L\asymp\frac{d^{1/96}}{\log d}.
+\]
+Consequently,
+\[
+  \cP a_3(v_L-4)\asymp\frac{d^{1/96}}{\log d},
+\]
+whereas
+\[
+  2\log_2d+2\log_2\left(\frac{72\sqrt d}{\delta_L}\right)
+  +2-\log_2(\cP a_3)=O(\log d).
+\]
+Thus, for all sufficiently large $n$,
+\begin{equation}\label{eq:Pv-hypotheses}
+  \begin{gathered}
+  0<\delta_L\le36\cP a_3,\\
+  \cP a_3(v_L-4)
+  \ge2\log_2d+2\log_2\left(\frac{72\sqrt d}{\delta_L}\right)
+  +2-\log_2(\cP a_3).
+  \end{gathered}
+\end{equation}
+Hence the hypotheses in part~(v) of 
+\cref{prop:LLTTY-package} hold at $(v,\rho,\delta)=(v_L,\rho_L,\delta_L)$. By~\eqref{eq:lower-band-budgets},
+\[
+  d^{v_L}=\exp(O(d^{1/96}))=n^{o(1)},
+  \qquad
+  \frac{\sqrt n}{d^{3/2}}=n^{1/2-o(1)}.
+\]
+In particular, $d\le n^{1/3}$ and $d^{v_L}\le\sqrt n/d^{3/2}$ for all sufficiently large $n$, so all LLTTY net and equivalence-class bounds apply for $4\le u\le v_L$.
+
+For later reference, define the clustered terminal class
+\begin{equation}\label{eq:clustered-Pv}
+  P_{v_L,\rho_L,\delta_L}(L)
+  :=\set{x\in P_{v_L}(L):\exists\lambda\in\C,\ 
+  \#\set{j:|x_j-\lambda|\le\rho_Lx_{n_3}^*}>\delta_Ln}.
+\end{equation}
+
+\subsection{The net reduction}
+
+The following is the rectangular form of the deterministic net reduction in~\cite[Sections~5--7]{LLTTY19}. The only matrix estimate needed in passing from a continuous vector to its net point is the rectangular restricted norm from 
+\cref{prop:restricted-norm}.
+
+\begin{lemma}[Row-slice net reduction]\label{lem:net-reduction}
+Let $\mathcal X$ be one of the families $K_u(L)$ or $P_{v_L,\rho_L,\delta_L}(L)$, and let $k=d^u$ be its discretization scale. There is a deterministic set $\mathcal A_k(\mathcal X)$ of $k$-vectors such that
+\begin{equation}\label{eq:net-reduction}
+  \begin{aligned}
+  \Pp\set{\exists x\in\mathcal X:A_{\zeta,I}x=0}
+  &\le2d^2\sum_{y\in\mathcal A_k(\mathcal X)}
+  \sup_{V\in\C^K}\\[-2pt]
+  &\hspace{3em}\times
+  \Pp\set{\norm{M_Iy+V}_2\le C\log d\frac{\sqrt{dn}}{k}}
+  +n^{-100}.
+  \end{aligned}
+\end{equation}
+The $k$-vectors represented in $\mathcal A_k(\mathcal X)$ fall into at most $e^n$ LLTTY equivalence classes, and each represented class obeys~\eqref{eq:class-cardinality}. Moreover,
+\begin{equation}\label{eq:crude-net-count}
+  \left|\bigcup_{u=4}^{v_L}\mathcal A_{d^u}(L)\right|
+  \le v_L\exp(Cnd^{1/3}).
+\end{equation}
+\end{lemma}
+
+\begin{lemmafiveonea}[Coordinate ranges for gradual net points]\label{lem:coordinate-ranges}
+Let $x\in S_L$, so $x_{n_3}^*=1$, and let $y$ be its canonical $k$-approximation. If $\sigma$ orders the coordinates of $x$ by nonincreasing modulus, then, for all sufficiently large $n$,
+\[
+  \max_{j\le n}|y_j|\le2n^6,
+  \qquad
+  \max_{j>n_2}|y_{\sigma(j)}|\le2d^{3/2}.
+\]
+\end{lemmafiveonea}
+
+\begin{proof}[Proof of Lemma 5.1A]
+Because $x\in S_L\subset T(L)^c$ and $x_{n_3}^*=1$, the deterministic order-statistic estimate in~\cite[Lemma~4.2]{LLTTY19} gives $x_1^*\le n^6x_{n_3}^*=n^6$. Since $x\notin T_2(L)$, the defining reverse inequality gives $x_{n_2}^*\le d^{3/2}x_{n_3}^*=d^{3/2}$. Canonical rounding changes each real and imaginary component by less than $1/k$, and $k\ge1$, so the displayed bounds follow after replacing the constants by $2$.
+\end{proof}
+
+\begin{proof}[Proof of 
+\cref{lem:net-reduction}]
+Work on the restricted-norm event from 
+\cref{prop:restricted-norm}. Let $x\in\mathcal X$ satisfy $A_{\zeta,I}x=0$, and let $y$ be its canonical $k$-approximation. Put
+\[
+  \alpha=\frac1n\sum_{j=1}^n(x_j-y_j),
+  \qquad
+  w=x-y-\alpha\1.
+\]
+Then $w\perp\1$, while coordinatewise rounding gives
+\begin{equation}\label{eq:net-w-alpha}
+  \norm w_2\le C\frac{\sqrt n}{k},
+  \qquad
+  |\alpha|\le\frac Ck.
+\end{equation}
+Round the real and imaginary parts of $\alpha$ to the grid $(kd)^{-1}\Z$, obtaining $\wt\alpha$. There are at most $Cd^2$ possible values and
+\begin{equation}\label{eq:alpha-rounding}
+  |\alpha-\wt\alpha|\le\frac C{kd}.
+\end{equation}
+Writing $y_I=(y_i)_{i\in I}$, define
+\[
+  V(y,\wt\alpha)=-\zeta y_I+\wt\alpha(d-\zeta)\1_I.
+\]
+The exact row-sum identity $M_I\1=d\1_I$ and $A_{\zeta,I}x=0$ give
+\[
+  M_Iy+V(y,\wt\alpha)
+  =-(M_I-\zeta P_I)w+(\wt\alpha-\alpha)(d-\zeta)\1_I.
+\]
+Since $w\perp\1$, one has $M_Iw=(M_I-\E M_I)w$. Therefore~\eqref{eq:net-w-alpha}, \eqref{eq:alpha-rounding}, and the restricted norm imply
+\[
+  \norm{M_Iy+V(y,\wt\alpha)}_2
+  \le C_{Z_0}\frac{\sqrt{dn}}{k}
+  \le C\log d\frac{\sqrt{dn}}{k}.
+\]
+Taking the union over $O(d^2)$ choices of $\wt\alpha$ proves~\eqref{eq:net-reduction}. We use 
+\cref{prop:restricted-norm} with failure $n^{-100}$.
+
+The equivalence-class assertions for the canonical approximations in $\mathcal A_k(\mathcal X)$ are~\cite[Lemmas~5.1 and 5.5]{LLTTY19}; no claim is made here about unrestricted $k$-vectors. For the crude count, first choose the positions of the top $n_2$ coordinates. Lemma 5.1A shows that each top coordinate has $O(k^2n^{12})$ possible complex grid values, while each remaining coordinate has $O(k^2d^3)$ possible values. Hence
+\[
+  |\mathcal A_k(L)|
+  \le\binom n{n_2}(Ck^2n^{12})^{n_2}(Ck^2d^3)^{n-n_2}.
+\]
+Since $n_2\asymp n/d^{2/3}$ and $\log k=O(d^{1/96})$, the logarithm of the right-hand side is at most $Cnd^{1/3}$. Summing over the $v_L$ discretization scales proves~\eqref{eq:crude-net-count}.
+\end{proof}
+
+For a fixed net vector $y$, define $W_y$ and $B$ by~\eqref{eq:Wy} and~\eqref{eq:B-distribution}. Applying~\eqref{eq:profile-tensorization} and~\eqref{eq:condition-to-slice} gives
+\begin{equation}\label{eq:fixed-net-slice}
+  \Pp_{\mathrm{slice}}
+  \set{\norm{M_Iy+V}_2\le C\log d\frac{\sqrt{dn}}{k}}
+  \le e^{Cd^2}
+  \left[\Lambda_L\bigl(Ce^{-cD(B)}W_y+e^{-cd^{2/3}}\bigr)\right]^K,
+\end{equation}
+where
+\begin{equation}\label{eq:Lambda-L}
+  \Lambda_L=C\frac nK\log^2d=C\theta_L^{-1}\log^2d.
+\end{equation}
+We split the two terms using $(A+B)^K\le2^{K-1}(A^K+B^K)$.
+
+\subsection{The profile-exception term}
+
+By~\eqref{eq:crude-net-count}, the additive term $e^{-cd^{2/3}}$, summed over all $4\le u\le v_L$, contributes at most
+\[
+  \exp\left[-cKd^{2/3}+Cnd^{1/3}+CK\log\log d+Cd^2+O(n)\right]
+  \le e^{-c'nd^{2/3}}.
+\]
+This single estimate is used for every branch below.
+
+\subsection{Entropy of dyadic weight orders}
+
+\begin{lemma}\label{lem:weight-entropy}
+For every integer-valued random variable $B$,
+\[
+  H(B)\le C+\log(1+D(B)),
+  \qquad
+  D(B)=\E|B-B'|.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $r\in\Z$ be a median of $B$. Since a median minimizes expected absolute deviation,
+\[
+  M:=\E|B-r|\le\E|B-B'|=D(B).
+\]
+For $\alpha\in(0,1]$, compare the law of $B$ by relative entropy with
+\[
+  q_j=Z_\alpha^{-1}e^{-\alpha|j-r|},
+  \qquad
+  Z_\alpha\le C/\alpha.
+\]
+Then $H(B)\le\log Z_\alpha+\alpha M$. Taking $\alpha=(1+D(B))^{-1}$ proves the lemma.
+\end{proof}
+
+Let $T_b$ be the dyadic weight set of order $b$, and let $t_b=|T_b|$. By~\eqref{eq:factorial-compression},
+\begin{equation}\label{eq:factorial-entropy}
+  \frac{n!}{\prod_qs_q!}
+  \le e^{Cn}\frac{n!}{\prod_bt_b!}
+  \le e^{Cn+nH(B)}.
+\end{equation}
+Combining 
+\cref{lem:weight-entropy} with $K/n\to1$ yields
+\begin{equation}\label{eq:entropy-dispersion-cancel}
+  \frac{n!}{\prod_qs_q!}e^{-cKD(B)}\le e^{C'n},
+\end{equation}
+because $\log(1+t)-c(K/n)t$ is uniformly bounded above.
+
+\subsection{\texorpdfstring{The $K_u(L)$ branches}{The Ku(L) branches}}
+
+Let $y$ be the $d^u$-approximation of a vector in $K_u(L)$, and put
+\begin{equation}\label{eq:kappa-I-large}
+  \kappa=\frac{\cK a_3}{16}<\frac13,
+  \qquad
+  \mathscr I=\set{q:s_q\ge d^{-\kappa}n}.
+\end{equation}
+The inequality $\kappa<1/3$ ensures that every part in $\mathscr I$ uses the large-part branch of~\eqref{eq:truncated-weights}.
+
+\subsubsection{Case 1: large parts occupy almost all coordinates}
+
+Assume
+\[
+  \sum_{q\in\mathscr I}s_q\ge n-\frac{\cK n_3}{4}.
+\]
+Let $\mathscr I_1$ be the large spread parts, $\mathscr I_2$ the large regular parts, and $\mathscr I_3$ the remaining parts. Then
+\[
+  \sum_{q\in\mathscr I_1}s_q\ge\frac{3\cK n_3}{4},
+  \qquad
+  \sum_{q\in\mathscr I_3}s_q\le\frac{\cK n_3}{4}.
+\]
+For $q\in\mathscr I_1$,
+\[
+  \wt w_q^{-s_q}
+  \le d^{-s_q/2}\left(\frac n{s_q}\right)^{s_q}h_q^{-s_q};
+\]
+for $q\in\mathscr I_2$,
+\[
+  \wt w_q^{-s_q}
+  =\left(\frac n{s_q}\right)^{s_q}h_q^{-s_q};
+\]
+and for $q\in\mathscr I_3$,
+\[
+  \wt w_q^{-s_q}\le d^{s_q}h_q^{-s_q}.
+\]
+Since $n/s_q\le d^\kappa$ on $\mathscr I$, multiplication gives
+\[
+  \prod_q\wt w_q^{-s_q}
+  \le C^nd^{-\cK n_3/16}\prod_qh_q^{-s_q}.
+\]
+Thus, for some absolute $c_1>0$,
+\begin{equation}\label{eq:Ku-case1-energy}
+  \prod_qh_q^{s_q}W_y^n\le C^nd^{-c_1n}.
+\end{equation}
+Passing from $n$ to $K=n-L$ rows costs only
+\begin{equation}\label{eq:Wy-K-n}
+  W_y^K=W_y^nW_y^{-L},
+  \qquad
+  W_y^{-L}\le(n\sqrt d)^L=e^{O(n/d^2)}.
+\end{equation}
+For one equivalence class, multiply the main term in~\eqref{eq:fixed-net-slice} by~\eqref{eq:class-cardinality}. Using~\eqref{eq:entropy-dispersion-cancel}, \eqref{eq:Ku-case1-energy}, and~\eqref{eq:Wy-K-n}, its logarithm is
+\[
+  -c_1n\log d+O(n\log\log d+n+d^2+n/d^2).
+\]
+The $e^n$ equivalence classes and $v_L$ choices of $u$ are absorbed, so
+\begin{equation}\label{eq:Ku-case1-prob}
+  \Pp\set{\text{some Case-1 $K_u(L)$ net vector is small}}
+  \le e^{-cn\log d}.
+\end{equation}
+
+\subsubsection{Case 2: a constant fraction lies in small parts}
+
+Assume
+\[
+  \sum_{q\in\mathscr I^c}s_q\ge\frac{\cK n_3}{4}.
+\]
+By 
+\cref{prop:LLTTY-package}, there are $b_1\le b_2$ such that
+\[
+  \Pp\set{B\le b_1}\ge c_0,
+  \qquad
+  \Pp\set{B\ge b_2}\ge c_0,
+  \qquad
+  b_2-b_1\ge c_1d^\kappa.
+\]
+Therefore
+\begin{equation}\label{eq:Ku-case2-dispersion}
+  D(B)\ge2c_0^2(b_2-b_1)\ge cd^\kappa.
+\end{equation}
+Using $\wt w_q\ge h_q/d$,
+\[
+  W_y^K\prod_qh_q^{s_q}
+  \le d^K\prod_qh_q^{(1-K/n)s_q}
+  \le d^Ke^{O(n/d^2)}.
+\]
+The factorial factor is at most $(3\log n)^n=e^{O(n\log d)}$. Thus the contribution of one class has logarithm
+\[
+  -cKd^\kappa+O(n\log d+n/d^2+d^2).
+\]
+Since $d^\kappa\gg\log d$,
+\begin{equation}\label{eq:Ku-case2-prob}
+  \Pp\set{\text{some Case-2 $K_u(L)$ net vector is small}}
+  \le e^{-cnd^\kappa}.
+\end{equation}
+Combining the two cases and the profile-exception term gives
+\begin{equation}\label{eq:Ku-total}
+  \sum_{u=4}^{v_L}
+  \sum_{y\in\mathcal A_{d^u}(K_u(L))}
+  \sup_V\Pp\set{\norm{M_Iy+V}_2\le C\log d\frac{\sqrt{dn}}{d^u}}
+  \le e^{-cn\log d}.
+\end{equation}
+
+\subsection{\texorpdfstring{The clustered $P_{v_L}(L)$ branch}{The clustered P-vL(L) branch}}
+
+Let $x\in P_{v_L,\rho_L,\delta_L}(L)$, and let $y$ be its $d^{v_L}$-approximation. By part~(v) of 
+\cref{prop:LLTTY-package}, with the hypotheses verified in~\eqref{eq:Pv-hypotheses}, there exist $b_1<b_2$ such that
+\[
+  \Pp\set{B\le b_1}\ge\frac{\delta_L}{36},
+  \qquad
+  \Pp\set{B\ge b_2}\ge c_0,
+  \qquad
+  b_2-b_1\ge\frac{\cP a_3}{2}(v_L-4)\ge cv_L.
+\]
+Consequently,
+\begin{equation}\label{eq:Pv-dispersion}
+  D(B)\ge c\delta_Lv_L.
+\end{equation}
+For one equivalence class, use $\wt w_q\ge h_q/d$ in the main term. Multiplication by~\eqref{eq:class-cardinality} leaves
+\[
+  e^{O(d^2)}(Cd\log^2d)^Ke^{-cK\delta_Lv_L}
+  \frac{n!}{\prod_qs_q!}
+  \prod_qh_q^{(1-K/n)s_q}.
+\]
+The factorial factor is $e^{O(n\log d)}$, the height mismatch is $e^{O(n/d^2)}$, and $\delta_Lv_L\gg\log d$. Therefore
+\begin{equation}\label{eq:Pv-clustered-prob}
+  \Pp\set{\text{some clustered $P_{v_L}(L)$ net vector is small}}
+  \le e^{-cn\delta_Lv_L}+e^{-cnd^{2/3}}.
+\end{equation}
+
+\subsection{Assembly}
+
+By 
+\cref{prop:LLTTY-package}, the exact gradual class decomposes as
+\begin{equation}\label{eq:SL-decomposition-vL}
+  S_L=\bigcup_{u=4}^{v_L}K_u(L)\cup P_{v_L}(L).
+\end{equation}
+The estimates above show that, with failure $o(n^{-1})$, no vector in $\cone{S_L}$ lying in the right kernel has a cluster of more than $\delta_Ln$ coordinates at radius $\rho_Lx_{n_3}^*$. The compatibility theorem from 
+\cref{thm:kernel-compatibility} identifies every remaining nonzero kernel vector with either $V_L$ or $\cone{S_L}$.
+
+\begin{theorem}[Row-slice structural theorem]\label{thm:row-slice-structural}
+There are absolute constants $a,C_*>0$ such that the following holds. Fix $\sigma\in(0,1)$, let $d$ satisfy~\eqref{eq:lower-band}, and set
+\[
+  m=\floor{n/d^3}-1,
+  \qquad
+  L\in\set{m,m+1}.
+\]
+Let $I\subset[n]$ be deterministic with $|I|=n-L$. Put $q_L=\floor{aL}$, and let
+\[
+  E_I=\spanv\set{\ol{X_i-\zeta e_i}:i\in I},
+  \qquad
+  |\zeta|\le Z_0\sqrt d.
+\]
+Then, with probability at least $1-C/n$, every nonzero $x\in E_I^\perp=\ker A_{\zeta,I}$ satisfies one of the following:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item there exists $i\le q_L$ such that
+\[
+  x_i^*>0.9\left(\frac ni\right)^3x_{q_L}^*;
+\]
+\item for all $i\le q_L$ the reverse inequality holds, and
+\[
+  \sup_{\lambda\in\C}
+  \#\set{j:|x_j-\lambda|
+  \le\exp\left[-2\left(\frac nL\right)^{1/288}\right]x_{q_L}^*}
+  \le n\left(\frac Ln\right)^{1/576}.
+\]
+\end{enumerate}
+The statement is for each fixed $I$, not simultaneously over all row sets. Its constants are uniform in $d$ throughout~\eqref{eq:lower-band} and for $L=m,m+1$; the threshold from which it holds may depend on $\sigma$ and $Z_0$.
+\end{theorem}
+
+\begin{proof}
+By 
+\cref{thm:kernel-compatibility}, outside an event of probability $C/n$, every nonzero kernel vector is in $V_L$ or in $\cone{S_L}$. The first class is alternative~(i). Consider a vector in the second class that is not in $V_L$. The deterministic order-statistic estimates built into the LLTTY gradual class~\cite[Lemma~4.2]{LLTTY19} give
+\begin{equation}\label{eq:qL-n3-order-stat}
+  x_{q_L}^*
+  \le d^3\left(\frac n{q_L}\right)^6x_{n_3}^*
+  \le C_ad^{21}x_{n_3}^*.
+\end{equation}
+Since $u_L/\log d\to\infty$,
+\[
+  C_ad^{21}\le e^{u_L}
+\]
+for all large $n$. Hence
+\begin{equation}\label{eq:radius-comparison}
+  e^{-2u_L}x_{q_L}^*
+  \le e^{-u_L}x_{n_3}^*
+  =\rho_Lx_{n_3}^*.
+\end{equation}
+A cluster forbidden by alternative~(ii) would therefore be a cluster in $P_{v_L,\rho_L,\delta_L}(L)$, which is excluded by~\eqref{eq:Ku-total}, \eqref{eq:Pv-clustered-prob}, and 
+\cref{lem:net-reduction} with failure $o(n^{-1})$. Since $\delta_Ln=n(L/n)^{1/576}$, the stated bound follows.
+\end{proof}

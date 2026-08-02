@@ -1,0 +1,142 @@
+\section{Intermediate singular values}\label{sec:intermediate}
+
+We convert~\eqref{eq:averaged-normal-small-ball} into a lower bound for an intermediate singular value. Fix $z\in\C$ and write
+\[
+  A_z=M_n-z\sqrt d\,I_n.
+\]
+Let $N=n-m$ with
+\[
+  m=\floor{n/d^3}-1,
+\]
+and expose the first $N$ rows $R_1,\ldots,R_N$ of $A_z$.
+
+For each $i\le N$, let
+\[
+  F_i=\spanv\set{\ol{R_j}:j\le N,\ j\ne i}
+\]
+and define the actual leave-one-row-out distance
+\[
+  D_i=\dist(\ol{R_i},F_i)
+  =\dist\bigl(R_i,\spanv\set{R_j:j\le N,\ j\ne i}\bigr).
+\]
+If $\dim F_i<N-1$, set $E_i=\Ext_{N-1}(F_i)$; otherwise set $E_i=F_i$. Put
+\[
+  \wt D_i=\dist(\ol{R_i},E_i)\le D_i,
+  \qquad
+  Y_i=P_{E_i^\perp}G_i,
+\]
+where $G_i$ is an independent standard complex Gaussian. Conditional on $R_i$ and $E_i$,
+\[
+  R_i\cdot Y_i
+  =\inner{Y_i}{\ol{R_i}}
+  =\inner{G_i}{P_{E_i^\perp}\ol{R_i}}
+\]
+is a centered complex Gaussian with variance $\wt D_i^2$. Hence there are absolute $c,c_0>0$ such that
+\begin{equation}\label{eq:Gaussian-distance-implication}
+  \wt D_i\le c\rho
+  \quad\Longrightarrow\quad
+  \Pp_{G_i}\set{|R_i\cdot Y_i|\le\rho\given R_i,E_i}\ge c_0,
+\end{equation}
+where
+\[
+  \rho=e^{-C_{\isv}(z)d^{1/96}}
+\]
+for a sufficiently large shift-dependent constant $C_{\isv}(z)$.
+
+Conditional on $E_i,Y_i$, the omitted row $R_i=X_i-z\sqrt d\,e_i$ remains an independent row slice. The diagonal shift changes only the center of the concentration function, so~\eqref{eq:averaged-normal-small-ball} gives
+\begin{equation}\label{eq:row-normal-small-ball}
+  \Pp\set{|R_i\cdot Y_i|\le\rho}\le Cd^{-3}+C/n.
+\end{equation}
+Combining~\eqref{eq:Gaussian-distance-implication} and~\eqref{eq:row-normal-small-ball},
+\begin{equation}\label{eq:leave-one-out-distance-prob}
+  \Pp\set{D_i\le c\rho}
+  \le\Pp\set{\wt D_i\le c\rho}
+  \le Cd^{-3}+C/n.
+\end{equation}
+
+For each fixed index $i$, the exposed set $\set{1,\ldots,N}\setminus\set i$ is deterministic, so the fixed-$I$ estimate in 
+\cref{sec:normals} applies. We do not intersect these $N$ structural events and do not take a union bound over the leave-one-out indices. Instead, the per-index bound is summed only after taking expectations.
+
+Let
+\[
+  B=\#\set{i\le N:D_i<c\rho}.
+\]
+Linearity of expectation, not independence, gives
+\[
+  \E B\le C\frac n{d^3}+C.
+\]
+Set
+\[
+  t=\ceil{\frac n{d^2}}.
+\]
+Markov's inequality yields
+\begin{equation}\label{eq:bad-row-Markov}
+  \Pp\set{B>t}
+  =O\left(\frac1d+\frac{d^2}{n}\right)
+  =O(1/d)=o(1).
+\end{equation}
+
+On $B\le t$, delete all bad rows and, if necessary, additional arbitrary rows so that the resulting matrix $H$ has $k=N-t$ rows. For every surviving row $h_i$,
+\[
+  \dist\bigl(h_i,\spanv\set{h_j:j\ne i}\bigr)\ge c\rho,
+\]
+because deleting rows only shrinks the comparison span. By the negative second-moment identity~\eqref{eq:negative-second-moment},
+\begin{equation}\label{eq:NSM-H}
+  \sum_{j=1}^ks_j(H)^{-2}\le\frac{k}{c^2\rho^2}.
+\end{equation}
+Let $j_0=N-2t=k-t$. At least $t+1$ singular values of $H$ are no larger than $s_{j_0}(H)$, and therefore
+\[
+  \frac{t+1}{s_{j_0}(H)^2}
+  \le\sum_{j=1}^ks_j(H)^{-2}.
+\]
+Using~\eqref{eq:NSM-H},
+\begin{equation}\label{eq:intermediate-H}
+  s_{j_0}(H)
+  \ge c\rho\sqrt{\frac{t+1}{k}}
+  \ge\frac{c\rho}{d}.
+\end{equation}
+Adding the deleted rows replaces the common $n\times n$ column Gram matrix $H^*H$ by
+\[
+  H^*H+\sum_{u\in\mathcal D}R_u^*R_u,
+\]
+a positive-semidefinite increment. Hence the relevant singular values can only increase, and
+\[
+  s_{j_0}(A_z)\ge s_{j_0}(H).
+\]
+Define
+\[
+  q_0=m+2t.
+\]
+Then $j_0=n-q_0$ and
+\begin{equation}\label{eq:q0-scale}
+  q_0=O\left(\frac n{d^2}\right)
+  =o\left(\frac n{d\log d}\right).
+\end{equation}
+Since the polynomial factor $d^{-1}$ is absorbed into the exponential,~\eqref{eq:intermediate-H} proves the desired estimate.
+
+\begin{theorem}[Lower-band intermediate singular value]\label{thm:intermediate}
+Fix $\sigma\in(0,1)$ and let $d$ satisfy~\eqref{eq:lower-band}. Let $M_n$ be the independent row-slice matrix. For every fixed $z\in\C$, there are constants $C_{\isv}(z),C'_{\isv}(z)>0$ and integers $q_0=q_0(n,z)$ with
+\[
+  q_0\le C'_{\isv}(z)\frac n{d^2}
+\]
+such that
+\[
+  \Pp\set{s_{n-q_0}(M_n-z\sqrt d\,I_n)
+  \ge e^{-C_{\isv}(z)d^{1/96}}}=1-o(1).
+\]
+More precisely, the failure probability is $O(1/d)$ uniformly throughout~\eqref{eq:lower-band}; the term $d^2/n$ and the exponentially small net and witness errors are absorbed into this bound.
+\end{theorem}
+
+\begin{remark}
+The choice
+\[
+  m=\floor{n/d^3}-1=\frac n{d^3}+O(1)
+\]
+is tuned to the LLTTY exponent $\gamma=1/288$:
+\[
+  (n/m)^\gamma=d^{1/96+o(1)},
+  \qquad
+  (m/n)^{\gamma/2}=d^{-1/192+o(1)}.
+\]
+The deletion scale $t=n/d^2$ is larger than the expected number $n/d^3$ of bad rows, but remains small enough for the lower-band logarithmic-tail budget.
+\end{remark}

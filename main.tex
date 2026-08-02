@@ -1,0 +1,153 @@
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools,mathrsfs}
+\usepackage{booktabs,longtable,array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{aliascnt}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{xcolor}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black,
+  pdftitle={The circular law for independent row slices down to logarithmic degree},
+  pdfauthor={Griffin P. Hurt}
+}
+
+\setlist[enumerate]{leftmargin=2.2em,itemsep=2pt,topsep=4pt}
+\setlist[itemize]{leftmargin=1.8em,itemsep=2pt,topsep=4pt}
+\setcounter{tocdepth}{2}
+\allowdisplaybreaks
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\newaliascnt{fact}{theorem}
+\newtheorem{fact}[fact]{Fact}
+\aliascntresetthe{fact}
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\theoremstyle{remark}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\newtheorem*{conjecture}{Conjecture}
+\newtheorem*{lemmafiveonea}{Lemma 5.1A}
+
+\numberwithin{equation}{section}
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\Om}{\Omega}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+\newcommand{\ol}{\overline}
+\newcommand{\cK}{c_K}
+\newcommand{\cP}{c_P}
+\newcommand{\BL}{\mathrm{BL}}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\isv}{\mathrm{isv}}
+\newcommand{\src}{\mathrm{src}}
+\newcommand{\vol}{\operatorname{Vol}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\spanv}{\operatorname{span}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Lip}{\operatorname{Lip}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Ber}{\operatorname{Bernoulli}}
+\newcommand{\Mult}{\operatorname{Multinomial}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\cone}[1]{\C^{\times}#1}
+\newcommand{\logp}{\log^{+}}
+\newcommand{\logm}{\log^{-}}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\inner}[2]{\left\langle #1,#2\right\rangle}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\given}{\,\middle|\,}
+\newcommand{\dd}{\,d}
+\newcommand{\eqdist}{\stackrel{d}{=}}
+\newcommand{\littleoP}{o_{\Pp}(1)}
+\newcommand{\bigOP}{O_{\Pp}(1)}
+
+\DeclareMathOperator{\med}{med}
+\DeclareMathOperator{\ESD}{ESD}
+
+\crefname{theorem}{theorem}{theorems}
+\crefname{proposition}{proposition}{propositions}
+\crefname{lemma}{lemma}{lemmas}
+\crefname{corollary}{corollary}{corollaries}
+\crefname{fact}{fact}{facts}
+\crefname{example}{example}{examples}
+\crefname{definition}{definition}{definitions}
+\crefname{remark}{remark}{remarks}
+\crefname{section}{Section}{Sections}
+
+\title[The circular law down to logarithmic degree]{The circular law for independent row slices down to logarithmic degree}
+\author{Griffin P. Hurt}
+\email{gh7775@rit.edu}
+\date{Revised July 2026}
+\subjclass[2020]{60B20, 15B52, 05C80, 60F05}
+\keywords{circular law, sparse random matrices, row-regular matrices, intermediate singular values, random normals, small-ball probability}
+
+\begin{document}
+
+\begin{abstract}
+Let $M_n$ be an $n\times n$ random $0$--$1$ matrix with independent rows, each uniform over vectors having exactly $d$ ones. We prove that, for an absolute constant $C_*>0$, the empirical spectral distribution of
+\[
+  \frac{M_n}{\sqrt{d(1-d/n)}}
+\]
+converges in probability to the circular law whenever $C_*\log n\le d$ and $d=o(n)$. This lowers the known $\log^{2+\eps}n$ threshold to sufficiently large logarithmic degree throughout the sparse range.
+
+The main obstacle is the lack of column regularity, which removes the aggregate-profile identities available for random regular digraphs. In the lower polylogarithmic range, we replace those identities by an averaged multinomial row-profile estimate and combine it with a rectangular right-kernel analysis to control all but $O(n/d^2)$ of the smallest singular values. A regularized row-replacement argument then compares logarithmic determinants with those of an i.i.d. Bernoulli matrix. Above every fixed superlogarithmic cutoff, the same comparison is combined instead with a uniform polynomial smallest-singular-value bound. Girko hermitization and the sparse i.i.d. circular law complete the proof.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+\input{sections/01_intro}
+\input{sections/02_preliminaries}
+\input{sections/03_profiles}
+\input{sections/04_kernels}
+\input{sections/05_structural}
+\input{sections/06_normals}
+\input{sections/07_intermediate}
+\input{sections/08_replacement}
+\input{sections/09_hermitization}
+\input{sections/10_directions}
+\input{sections/appendix_a}
+\input{sections/appendix_b}
+\input{sections/references}
+
+\end{document}

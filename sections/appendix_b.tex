@@ -1,0 +1,61 @@
+\section{Dependency ledger and source interfaces}\label{app:dependencies}
+
+For clarity, we list the imported results and the new arguments proved in this paper. This appendix is not logically necessary, but it makes the proof interfaces auditable.
+
+\subsection{Imported statements}
+
+\paragraph{Li--Litvak--Yu \cite{LLY26a}.}
+All theorem and remark numbers cited from this preprint refer to arXiv:2604.10446v1 (April 2026). The source mappings used here are: Theorem~1.3 for the circular law above $\log^{2+\eps}n$; Theorem~1.7 and Remark~1.9 for the row-slice smallest-singular-value estimate and its refined threshold; Theorem~3.1 and Remark~3.2 for the Bernoulli counterpart; and Theorem~4.1 for the rectangular restricted operator norm. The deduction of a single polynomial threshold above $(\log n)^{1+\eps}$ is not quoted as a source theorem: it is carried out in \cref{cor:uniform-polynomial} from the formula in source Remark~1.9. Section~3 and Corollary~3.5 of the source are methodological antecedents for the replacement and conditioning steps, respectively; the arbitrary-codimension regularized comparison used here is proved in \cref{prop:row-replacement}. We do not import a codimension-$L$ right-kernel theorem from this source.
+
+\paragraph{LLTTY19 \cite{LLTTY19}.}
+Source checks use arXiv:1801.05575v4. Section~4 supplies the codimension-dependent steep classes $T_i(L)$, their constant-shifted versions, and the exact gradual class $S_L$; the particular locators used later are Section~4.1, equation~(8), for the shifted very-steep inclusion, Lemma~4.5 for the shifted nets, and Lemma~4.11 for the deterministic almost-constant reduction. Sections~5--7 supply the canonical $k$-approximation, the $\ell$-decomposition, source nets, and equivalence classes. The author-derived consequences in \cref{prop:LLTTY-package} are extracted from Lemmas~5.1, 5.4, 5.5, 7.2, 7.7--7.9 and Theorem~5.6. A lemma-by-lemma derivation of the factorial, geometric, and clustered-$P_v$ conclusions, including the intermediate conclusions taken from the proofs of source Lemmas~7.7--7.9, is given in \cref{app:LLTTY-extraction}. The row-local small-ball input is Lemma~6.4, and the tensorization form is Lemma~2.7. The clustered-$P_v$ hypotheses are reproduced in \eqref{eq:Pv-delta}--\eqref{eq:Pv-separation-hyp}.
+
+\paragraph{LLTTY21 \cite{LLTTY21}.}
+Source checks use arXiv:1801.05576v2. \Cref{prop:Gaussian-anti-clustering} isolates a deterministic fixed-subspace consequence of Theorem~4.2, Propositions~4.4 and~4.7, and Lemmas~4.8--4.10. Its proof gives a separate verification of the dimension requirements, the source linear-combination count $p_{\src}$, the cutoff $\ell_0\le4n/L$, and the radius, cluster-size, and steepness comparisons. The deterministic tie-break is the one explicitly suggested immediately before source Lemma~4.8. No random-regular-digraph probability estimate is imported.
+
+\paragraph{Rudelson--Tikhomirov \cite{RT19}.}
+The optimal sparse i.i.d. circular law under the minimal divergence condition is used only as a comparator result. No intermediate estimate from that paper is imported into the row-slice structural argument.
+
+\paragraph{SSS25 \cite{SSS25}.}
+Source checks use arXiv:2310.17600v2. \Cref{prop:Bernoulli-hermitization} reproduces the complete logarithmic-potential squeeze needed here. Fact~10.2 supplies bounded-continuous convergence to the deterministic shifted Gaussian singular-value law $\nu_z^G$, and Fact~10.1 identifies $U^\circ(z)=-\int\log t\,\dd\nu_z^G(t)$ and proves finiteness. Lemma~8.2, Fact~9.1, and Lemma~9.3 give the explicit upper and lower bounds for the full, untruncated logarithmic potential. The resulting statement holds for every fixed $z\ne0$, rather than only on an unspecified full-measure set. The Hilbert--Schmidt bound in \cref{prop:Bernoulli-hermitization} is elementary.
+
+\paragraph{Tao's concentration theorem \cite{Tao12}.}
+The convex concentration statement used for regularized Bernoulli distances is Theorem~2.1.13. It gives Gaussian tails for a convex $1$-Lipschitz function of bounded independent complex coordinates, centered at a median. The median-to-mean calculation is recorded in \cref{lem:convex-concentration}.
+
+\paragraph{Tao--Vu \cite{TV10}.}
+The replacement principle used in the lower-band and superlogarithmic arguments is Theorem~2.1. Its Hilbert--Schmidt and logarithmic-determinant hypotheses are verified explicitly in \cref{thm:lower-band-circular,prop:superlog-bridge}.
+
+\subsection{New statements proved here}
+
+The following components are specific to the independent row-slice lower-band argument and its superlogarithmic completion.
+\begin{enumerate}
+\item The max-weight inequality, \cref{lem:max-weight}.
+\item The averaged multinomial row-profile estimate and its conditioning back to a row slice, \cref{prop:averaged-profile} and \eqref{eq:condition-to-slice}.
+\item The entropy--energy cancellation $H(B)\le C+\log(1+D(B))$ and the completion of the $K_u$ and clustered-$P_v$ class sums uniformly for $C_*\log n\le d\le(\log n)^{1+\sigma}$.
+\item The rectangular LLTTY compatibility theorem, \cref{thm:kernel-compatibility}: direct independent-row exclusion of $T_0^{\mathcal K}(L)$, $T_1^{\mathcal K}(L)$, $T_2^{\mathcal K}(L)$, and the nonzero vectors in $\mathcal B(10/d^3)\setminus T_3^{\mathcal K}(L)$, with literal identification of the remaining nonzero kernel vectors with $\cone{S_L}$.
+\item The rectangular row-slice structural theorem, \cref{thm:row-slice-structural}, uniformly for codimensions $L=m$ and $L=m+1$ throughout the lower band.
+\item The exact-slice double-counting lemma, \cref{lem:slice-double-count}.
+\item The lower-band intermediate-singular-value bound, \cref{thm:intermediate}.
+\item The generalized regularized row-replacement estimate, \cref{prop:row-replacement}, valid for arbitrary codimension with $p(1-p)(r+1)\ge1$.
+\item The abstract negative-log tail lemma, \cref{lem:negative-log-tail}, and the lower-band prefix-to-square synthesis proving \cref{thm:lower-band-circular}.
+\item The superlogarithmic bridge, \cref{prop:superlog-bridge}, which combines the uniform polynomial smallest-singular-value scale with the codimension $r=\ceil{n/d^{a_\eps}}$ and connects the lower band to the Li--Litvak--Yu circular-law range. The proof remains valid throughout the full superlogarithmic range.
+\end{enumerate}
+
+\subsection{Measurability and probability bookkeeping}
+
+All row-set statements are uniform for each deterministic fixed set of the indicated size. Measurable enlargements are produced by the fixed standard-basis extension rule in \cref{sec:normals}, and greedy Gaussian clusters use the fixed total-order tie-break. For a fresh slice row, independence is stated relative to the sigma-algebra generated by the exposed rows and all auxiliary Gaussian randomness.
+
+The structural theorem holds for each fixed exposed row set with failure $O(1/n)$, not simultaneously over all such sets. In the leave-one-row-out argument, no union bound over $n$ indices is taken. Instead, the per-index structural failure contributes only $O(1)$ to the expected number of bad indices. Markov's inequality is then applied at the much larger threshold $n/d^2$.
+
+All convergence statements in both hermitization regimes are in probability. Random errors arise only through expectation bounds followed by Markov's inequality, deterministic estimates on events of probability $1-o(1)$, or imported Bernoulli convergence in probability. The proof is carried out separately for each fixed nonzero shift $z$; there is no union bound over uncountably many shifts. Excluding the single point $z=0$ is immaterial for the almost-everywhere hypothesis in the replacement principle.
+
+For the lower band, the prefix codimension is $r=\ceil{n/\sqrt d}$, and only $q_0=O(n/d^2)$ bottom singular values pay the full smallest-singular-value cost. In the superlogarithmic bridge, the codimension is $r=\ceil{n/d^{a_\eps}}$, and all $r$ bottom singular values may pay the uniform polynomial cost.
+
+\subsection{Normalization}
+
+All determinant comparisons are performed at the $\sqrt d$ normalization. The variance normalization is recovered only after the circular law has been proved:
+\[
+  \frac{M_n}{\sqrt{d(1-d/n)}}
+  =(1-d/n)^{-1/2}\frac{M_n}{\sqrt d},
+\]
+and the deterministic scalar tends to one because $d=o(n)$. This avoids invoking any unproved uniformity of the Bernoulli logarithmic-potential theorem under varying shifts.

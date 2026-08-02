@@ -1,0 +1,257 @@
+\section{An averaged row-profile small-ball estimate}\label{sec:profiles}
+
+This section contains the principal model-specific input. The regular-digraph proof in~\cite{LLTTY19} conditions on a global profile matrix and then uses exact column regularity to cancel profile entropy. In the independent row-slice model, global profiles fluctuate. We instead average the one-row estimator over the multinomial profile before tensorizing over the independent rows.
+
+\subsection{The with-replacement representation}
+
+Let $y$ be a $k$-vector with nonempty $\ell$-parts $\mathcal L^{(1)},\ldots,\mathcal L^{(r)}$. Put
+\[
+  s_q=|\mathcal L^{(q)}|,
+  \qquad
+  p_q=s_q/n.
+\]
+Let $J_1,\ldots,J_d$ be i.i.d. uniform random variables on $[n]$ and define
+\[
+  \widehat X:=\sum_{a=1}^d e_{J_a}.
+\]
+Its profile relative to the $\ell$-decomposition is
+\[
+  Q_q:=\#\set{a\le d:J_a\in\mathcal L^{(q)}},
+  \qquad
+  Q\sim\Mult(d;p_1,\ldots,p_r).
+\]
+Conditional on $Q$, the samples belonging to distinct $\ell$-parts are independent, and within $\mathcal L^{(q)}$ they are i.i.d. uniform on that part. If $\psi_{q,a}$ denotes the corresponding level value of $y$, then
+\begin{equation}\label{eq:conditional-block-sum}
+  \widehat X\cdot y
+  \eqdist
+  \sum_{q=1}^r\sum_{a=1}^{Q_q}\psi_{q,a}
+  \qquad\text{conditional on }Q.
+\end{equation}
+
+\begin{lemma}[Conditional row-local small ball]\label{lem:conditional-row-small-ball}
+For every profile $Q$ and every $\tau\ge1$,
+\[
+  \mathcal Q\!\left(\widehat X\cdot y,\frac{\tau\sqrt d}{k}\,\middle|\,Q\right)
+  \le C\tau^2\operatorname{SB}(Q).
+\]
+\end{lemma}
+
+\begin{proof}
+This is the row-local content of~\cite[Lemma~6.4]{LLTTY19}. We indicate why no global regularity enters. The blocks in~\eqref{eq:conditional-block-sum} are independent, so convolution reduces the estimate to any visited part $q$.
+
+The level sets inside one $\ell$-part have cardinalities within a factor four, hence
+\[
+  \max_z\Pp\{\psi_{q,a}=z\}\le\frac4{h_q+3}.
+\]
+For a regular part, the distinct represented values form a $1/k$-separated subset of the complex plane. The discrete planar concentration estimate~\cite[Proposition~2.5]{LLTTY19} gives
+\[
+  \mathcal Q\!\left(\sum_{a=1}^{Q_q}\psi_{q,a},\frac{\tau\sqrt d}{k}\right)
+  \le C\max\left\{\frac{d\tau^2}{h_qQ_q},\frac1{h_q}\right\}
+  \le\frac{C\tau^2}{w_q(Q)}.
+\]
+
+For a spread part, the distinct represented values are $d/k$-separated and, by the source-compatible construction in \cref{sec:preliminaries}, one has $h_q\ge2$. In the Miroshnikov branch $h_q>32$, we may first assume
+\[
+  1\le\tau^2\le w_q(Q)=h_q\sqrt{Q_q},
+\]
+since otherwise $C\tau^2/w_q(Q)\ge1$, after taking $C\ge1$, and the desired probability bound is trivial. Under this reduction, $Q_q\le d$, the atom bound above, and the $d/k$-separation give, for all sufficiently large $d$,
+\[
+  \max_{a\le Q_q}\mathcal Q\!\left(\psi_{q,a},\frac{\tau\sqrt{2d}}{k}\right)
+  \le\frac{8+64\tau^2/d}{h_q}\le\frac12.
+\]
+This verifies the atom hypothesis in the Miroshnikov estimate. Applying the two-dimensional Esseen estimate~\cite[Proposition~2.2]{LLTTY19} when $2\le h_q\le32$, and the Miroshnikov estimate~\cite[Proposition~2.3]{LLTTY19} when $h_q>32$, yields
+\[
+  \mathcal Q\!\left(\sum_{a=1}^{Q_q}\psi_{q,a},\frac{\tau\sqrt d}{k}\right)
+  \le\frac{C\tau^2}{h_q\sqrt{Q_q}}
+  =\frac{C\tau^2}{w_q(Q)}.
+\]
+The lower bound $h_q\ge2$ is essential here: a one-level block is deterministic conditional on $Q_q$ and therefore belongs to the regular part. For such a block $w_q(Q)=Q_q/d\le1$, so the preceding regular estimate and the truncation in~\eqref{eq:SB-actual} give the required trivial bound.
+
+Taking the minimum over all visited parts, and truncating the bound by one, proves the lemma. The proof uses only the counts $Q_q$, the conditional independence in~\eqref{eq:conditional-block-sum}, and the deterministic geometry of the $\ell$-decomposition. The identities $\sum_iQ_{iq}=ds_q$ and exact column regularity do not occur.
+\end{proof}
+
+\subsection{Comparison with truncated weights}
+
+Define the large-part set
+\[
+  \mathscr L:=\set{q:p_q\ge d^{-1/3}}.
+\]
+For $q\in\mathscr L$, the marginal $Q_q$ is binomial with mean $dp_q\ge d^{2/3}$. Let
+\[
+  \mathcal G:=\bigcap_{q\in\mathscr L}\set{Q_q\ge\tfrac12dp_q}.
+\]
+Since $|\mathscr L|\le d^{1/3}$, Chernoff's inequality gives
+\begin{equation}\label{eq:profile-good-failure}
+  \Pp(\mathcal G^c)
+  \le d^{1/3}e^{-cd^{2/3}}
+  \le e^{-c'd^{2/3}}.
+\end{equation}
+On $\mathcal G$, the definitions~\eqref{eq:actual-weights}--\eqref{eq:truncated-weights} imply
+\[
+  w_q(Q)\ge\frac12\wt w_q
+\]
+for every visited large regular part, the same inequality with $1/\sqrt2$ for every visited large spread part, and $w_q(Q)\ge\wt w_q$ for every visited small part. Hence
+\begin{equation}\label{eq:actual-truncated-comparison}
+  \E_Q\operatorname{SB}(Q)
+  \le2\E_Q\operatorname{SB}(\wt Q)+e^{-cd^{2/3}}.
+\end{equation}
+
+\subsection{The max-weight inequality}
+
+Let $B$ be a real random variable and let $B_1,\ldots,B_d$ be i.i.d. copies. The next lemma is the mechanism that converts occupancy of weight bins into both a geometric mean and an entropy-dispersion penalty.
+
+\begin{lemma}[Max-weight lemma]\label{lem:max-weight}
+There are absolute constants $\eps_0,c>0$ such that the following holds for every integer $d\ge2$. If
+\[
+  R:=\diam(\supp B)\le\eps_0d,
+\]
+then
+\begin{equation}\label{eq:max-weight}
+  \E2^{-\max_{a\le d}B_a}
+  \le2^{-\E B}\exp\bigl(-c\E|B-B'|\bigr),
+\end{equation}
+where $B'$ is an independent copy of $B$.
+\end{lemma}
+
+\begin{proof}
+Put $\mu=\E B$ and $D=\E|B-B'|$. Let $t=\floor{d/2}$ and pair the first $2t$ samples. Set
+\[
+  Z_j=\max(B_{2j-1},B_{2j}),
+  \qquad1\le j\le t.
+\]
+Since $\max_{a\le d}B_a\ge t^{-1}\sum_{j=1}^tZ_j$, with $\theta=(\log2)/t$ we have
+\begin{equation}\label{eq:max-weight-mgf}
+  \E2^{-\max B_a}\le\bigl(\E e^{-\theta Z_1}\bigr)^t.
+\end{equation}
+The identity
+\[
+  \max(B,B')=\frac{B+B'+|B-B'|}{2}
+\]
+gives
+\begin{equation}\label{eq:EZ1}
+  \E Z_1=\mu+\frac D2.
+\end{equation}
+By Efron--Stein and the fact that the maximum is $1$-Lipschitz in each coordinate,
+\[
+  \Var(Z_1)\le\E(B-B')^2\le RD.
+\]
+The bounded-variable Bernstein moment estimate yields, whenever $\theta R\le1/2$,
+\[
+  \log\E e^{-\theta(Z_1-\E Z_1)}\le C\theta^2RD.
+\]
+Indeed, $|Z_1-\E Z_1|\le R$; expanding the exponential and summing the terms of order at least two gives
+\[
+  \E e^{-\theta(Z_1-\E Z_1)}\le1+C\theta^2\Var(Z_1),
+\]
+and $\Var(Z_1)\le RD$. Combining this with~\eqref{eq:max-weight-mgf} and~\eqref{eq:EZ1}, and using $t\ge d/3$, gives
+\[
+  \log\E2^{-\max B_a}
+  \le-(\log2)\mu-\frac{\log2}{2}D+C\frac RdD.
+\]
+Choosing $\eps_0$ sufficiently small absorbs the last term and proves~\eqref{eq:max-weight}.
+\end{proof}
+
+\subsection{Averaging the profile}
+
+Define $B$ by selecting an $\ell$-part according to coordinate mass:
+\begin{equation}\label{eq:B-distribution}
+  \Pp\set{B=\floor{\log_2\wt w_q}}=p_q,
+  \qquad
+  D(B):=\E|B-B'|.
+\end{equation}
+Also set
+\begin{equation}\label{eq:Wy}
+  W_y:=\prod_{q=1}^r\wt w_q^{-p_q}.
+\end{equation}
+If $J_a$ falls in part $q_a$, then
+\[
+  \operatorname{SB}(\wt Q)
+  \le\frac1{\max_{a\le d}\wt w_{q_a}}
+  \le2^{-\max_{a\le d}B_a}.
+\]
+Moreover,
+\[
+  2^{-\E B}\le2\prod_q\wt w_q^{-p_q}=2W_y.
+\]
+Thus \cref{lem:max-weight} and~\eqref{eq:actual-truncated-comparison} prove the main proposition.
+
+\begin{proposition}[Averaged row-profile estimate]\label{prop:averaged-profile}
+There are absolute constants $\eps_0,c,C>0$ such that, whenever
+\[
+  \diam(\supp B)\le\eps_0d,
+\]
+one has
+\begin{equation}\label{eq:averaged-profile}
+  \E_Q\operatorname{SB}(Q)
+  \le Ce^{-cD(B)}W_y+e^{-cd^{2/3}}.
+\end{equation}
+Consequently, for every $\tau\ge1$,
+\begin{equation}\label{eq:averaged-profile-small-ball}
+  \mathcal Q\!\left(\widehat X\cdot y,\frac{\tau\sqrt d}{k}\right)
+  \le C\tau^2\left(Ce^{-cD(B)}W_y+e^{-cd^{2/3}}\right).
+\end{equation}
+The same estimate holds after adding a deterministic scalar.
+\end{proposition}
+
+\begin{proof}
+Equation~\eqref{eq:averaged-profile} follows from~\eqref{eq:actual-truncated-comparison} and \cref{lem:max-weight}. Averaging \cref{lem:conditional-row-small-ball} over $Q$ gives~\eqref{eq:averaged-profile-small-ball}.
+\end{proof}
+
+\subsection{Tensorization and conditioning to the slice}
+
+Let $\widehat X_1,\ldots,\widehat X_K$ be independent with-replacement rows and let $\widehat M_K$ be the resulting $K\times n$ matrix. By \cref{lem:tensorization,prop:averaged-profile}, for deterministic $V\in\C^K$,
+\begin{equation}\label{eq:profile-tensorization-general}
+  \Pp\set{
+    \norm{\widehat M_Ky+V}_2
+    \le\frac{\tau\sqrt{dK}}{k}
+  }
+  \le\left[
+    C\tau^2\left(Ce^{-cD(B)}W_y+e^{-cd^{2/3}}\right)
+  \right]^K.
+\end{equation}
+Taking
+\[
+  \tau=C\sqrt{\frac nK}\log d
+\]
+yields
+\begin{equation}\label{eq:profile-tensorization}
+  \begin{aligned}
+  \Pp\set{
+    \norm{\widehat M_Ky+V}_2
+    \le C\log d\frac{\sqrt{dn}}{k}
+  }
+  &\le\Bigg[
+    C\frac nK\log^2d\\[-2pt]
+  &\hspace{4em}\times
+    \left(Ce^{-cD(B)}W_y+e^{-cd^{2/3}}\right)
+  \Bigg]^K.
+  \end{aligned}
+\end{equation}
+
+An ordered with-replacement row has distinct samples with probability $(n)_d/n^d$, where $(n)_d=n(n-1)\cdots(n-d+1)$. Conditional on distinctness, its indicator is a uniform $d$-subset row. Therefore, for every event $\mathcal E$ depending on $K$ independent rows,
+\begin{equation}\label{eq:condition-to-slice}
+  \Pp_{\mathrm{slice}}(\mathcal E)
+  \le\left(\frac{n^d}{(n)_d}\right)^K
+  \Pp_{\mathrm{wr}}(\mathcal E).
+\end{equation}
+Under~\eqref{eq:lower-band}, $K\le n$ and $d=o(\sqrt n)$, so
+\begin{equation}\label{eq:conditioning-cost}
+  K\log\frac{n^d}{(n)_d}
+  =K\sum_{j=0}^{d-1}-\log\left(1-\frac jn\right)
+  =O\left(\frac{Kd^2}{n}\right)
+  =O(d^2).
+\end{equation}
+Hence the total conditioning cost is $e^{O(d^2)}=e^{o(n)}$, uniformly in the lower band.
+
+\begin{remark}[Why the logarithmic lower constant must be large]\label{rem:large-log-constant}
+By~\eqref{eq:weight-range},
+\[
+  \diam(\supp B)\le\log_2n+\frac32\log_2d+2.
+\]
+Under~\eqref{eq:lower-band},
+\[
+  \frac{\diam(\supp B)}d
+  \le\frac1{C_*\log2}+o(1).
+\]
+Thus the hypothesis of \cref{lem:max-weight} holds uniformly throughout~\eqref{eq:lower-band} once $C_*$ is a sufficiently large absolute constant. This is the new profile-theoretic reason for requiring a large constant multiplying $\log n$. The final $C_*$ must also dominate the constants in the imported smallest-singular-value and restricted-norm inputs and in the rectangular right-kernel argument; see \cref{rem:final-Cstar}.
+\end{remark}

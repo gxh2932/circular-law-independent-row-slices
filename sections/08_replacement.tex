@@ -1,0 +1,257 @@
+\section{Generalized regularized row replacement}\label{sec:replacement}
+
+We prove the comparison estimate used in both the lower-band and superlogarithmic regimes. The argument is a regularized version of the prefix-volume replacement in~\cite[Section~3]{LLY26a}; the codimension is allowed to be any $r=n-k$ with $p(1-p)(r+1)\ge1$.
+
+\subsection{Regularized distances associated with positive contractions}
+
+Let $P$ be an $n\times n$ Hermitian matrix satisfying $0\le P\le I$. For $\eta>0$ and $u\in\C^n$, define
+\[
+  f_P(x):=\sqrt{\eta^2+\inner{P(x+u)}{x+u}}.
+\]
+Let $\boldsymbol\xi=(\xi_1,\ldots,\xi_n)$ have i.i.d. $\Ber(p)$ coordinates, let $X$ be a uniform $d$-subset row with $p=d/n$, and put
+\[
+  \mu_P:=\E f_P(\boldsymbol\xi),
+\]
+\begin{equation}\label{eq:DP}
+  D_P^2:=\eta^2+p(1-p)\tr P
+  +\inner{P(u+p\1)}{u+p\1}.
+\end{equation}
+
+\begin{lemma}[Convex concentration on a product cube]\label{lem:convex-concentration}
+Let $K>0$, let $\zeta_1,\ldots,\zeta_n$ be independent complex random variables with $|\zeta_j|\le K$ almost surely, and let $F:\C^n\to\R$ be convex and $1$-Lipschitz. If $m_F$ is a median of $F(\zeta)$, then, for every $t>0$,
+\begin{align}
+  \Pp\set{|F(\zeta)-m_F|\ge tK}&\le Ce^{-ct^2},
+  \label{eq:convex-median}\\
+  \Pp\set{|F(\zeta)-\E F(\zeta)|\ge tK}&\le Ce^{-ct^2}.
+  \label{eq:convex-mean}
+\end{align}
+The constants are absolute.
+\end{lemma}
+
+\begin{proof}
+The median-centered estimate is~\cite[Theorem~2.1.13]{Tao12}. To record the recentering used below, integrating~\eqref{eq:convex-median} gives
+\[
+  |\E F(\zeta)-m_F|
+  \le\E|F(\zeta)-m_F|
+  \le K\int_0^\infty Ce^{-ct^2}\dd t
+  \le CK.
+\]
+If $t\ge2C$, then
+\[
+  \set{|F(\zeta)-\E F(\zeta)|\ge tK}
+  \subset
+  \set{|F(\zeta)-m_F|\ge tK/2};
+\]
+for $0<t<2C$, the estimate follows after increasing the leading constant. This proves~\eqref{eq:convex-mean}.
+\end{proof}
+
+\begin{lemma}[Regularized distance concentration]\label{lem:regularized-distance}
+Assume $D_P\ge1$. Then
+\[
+  c_0D_P\le\mu_P\le D_P,
+\]
+and, for every $t>0$,
+\begin{align}
+  \Pp\set{|f_P(\boldsymbol\xi)-\mu_P|\ge t}&\le Ce^{-ct^2},
+  \label{eq:Bernoulli-distance-tail}\\
+  \Pp\set{|f_P(X)-\mu_P|\ge t}&\le C\sqrt d\,e^{-ct^2}.
+  \label{eq:slice-distance-tail}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Write $x=\boldsymbol\xi-p\1$ and $u_0=u+p\1$. Since $\E x=0$ and the coordinates are independent,
+\[
+  \E f_P(\boldsymbol\xi)^2
+  =\eta^2+p(1-p)\tr P+\inner{Pu_0}{u_0}
+  =D_P^2.
+\]
+We write out the positive-contraction variance calculation. Set
+\[
+  Q_P:=\inner{Px}{x}-p(1-p)\tr P,
+  \qquad
+  L_P:=2\Re\inner{Px}{u_0}.
+\]
+Put $\sigma^2=p(1-p)$ and $m_4=\E x_1^4$. Since $x$ is real and $P=P^*$,
+\[
+  \inner{Px}{x}
+  =\sum_jP_{jj}x_j^2+2\sum_{j<\ell}\Re(P_{j\ell})x_jx_\ell.
+\]
+The centered diagonal terms are orthogonal in $L^2$ to the off-diagonal monomials, and distinct off-diagonal monomials are likewise orthogonal. Hence
+\begin{align}
+  \Var(Q_P)
+  &=(m_4-\sigma^4)\sum_jP_{jj}^2
+  +4\sigma^4\sum_{j<\ell}(\Re P_{j\ell})^2\notag\\
+  &\le C\sigma^2\sum_{j,\ell}|P_{j\ell}|^2
+  =Cp(1-p)\tr(P^2).
+  \label{eq:QP-variance}
+\end{align}
+Here
+\[
+  m_4=p(1-p)^4+(1-p)p^4=\sigma^2(1-3\sigma^2),
+\]
+so $0\le m_4-\sigma^4\le\sigma^2$, while $4\sigma^4\le\sigma^2$. Furthermore, self-adjointness under our linear-first convention gives
+\[
+  \inner{Px}{u_0}=\inner{x}{Pu_0}
+  =\sum_jx_j\ol{(Pu_0)_j}.
+\]
+Consequently,
+\begin{align}
+  \Var(L_P)
+  &=4\sigma^2\sum_j\bigl(\Re(Pu_0)_j\bigr)^2\notag\\
+  &\le4\sigma^2\norm{Pu_0}_2^2
+  =4p(1-p)\inner{P^2u_0}{u_0}.
+  \label{eq:LP-variance}
+\end{align}
+Since $f_P(\boldsymbol\xi)^2-D_P^2=Q_P+L_P$, it follows that
+\begin{align*}
+  \Var\bigl(f_P(\boldsymbol\xi)^2\bigr)
+  &\le2\Var(Q_P)+2\Var(L_P)\\
+  &\le C\left[p(1-p)\tr(P^2)+p(1-p)\inner{P^2u_0}{u_0}\right]\\
+  &\le C\left[p(1-p)\tr P+\inner{Pu_0}{u_0}\right]
+  \le CD_P^2.
+\end{align*}
+Here we used $p(1-p)\le1$, $\tr(P^2)\le\tr P$, and $P^2\le P$. Thus, when $D_P\ge1$,
+\[
+  \E f_P(\boldsymbol\xi)^4
+  =D_P^4+\Var\bigl(f_P(\boldsymbol\xi)^2\bigr)
+  \le CD_P^4.
+\]
+H\"older's inequality yields
+\[
+  D_P^2=\E f_P^2
+  \le(\E f_P)^{2/3}(\E f_P^4)^{1/3},
+\]
+which implies $\mu_P\ge c_0D_P$ for an absolute constant $c_0>0$. The upper bound is Jensen's inequality.
+
+The map $x\mapsto f_P(x)$ is convex and $1$-Lipschitz because $\norm{P^{1/2}}\le1$. Since the Bernoulli coordinates satisfy $|\xi_j|\le1$, 
+\cref{lem:convex-concentration}, in its mean-centered form~\eqref{eq:convex-mean}, gives~\eqref{eq:Bernoulli-distance-tail}.
+
+Finally, the row-slice law is the law of $\boldsymbol\xi$ conditioned on $\sum_j\xi_j=d$. The local central-limit bound
+\[
+  \Pp\set{\sum_j\xi_j=d}\ge\frac c{\sqrt d}
+\]
+follows directly from Stirling's formula; the explicit computation appears in the proof of~\cite[Corollary~3.5]{LLY26a}. Dividing by this conditioning probability transfers~\eqref{eq:Bernoulli-distance-tail} to~\eqref{eq:slice-distance-tail}.
+\end{proof}
+
+\begin{lemma}[One-row logarithmic comparison]\label{lem:one-row-log}
+Let $0\le r<n$ be an integer. Assume $\tr P\ge r+1$ and put
+\[
+  Q=p(1-p)(r+1)\ge1.
+\]
+Suppose $f_P(\boldsymbol\xi),f_P(X)\le U$ almost surely. Then
+\begin{equation}\label{eq:one-row-log}
+  \E|\log f_P(X)-\log f_P(\boldsymbol\xi)|
+  \le C\sqrt{\frac{\log(ed)}{Q}}
+  +C\sqrt d\log\left(\frac U\eta\right)e^{-cQ}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $D_P^2\ge Q$ and $D_P\ge1$, 
+\cref{lem:regularized-distance} gives $\mu_P\ge c_0\sqrt Q$. Let
+\[
+  \mathcal G=\set{f_P(X)\ge\mu_P/2,\ f_P(\boldsymbol\xi)\ge\mu_P/2}.
+\]
+On $\mathcal G$,
+\[
+  |\log f_P(X)-\log f_P(\boldsymbol\xi)|
+  \le\frac2{\mu_P}|f_P(X)-f_P(\boldsymbol\xi)|.
+\]
+Integrating the tails in~\eqref{eq:Bernoulli-distance-tail}--\eqref{eq:slice-distance-tail},
+\[
+  \E|f_P(\boldsymbol\xi)-\mu_P|\le C,
+\]
+while
+\[
+  \E|f_P(X)-\mu_P|
+  \le\int_0^\infty\min(1,C\sqrt d\,e^{-ct^2})\dd t
+  \le C\sqrt{\log(ed)}.
+\]
+Thus the contribution from $\mathcal G$ is at most $C\sqrt{\log(ed)/Q}$.
+
+By 
+\cref{lem:regularized-distance},
+\[
+  \Pp(\mathcal G^c)
+  \le C\sqrt d\,e^{-c\mu_P^2}
+  \le C\sqrt d\,e^{-cQ}.
+\]
+Since $\eta\le f_P\le U$, the logarithmic difference on $\mathcal G^c$ is at most $\log(U/\eta)$. This proves~\eqref{eq:one-row-log}.
+\end{proof}
+
+\subsection{The hybrid argument}
+
+For a $k\times n$ matrix $H$, define
+\[
+  \Psi_\eta(H):=\frac12\log\det(HH^*+\eta^2I_k).
+\]
+Let $R_1,\ldots,R_k$ be independent uniform row slices. Let $\widetilde R_1,\ldots,\widetilde R_k$ be i.i.d. Bernoulli$(p)$ rows, and assume the two families are mutually independent. Let $u_1,\ldots,u_k\in\C^n$ be deterministic.
+
+Define a hybrid $H^{(i)}$ whose first $i$ rows are $R_j+u_j$ and whose remaining rows are $\widetilde R_j+u_j$. At the $i$th replacement, let $K_i$ be the matrix of the other $k-1$ rows and put
+\begin{equation}\label{eq:Pi-hybrid}
+  P_i=I-K_i^*(K_iK_i^*+\eta^2I_{k-1})^{-1}K_i,
+  \qquad
+  \widehat P_i:=\ol{P_i}.
+\end{equation}
+For a candidate $i$th row with coordinate column $v\in\C^n$, let $H_v$ denote the corresponding hybrid matrix. The Schur-complement identity, together with our convention that matrix rows act bilinearly, gives
+\begin{align}
+  \det(H_vH_v^*+\eta^2I_k)
+  &=\det(K_iK_i^*+\eta^2I_{k-1})
+  \bigl(\eta^2+v^\top P_i\ol v\bigr)\notag\\
+  &=\det(K_iK_i^*+\eta^2I_{k-1})
+  \bigl(\eta^2+\inner{\widehat P_iv}{v}\bigr).
+  \label{eq:Schur-hybrid}
+\end{align}
+Indeed, since $P_i$ is Hermitian,
+\[
+  \inner{\widehat P_iv}{v}
+  =v^\top\widehat P_i^\top\ol v
+  =v^\top P_i\ol v.
+\]
+The determinant involving $K_i$ is common to the two hybrids and cancels. Since $\Psi_\eta=\frac12\log\det$, the remaining factor gives
+\begin{align}
+  \Psi_\eta(H^{(i)})-\Psi_\eta(H^{(i-1)})
+  &=\log\sqrt{\eta^2+\inner{\widehat P_i(R_i+u_i)}{R_i+u_i}}\notag\\
+  &\quad-\log\sqrt{\eta^2+\inner{\widehat P_i(\widetilde R_i+u_i)}{\widetilde R_i+u_i}}.
+  \label{eq:hybrid-increment}
+\end{align}
+The matrix $P_i$ is a positive contraction. On $\ker K_i$, it is the identity; hence
+\begin{equation}\label{eq:trace-Pi}
+  \tr P_i\ge\dim\ker K_i\ge n-k+1=r+1.
+\end{equation}
+Entrywise conjugation preserves Hermitian positivity and the contraction property. Thus $\widehat P_i$ is also a positive contraction; moreover, since $\tr P_i$ is real,
+\[
+  \tr\widehat P_i=\ol{\tr P_i}=\tr P_i\ge r+1.
+\]
+Also, for either row type,
+\[
+  \sqrt{\eta^2+\inner{\widehat P_i(x+u_i)}{x+u_i}}
+  \le\sqrt{\eta^2+(\sqrt n+\norm{u_i}_2)^2}.
+\]
+Conditional on all other rows, $\widehat P_i$ is deterministic and the two candidate rows retain their respective slice and Bernoulli laws. Therefore 
+\cref{lem:one-row-log} applies with $P=\widehat P_i$ and
+\[
+  U=\sqrt{\eta^2+\left(\sqrt n+\max_{i\le k}\norm{u_i}_2\right)^2}.
+\]
+Telescoping~\eqref{eq:hybrid-increment}, taking absolute values, conditioning, and summing gives the desired result. Notice that no independence among the increments is required.
+
+\begin{proposition}[Generalized regularized row replacement]\label{prop:row-replacement}
+Let $p=d/n$, $1\le k<n$, and $r=n-k$. Define $H_{\mathrm{slice}}$ from independent row slices and $H_{\mathrm{iid}}$ from i.i.d. Bernoulli$(p)$ rows, with the same deterministic shifts $u_i$, and assume that the two row families are mutually independent. Put
+\[
+  Q=p(1-p)(r+1),
+  \qquad
+  U=\sqrt{\eta^2+\left(\sqrt n+\max_{i\le k}\norm{u_i}_2\right)^2}.
+\]
+If $Q\ge1$, then
+\begin{equation}\label{eq:row-replacement}
+  \frac1n\E|\Psi_\eta(H_{\mathrm{slice}})-\Psi_\eta(H_{\mathrm{iid}})|
+  \le C\sqrt{\frac{\log(ed)}{Q}}
+  +C\sqrt d\log\left(\frac U\eta\right)e^{-cQ}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Apply 
+\cref{lem:one-row-log} conditionally to each increment in~\eqref{eq:hybrid-increment}. There are $k\le n$ increments, so division by $n$ leaves the same bound.
+\end{proof}

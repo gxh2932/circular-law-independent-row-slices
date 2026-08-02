@@ -1,0 +1,228 @@
+\section{Gaussian normals and exact-slice anti-concentration}\label{sec:normals}
+
+The structural theorem is converted into anti-concentration for a random normal. This stage is model-independent once the row span has the structural property.
+
+\subsection{The Gaussian cluster theorem}
+
+Let $E\subset\C^n$ be a subspace and let $G$ be a standard complex Gaussian vector. We write
+\[
+  Y=P_{E^\perp}G.
+\]
+We use the following fixed measurable enlargement rule. If a subspace $F\subset\C^n$ has dimension below a prescribed target $r$, set $F_0=F$ and recursively choose the least index $j$ for which $P_{F_{k-1}^\perp}e_j\ne0$, normalize that projection, and adjoin it to $F_{k-1}$. Stop at dimension $r$, and denote the resulting subspace by $\Ext_r(F)$. Orthogonal projection, the least-index choice, and Gram--Schmidt normalization are Borel measurable on each rank stratum, so $F\mapsto\Ext_r(F)$ is measurable. It contains $F$. Consequently, if $F\subset E_0$, then $E_0^\perp\subset F^\perp$, every structural statement valid on $F^\perp$ remains valid on $E_0^\perp$, and
+\[
+  \dist(R,E_0)\le\dist(R,F)
+\]
+for every row $R$. Thus rank deficiency creates no obstruction.
+
+The following is the fixed-subspace content used from~\cite[Theorem~4.2 and Lemmas~4.8--4.10]{LLTTY21}. More precisely, 
+\cite[Lemma~4.10]{LLTTY21} supplies the deterministic implication from an oversized correlation-cluster exceptional set to a forbidden vector in $E^\perp$, while~\cite[Lemmas~4.8 and 4.9]{LLTTY21} supply the Gaussian anti-clustering estimate after the large clusters have been removed. The proposition below isolates only this conditional fixed-subspace interface: $E$ is deterministic throughout, and all probability is over $G$. No regular-digraph probability estimate is imported at this stage.
+
+\begin{proposition}[Fixed-subspace Gaussian anti-clustering]\label{prop:Gaussian-anti-clustering}
+Let $\gamma=1/288$ and
+\[
+  \frac{n}{\log^{1/\gamma}n}\le L\le\frac n{d^3},
+  \qquad
+  q_L=\floor{aL},
+  \qquad
+  a\le c_{4.10}.
+\]
+Let $E\subset\C^n$ be deterministic with $\dim E=n-L$. Suppose that every nonzero $x\in E^\perp$ satisfies at least one of the following exact alternatives:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item there is $i\le q_L$ such that
+\[
+  x_i^*>0.9\left(\frac ni\right)^3x_{q_L}^*;
+\]
+\item for every $i\le q_L$ the reverse inequality holds, and
+\[
+  \sup_{\lambda\in\C}
+  \#\set{j:|x_j-\lambda|
+  \le e^{-2(n/L)^\gamma}x_{q_L}^*}
+  \le n\left(\frac Ln\right)^{\gamma/2}.
+\]
+\end{enumerate}
+Let $G$ be a standard complex Gaussian vector and $Y=P_{E^\perp}G$. Then, with probability at least $1-CL/n$ over $G$, there is $J\subset[n]$ such that
+\begin{equation}\label{eq:Gaussian-exceptional-size}
+  |J|\le2n\left(\frac Ln\right)^{\gamma/2}
+\end{equation}
+and
+\begin{equation}\label{eq:Gaussian-anti-cluster}
+  \sup_{\lambda\in\C}
+  \#\set{j\notin J:|Y_j-\lambda|\le e^{-C(n/L)^\gamma}}
+  \le L.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Only the fixed-subspace Gaussian results of~\cite{LLTTY21} are used. The notation and hypotheses are mapped as follows.
+\begin{center}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.22\linewidth}p{0.26\linewidth}p{0.43\linewidth}}
+\toprule
+\textbf{Source quantity} & \textbf{Choice here} & \textbf{Verification}\\
+\midrule
+$m=\dim E^\perp$ & $m=L$ & $L\ge n/\log^{288}n\ge n^{3/4}$ for large $n$\\
+number of Gaussian copies & $p_{\src}=\ell_0-1$ & $p_{\src}<n/b\le3n/L\le n^{1/4}$ for large $n$\\
+cluster cutoff $b$ & $b=\floor{L/2}$ & $1\le b<L$ and $2b\le L$\\
+small-ball parameter $s$ & $s=\tfrac12(L/n)^{3/2}$ & positive and deterministic\\
+strong-correlation radius $\alpha$ & $e^{-C_G(n/L)^\gamma}$ & the radius used in the source construction\\
+correlation probability $\beta$ & $\tfrac14(L/(4n))^3$ & the source Lemma~4.10 scale\\
+exceptional-size cutoff $V$ & $2n(L/n)^{\gamma/2}$ & the source Lemma~4.10 scale\\
+Lemma~4.10 index $\ell_0$ & $p_{\src}+1$ & $\ell_0<n/b+1\le4n/L$ for large $L$\\
+source steep cutoff & $\floor{c_{4.10}L}$ & $q_L\le\floor{c_{4.10}L}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The hypotheses of~\cite[Propositions~4.4 and 4.7]{LLTTY21} are therefore both satisfied by the displayed stronger bound $p_{\src}\le n^{1/4}$; the dimension requirement $m\ge n^{1/2}$ follows from $L\ge n^{3/4}$.
+
+Call a pair $(i,j)$ $(\alpha,\beta)$-strongly correlated if
+\[
+  \Pp_G\set{|Y_i-Y_j|\ge\alpha}\le\beta.
+\]
+Fix once and for all a total order on the subsets of $[n]$ that first compares cardinality and then compares indicator vectors lexicographically. At each stage of the greedy construction, choose the greatest admissible cluster in this order. This is the deterministic tie-break used immediately before~\cite[Lemma~4.8]{LLTTY21}; it makes every cluster $U_\ell$ and the exceptional set below measurable functions of the covariance of $Y$.
+
+Construct the disjoint strong-correlation clusters $U_1,U_2,\ldots$ with this tie-break. Let $\ell_0$ be the first index with $|U_{\ell_0}|\le b$, and put
+\[
+  J=\bigcup_{\ell<\ell_0}U_\ell.
+\]
+If $|J|>V$, 
+\cite[Lemma~4.10]{LLTTY21} produces a nonzero $x\in E^\perp$ satisfying the reverse steepness inequalities through $\floor{c_{4.10}L}$ and having more than $n(L/n)^{\gamma/2}$ coordinates in a disk of radius
+\[
+  e^{-2(n/L)^\gamma}x_{\floor{c_{4.10}L}}^*.
+\]
+Because $q_L\le\floor{c_{4.10}L}$, order-statistic monotonicity gives
+\[
+  x_{\floor{c_{4.10}L}}^*\le x_{q_L}^*.
+\]
+The vector is therefore neither in alternative~(i) nor in alternative~(ii), a contradiction. Hence $|J|\le V$ under the structural hypothesis.
+
+Outside $J$, all greedy clusters have size at most $b$. Apply~\cite[Lemmas~4.8 and 4.9]{LLTTY21} with the displayed $\alpha,\beta,b,s$. The probability of a disk containing at least $2b$ coordinates outside $J$ at radius
+\[
+  r_G=\frac{\alpha s}{\sqrt{16\log(1/\beta)}}
+\]
+is at most
+\[
+  \frac{(sn)^2}{2b^2}\le C\frac Ln.
+\]
+Since $2b\le L$, absence of such a disk implies the cardinality bound in~\eqref{eq:Gaussian-anti-cluster}. Finally, writing $q=n/L\ge2$,
+\[
+  \log r_G
+  =-C_Gq^\gamma-\frac32\log q-O(\log(e+\log q))
+  \ge-Cq^\gamma,
+\]
+so $r_G\ge e^{-C(n/L)^\gamma}$. Anti-clustering at radius $r_G$ implies the claim at the smaller displayed radius.
+\end{proof}
+
+Under~\eqref{eq:lower-band},
+\[
+  L\ge m\ge\frac{n}{2d^3}
+  \ge\frac{n}{\log^{3(1+\sigma)+1}n}
+  \ge\frac{n}{\log^{288}n}
+\]
+for all sufficiently large $n$, uniformly for $L=m,m+1$. Thus the lower codimension hypothesis in 
+\cref{prop:Gaussian-anti-clustering} is satisfied throughout the lower band. Combining 
+\cref{thm:row-slice-structural,prop:Gaussian-anti-clustering} with $L\in\set{m,m+1}$ and $m=n/d^3+O(1)$ gives
+\begin{equation}\label{eq:normal-scales}
+  \rho:=e^{-Cd^{1/96}},
+  \qquad
+  |J|\le2nd^{-1/192+o(1)},
+\end{equation}
+and failure probability $O(L/n)+O(n^{-1})=O(d^{-3})+O(n^{-1})$.
+
+\subsection{Quotienting the constant direction}
+
+For $y\in\C^n$, let
+\[
+  \mathfrak m(y)=\frac1n\sum_{j=1}^ny_j,
+  \qquad
+  y^\circ=y-\mathfrak m(y)\1.
+\]
+If $X$ is a uniform $d$-subset row, then
+\[
+  X\cdot y=d\mathfrak m(y)+X\cdot y^\circ.
+\]
+The deterministic term $d\mathfrak m(y)$ changes only the center in the L\'evy concentration function. For a shifted row $R_i=X-\zeta e_i$,
+\[
+  R_i\cdot y=X\cdot y^\circ+d\mathfrak m(y)-\zeta y_i,
+\]
+and the last two terms are deterministic after conditioning on $y$ and $i$. Coordinate clusters are likewise invariant under subtracting $\mathfrak m(y)$. Thus all small-ball estimates are naturally statements modulo $\spanv\set{\1}$.
+
+\subsection{A double-counting lemma for an exact row slice}
+
+\begin{lemma}[Slice anti-concentration from coordinate anti-clustering]\label{lem:slice-double-count}
+Let $J\subset[n]$, $K=J^c$, and suppose $|K|\ge n/2$. Assume that for some $m\ge1$ and $\rho>0$,
+\begin{equation}\label{eq:coordinate-anti-cluster}
+  \sup_{\lambda\in\C}\#\set{j\in K:|y_j-\lambda|\le\rho}\le m.
+\end{equation}
+If $X$ is the indicator of a uniform $d$-subset of $[n]$ and $d\le n/2$, then
+\begin{equation}\label{eq:slice-anti-concentration}
+  \sup_{\lambda\in\C}\Pp\set{|X\cdot y-\lambda|\le\rho}
+  \le\frac{4m}{n-d+1}+e^{-cd}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $S$ be the random $d$-subset and put $H(S)=|S\cap K|$. Since $|K|\ge n/2$, hypergeometric concentration gives
+\begin{equation}\label{eq:hypergeometric-H}
+  \Pp\set{H<d/4}\le e^{-cd}.
+\end{equation}
+Fix $\lambda\in\C$ and let
+\[
+  \mathcal A=\set{S:|S|=d,\ \left|\sum_{j\in S}y_j-\lambda\right|\le\rho}.
+\]
+Double-count pairs $(S,t)$ with $S\in\mathcal A$ and $t\in S\cap K$:
+\[
+  \sum_{|S|=d}\1_{\mathcal A}(S)H(S)
+  =\sum_{|T|=d-1}\sum_{\substack{t\in K\\t\notin T}}
+  \1\set{\left|y_t+\sum_{j\in T}y_j-\lambda\right|\le\rho}.
+\]
+For each fixed $T$, the inner sum is at most $m$ by~\eqref{eq:coordinate-anti-cluster}. Therefore
+\[
+  \sum_{|S|=d}\1_{\mathcal A}(S)H(S)
+  \le m\binom n{d-1}.
+\]
+On $H(S)\ge d/4$,
+\[
+  \frac d4\#\set{S\in\mathcal A:H(S)\ge d/4}
+  \le m\binom n{d-1}.
+\]
+Dividing by $\binom nd$ and using~\eqref{eq:hypergeometric-H} gives
+\[
+  \Pp(\mathcal A)
+  \le\frac{4m}{d}\frac{\binom n{d-1}}{\binom nd}+e^{-cd}
+  =\frac{4m}{n-d+1}+e^{-cd}.
+\]
+Taking the supremum over $\lambda$ proves the lemma.
+\end{proof}
+
+At $m=n/d^3+O(1)$, the right-hand side of~\eqref{eq:slice-anti-concentration} is $O(d^{-3})$.
+
+\subsection{The averaged random-normal small-ball bound}
+
+Fix a deterministic exposed row set $I$ of one of the two required cardinalities, and let
+\[
+  F_I=\spanv\set{\ol{X_i-\zeta e_i}:i\in I}
+\]
+be the actual conjugated row span. Define
+\[
+  E_I=\Ext_{|I|}(F_I),
+  \qquad
+  Y=P_{E_I^\perp}G,
+\]
+where $G$ is an independent standard complex Gaussian. Let
+\[
+  \mathcal F_I=\sigma\bigl((X_i)_{i\in I},G\bigr).
+\]
+Then $E_I$, $Y$, the greedy clusters, and the exceptional set $J$ are $\mathcal F_I$-measurable. By~\eqref{eq:kernel-conjugate-span}, $E_I^\perp\subset F_I^\perp=\ker A_{\zeta,I}$, so $Y$ is a Gaussian vector in the right kernel of the exposed shifted matrix. Conjugation is an isometry and preserves coordinate-cluster cardinalities.
+
+A fresh row slice $X$ is independent of $\mathcal F_I$. Conditional on $\mathcal F_I$, 
+\cref{thm:row-slice-structural,prop:Gaussian-anti-clustering} give coordinate anti-clustering outside $J$, and 
+\cref{lem:slice-double-count} therefore yields
+\begin{equation}\label{eq:averaged-normal-small-ball}
+  \E\left[
+  \sup_{\lambda\in\C}
+  \Pp_X\set{|X\cdot Y-\lambda|\le e^{-Cd^{1/96}}\given\mathcal F_I}
+  \right]
+  \le Cd^{-3}+\frac Cn.
+\end{equation}
+The structural and Gaussian failure events contribute $O(n^{-1})+O(d^{-3})$, and the concentration function is at most one. The exceptional coordinate set from~\eqref{eq:normal-scales} has size $o(n)$, hence its complement has size at least $n/2$ for large $n$. The estimate is uniform for each deterministic fixed $I$ of the two required cardinalities. No simultaneous event over all choices of $I$ is asserted.

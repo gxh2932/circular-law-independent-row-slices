@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this manuscript, please cite it using the metadata below."
+title: "The circular law for independent row slices down to logarithmic degree"
+type: software
+authors:
+  - family-names: Hurt
+    given-names: Griffin P.
+    email: gh7775@rit.edu
+version: "1.0-preprint"
+date-released: 2026-08-01
+repository-code: "https://github.com/gxh2932/circular-law-independent-row-slices"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Hurt
+      given-names: Griffin P.
+      email: gh7775@rit.edu
+  title: "The circular law for independent row slices down to logarithmic degree"
+  year: 2026

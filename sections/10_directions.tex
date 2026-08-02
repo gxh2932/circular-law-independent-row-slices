@@ -1,0 +1,61 @@
+\section{Further directions}\label{sec:further-directions}
+
+\subsection{Why the lower-band argument is logarithmic}
+
+The superlogarithmic bridge removes any need to run the structural machinery throughout the full range $d=o(n)$ and supplies the missing connection to the Li--Litvak--Yu circular-law regime. Within the lower polylogarithmic band, where the LLTTY discretization, the codimension choice $m\asymp n/d^3$, the Gaussian-normal source range, and the conditioning-to-slice estimate are used, the numerical structural and intermediate-singular-value budgets improve with $d$:
+\[
+  q_0=O(n/d^2),
+  \qquad
+  \frac{q_0}{n}\,d\log d=O\!\left(\frac{\log d}{d}\right)\to0,
+  \qquad
+  \delta_Lv_L\asymp\frac{d^{1/192}}{\log d}\gg\log d.
+\]
+The explicit lower logarithmic restriction enters in \cref{lem:max-weight}. In the present $\ell$-decomposition,
+\[
+  \diam(\supp B)\le\log_2n+O(\log d),
+\]
+whereas that lemma requires the diameter to be $O(d)$. Below logarithmic degree, the exact occupancy functional
+\[
+  \Phi_d(B)=\E 2^{-\max_{a\le d}B_a}
+\]
+can no longer be compressed uniformly into
+$2^{-\E B}e^{-cD(B)}$. A sublogarithmic proof would need to retain $\Phi_d(B)$ or establish a more refined entropy--occupancy inequality that separates bins of mass above and below $1/d$.
+
+The current proof also does not reach every fixed constant in $d=C\log n$. The support-diameter inequality and the imported restricted-norm and smallest-singular-value estimates require a sufficiently large absolute lower constant. Reducing that constant is a quantitative problem distinct from passing from the logarithmic band to larger degrees, which is handled by \cref{prop:superlog-bridge}.
+
+A separate question concerns the sharp scale of the unshifted smallest singular value. Li, Litvak, and Yu proved
+$s_n(M_n)=O_{\Pp}(\sqrt d/n)$ in the dense regime $d=pn$ for each fixed $p\in(0,1/2]$, and conjectured the same upper scale whenever
+$\min(d,n-d)\ge(1+\eps)\log n$~\cite[Theorem~1.1, Remark~1.4, and Conjecture~1.5]{LLY26b}. The present argument instead uses lower bounds for shifted matrices and controls a block of intermediate singular values; it neither resolves nor requires that sharp-scale conjecture.
+
+\subsection{Defective columns below the invertibility threshold}
+
+A fixed column of $M_n$ is zero with probability
+\[
+  \left(1-\frac dn\right)^n
+  =\exp\!\left(-d+O\!\left(\frac{d^2}{n}\right)\right)
+  =e^{-(1+o(1))d},
+\]
+where the last equality uses $d=o(n)$. Thus below the logarithmic scale the matrix has zero columns with substantial probability, and $s_n(M_n)=0$ at $z=0$. This does not by itself rule out the circular law when $d\to\infty$, because the proportion of zero columns is $e^{-(1+o(1))d}\to0$ and hermitization is an almost-everywhere statement in the shift. It does show that any sublogarithmic proof must tolerate an exceptional coordinate set rather than demand global invertibility or expansion.
+
+The structural theorem already allows an exceptional set of size
+\[
+  n d^{-1/192+o(1)},
+\]
+much larger than the expected number
+\[
+  n\exp\!\left(-d+O\!\left(\frac{d^2}{n}\right)\right)
+\]
+of zero columns when $d\to\infty$. This suggests a defect-tolerant version of the present argument: first remove low-degree columns, then prove many-level geometry and random-normal anti-clustering on the complement. The operator-norm scale also changes from $O(\sqrt d)$ to $O(\sqrt d+\log n)$, so the net radii would have to be rebalanced.
+
+\subsection{Conjectural optimal range}
+
+\begin{conjecture}
+The independent row-slice model obeys the circular law whenever
+\[
+  d\to\infty,
+  \qquad
+  d=o(n).
+\]
+\end{conjecture}
+
+This is consistent with the i.i.d. Bernoulli and doubly regular models. For fixed $d$, a positive limiting proportion of zero columns prevents convergence to the circular law. \Cref{thm:main} reaches every sparse degree above a sufficiently large logarithmic constant. The remaining asymptotic gap is therefore the sublogarithmic regime, together with the quantitative question of how small the constant in $d=C\log n$ can be. The present paper identifies two ingredients likely needed below logarithmic degree: an occupancy-sensitive replacement for the support-diameter max-weight lemma and a defect-tolerant structural theorem.

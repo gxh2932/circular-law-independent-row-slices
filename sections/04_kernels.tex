@@ -1,0 +1,641 @@
+\section{Rectangular right-kernel exclusions}\label{sec:kernels}
+
+This section connects rectangular right kernels in the independent-row model to the exact gradual class of~\cite{LLTTY19}. The result is uniform for the two codimensions in the leave-one-row-out argument; no square theorem is invoked.
+
+The proof has three stages. We first exclude the shifted very-steep classes using independent-row witness events and center-invariant equal-block anti-concentration. We then treat the almost-constant remainder on a uniform row-load event. Finally, the deterministic LLTTY alternatives identify every remaining nonzero kernel vector with either the permitted very-steep class or a scalar multiple of the normalized gradual class.
+
+\subsection{Complex convention and row action}
+
+We use the Hermitian inner product
+\[
+  \inner{u}{v}:=\sum_{j=1}^n u_j\ol{v_j},
+\]
+linear in the first variable. For matrix multiplication we use the bilinear row action
+\[
+  r\cdot x:=\sum_{j=1}^n r_jx_j.
+\]
+Thus $r\cdot x=\inner{x}{\ol r}$. If
+\[
+  r_i=X_i-\zeta e_i,
+  \qquad i\in I,
+\]
+and
+\[
+  E_I:=\spanv\set{\ol{r_i}:i\in I},
+\]
+then
+\begin{equation}\label{eq:kernel-conjugate-span}
+  E_I^\perp=\ker A_{\zeta,I},
+  \qquad
+  (A_{\zeta,I}x)_i=r_i\cdot x
+  =\sum_{j=1}^nX_{ij}x_j-\zeta x_i.
+\end{equation}
+No rank assumption is involved in~\eqref{eq:kernel-conjugate-span}.
+
+\subsection{The codimension-dependent LLTTY classes}\label{subsec:classes}
+
+Assume the lower-band condition~\eqref{eq:lower-band} and set
+\begin{equation}\label{eq:kernel-codimension}
+  m=\floor{\frac n{d^3}}-1,
+  \qquad
+  L\in\set{m,m+1},
+  \qquad
+  K=n-L.
+\end{equation}
+Let $I\subset[n]$ be deterministic with $|I|=K$, and assume throughout that $|\zeta|\le Z_0\sqrt d$. Write
+\[
+  P_I:\C^n\longrightarrow\C^I,
+  \qquad
+  P_Ix=x_I,
+  \qquad
+  A_{\zeta,I}:=M_I-\zeta P_I,
+\]
+where $M_I$ is the restriction of $M_n$ to the rows indexed by $I$. We record the classes from~\cite[Section~4]{LLTTY19}, displaying their dependence on $L$. To avoid collision with the Bernoulli density $p=d/n$, set
+\begin{equation}\label{eq:steep-epsilon-p}
+  \eps_{\mathrm{st}}=\sqrt{\frac{\log d}{d}},
+  \qquad
+  p_{\mathrm{st}}=\floor{\frac1{5\eps_{\mathrm{st}}}}
+  =\floor{\frac15\sqrt{\frac d{\log d}}}.
+\end{equation}
+With the fixed absolute constant $a_3>0$ from the constant convention, put
+\begin{equation}\label{eq:n1n2n3}
+  n_1=\ceil{\frac n{d^{3/2}}},
+  \qquad
+  n_2=\floor{\frac n{d^{2/3}}},
+  \qquad
+  n_3=\floor{a_3n}.
+\end{equation}
+Let $r$ be determined by
+\begin{equation}\label{eq:r-steep}
+  p_{\mathrm{st}}^r<n_1\le p_{\mathrm{st}}^{r+1},
+\end{equation}
+and let $r_0=r_0(L)$ be the least nonnegative integer for which
+\begin{equation}\label{eq:r0-steep}
+  p_{\mathrm{st}}^{r_0}\ge\frac{20L}{d}.
+\end{equation}
+For all sufficiently large $n$, uniformly for $L=m,m+1$, one has $r_0<r$. Indeed,
+\[
+  p_{\mathrm{st}}^{r-1}\ge\frac{n_1}{p_{\mathrm{st}}^2}
+  \ge\frac{25n\log d}{d^{5/2}},
+  \qquad
+  \frac{20L}{d}\le\frac{20n}{d^4}.
+\]
+Let
+\[
+  \mathcal K:=\set{(c,\ldots,c):c\in\C}
+\]
+be the one-dimensional space of constant vectors.
+
+The permitted very-steep source class is
+\begin{equation}\label{eq:T3}
+  T_3(L):=
+  \set{x:\exists i\le p_{\mathrm{st}}^{r_0},\ 
+  x_i^*>\left(\frac ni\right)^3x_{p_{\mathrm{st}}^{r_0}}^*}.
+\end{equation}
+For $r_0\le i\le r-1$, recursively define
+\begin{equation}\label{eq:T0i}
+  T_{0,i}(L):=
+  \set{x:x\notin T_3(L)\cup\bigcup_{j=r_0}^{i-1}T_{0,j}(L),\ 
+  x_{p_{\mathrm{st}}^i}^*>4d\,x_{p_{\mathrm{st}}^{i+1}}^*}.
+\end{equation}
+At the terminal scale set
+\begin{equation}\label{eq:T0r}
+  T_{0,r}(L):=
+  \set{x:x\notin T_3(L)\cup\bigcup_{j=r_0}^{r-1}T_{0,j}(L),\ 
+  x_{\ceil{n_1/p_{\mathrm{st}}}}^*>4d\,x_{n_1}^*},
+\end{equation}
+and put
+\begin{equation}\label{eq:T0}
+  T_0(L)=\bigcup_{i=r_0}^rT_{0,i}(L).
+\end{equation}
+The remaining source steep classes are
+\begin{equation}\label{eq:T1}
+  T_1(L):=\set{x\notin T_0(L)\cup T_3(L):x_{n_1}^*>d^{3/2}x_{n_2}^*}
+\end{equation}
+and
+\begin{equation}\label{eq:T2}
+  T_2(L):=\set{x\notin T_0(L)\cup T_1(L)\cup T_3(L):x_{n_2}^*>d^{3/2}x_{n_3}^*}.
+\end{equation}
+We abbreviate
+\begin{equation}\label{eq:T-union}
+  T(L)=\bigcup_{i=0}^3T_i(L).
+\end{equation}
+For $0\le i\le3$, define the shifted class
+\begin{equation}\label{eq:shifted-Ti}
+  T_i^{\mathcal K}(L):=
+  \set{v=x+y:x\in T_i(L),\ y\in\mathcal K,\ |y_1|\le x_{n_1}^*/10}.
+\end{equation}
+As in the source, the classes $T_0^{\mathcal K}$, $T_1^{\mathcal K}$, and $T_2^{\mathcal K}$ are excluded, whereas $T_3^{\mathcal K}$ is part of the permitted very-steep alternative.
+
+For $\vartheta>0$, define
+\begin{equation}\label{eq:B-vartheta}
+  \mathcal B(\vartheta):=
+  \set{x:\exists\lambda\in\C,\ 
+  \#\set{j:|x_j-\lambda|\le\vartheta x_{n_3}^*}>n-n_3}.
+\end{equation}
+Set
+\begin{equation}\label{eq:vartheta0}
+  \vartheta_0=\frac{10}{d^3}.
+\end{equation}
+The normalized gradual class used in the LLTTY decomposition is literally the following.
+
+\begin{definition}[LLTTY gradual class]\label{def:gradual-class}
+\begin{equation}\label{eq:gradual-class}
+  S_L:=\set{x\notin T(L)\cup\mathcal B(\vartheta_0):x_{n_3}^*=1}.
+\end{equation}
+Its dependence on $L$ is through $r_0(L)$ and the recursive steep classes.
+\end{definition}
+
+Let $c_{4.10}>0$ be the absolute constant from \cite[Lemma~4.10]{LLTTY21}. Fix a sufficiently small absolute constant $a\in(0,c_{4.10}]$ for the random-normal theorem, and put
+\begin{equation}\label{eq:qL}
+  q_L=\floor{aL},
+\end{equation}
+and define
+\begin{equation}\label{eq:VL}
+  V_L:=\set{0\ne x:\exists i\le q_L,\ 
+  x_i^*>0.9\left(\frac ni\right)^3x_{q_L}^*}.
+\end{equation}
+
+\subsection{\texorpdfstring{The shifted $T_3$ class is permitted}{The shifted T3 class is permitted}}
+
+The deterministic inclusion from~\cite[Section~4.1, equation~(8)]{LLTTY19} gives
+\begin{equation}\label{eq:T3-shift-inclusion}
+  T_3^{\mathcal K}(L)
+  \subset
+  \set{v:\exists i\le p_{\mathrm{st}}^{r_0},\ 
+  v_i^*>0.9\left(\frac ni\right)^3v_{p_{\mathrm{st}}^{r_0}}^*}.
+\end{equation}
+For completeness, if $v=x+c\1$ and $x\in T_3(L)$, then
+\[
+  |c|\le x_{n_1}^*/10\le x_{p_{\mathrm{st}}^{r_0}}^*/10.
+\]
+If $i$ witnesses~\eqref{eq:T3}, order-statistic stability gives
+\[
+  v_i^*\ge x_i^*-|c|,
+  \qquad
+  v_{p_{\mathrm{st}}^{r_0}}^*\le x_{p_{\mathrm{st}}^{r_0}}^*+|c|.
+\]
+Since $(n/i)^3>10$ for all relevant indices and all large $n$, the constant $0.9$ in~\eqref{eq:T3-shift-inclusion} follows.
+
+The minimality of $r_0$ and~\eqref{eq:steep-epsilon-p} yield
+\begin{equation}\label{eq:pr0-upper}
+  p_{\mathrm{st}}^{r_0}<\frac{20p_{\mathrm{st}}L}{d}
+  \le\frac{4L}{\sqrt{d\log d}}.
+\end{equation}
+After increasing $C_*$, the last quantity is at most $aL/2$. Since $L\to\infty$,
+\begin{equation}\label{eq:pr0-qL}
+  p_{\mathrm{st}}^{r_0}\le q_L.
+\end{equation}
+Monotonicity of order statistics in~\eqref{eq:T3-shift-inclusion} therefore implies
+\begin{equation}\label{eq:T3-in-VL}
+  T_3^{\mathcal K}(L)\subset V_L.
+\end{equation}
+All estimates are uniform for $L=m,m+1$.
+
+\subsection{\texorpdfstring{Unique-coordinate witnesses for $T_0^{\mathcal K}$}{Unique-coordinate witnesses for T0K}}
+
+For $r_0\le i<r$, put
+\begin{equation}\label{eq:si-ti}
+  s_i=p_{\mathrm{st}}^i,
+  \qquad
+  t_i=p_{\mathrm{st}}^{i+1}.
+\end{equation}
+At the terminal scale put
+\begin{equation}\label{eq:sr-tr}
+  s_r=\ceil{\frac{n_1}{p_{\mathrm{st}}}},
+  \qquad
+  t_r=n_1.
+\end{equation}
+The choice $t_r=n_1$, rather than $p_{\mathrm{st}}\ceil{n_1/p_{\mathrm{st}}}$, is important: it matches the defining jump in~\eqref{eq:T0r} and gives direct control of the constant shift.
+
+For disjoint sets $J^\ell,J^r\subset[n]$ satisfying $|J^\ell|=s_i$ and $|J^\ell\cup J^r|=t_i$, let
+\[
+  R=I\setminus(J^\ell\cup J^r)
+\]
+and define
+\begin{equation}\label{eq:unique-witness-count}
+  Z_{J^\ell,J^r}:=
+  \#\set{u\in R:|\supp X_u\cap J^\ell|=1,\ \supp X_u\cap J^r=\varnothing}.
+\end{equation}
+Because the rows are independent,
+\[
+  Z_{J^\ell,J^r}\sim\operatorname{Bin}(|R|,\pi_i),
+  \qquad
+  \pi_i=s_i\frac{\binom{n-t_i}{d-1}}{\binom nd}.
+\]
+Equivalently,
+\begin{equation}\label{eq:unique-witness-mean}
+  \E Z_{J^\ell,J^r}
+  =|R|\frac{ds_i}{n}\prod_{h=0}^{d-2}\frac{n-t_i-h}{n-1-h}.
+\end{equation}
+Since $t_i\le n_1\le2n/d^{3/2}$,
+\[
+  \prod_{h=0}^{d-2}\frac{n-t_i-h}{n-1-h}
+  \ge1-\frac{(d-1)(t_i-1)}{n-d+1}
+  \ge0.9
+\]
+for all large $n$. Also $|R|\ge n-L-n_1\ge0.9n$. Thus
+\begin{equation}\label{eq:unique-witness-mean-lower}
+  \E Z_{J^\ell,J^r}\ge0.8ds_i,
+\end{equation}
+and Chernoff's inequality gives
+\begin{equation}\label{eq:unique-witness-chernoff}
+  \Pp\set{Z_{J^\ell,J^r}<\tfrac12ds_i}\le e^{-cds_i}.
+\end{equation}
+At one scale the number of pairs is at most
+\[
+  \binom n{t_i}\binom{t_i}{s_i}
+  \le\left(\frac{en}{t_i}\right)^{t_i}2^{t_i}.
+\]
+Here $t_i\le p_{\mathrm{st}}s_i$, including $i=r$, and
+\[
+  s_i\ge p_{\mathrm{st}}^{r_0}\ge\frac{20L}{d}\ge\frac{10n}{d^4}
+\]
+for all large $n$. Therefore
+\[
+  \log\left[\binom n{t_i}\binom{t_i}{s_i}\right]
+  \le Cp_{\mathrm{st}}s_i\log d=o(ds_i).
+\]
+A union bound over the $O(\log n)$ scales gives an event $\mathcal E_0(L)$ such that
+\begin{equation}\label{eq:E0-failure}
+  \Pp(\mathcal E_0(L)^c)\le e^{-cn/d^3}.
+\end{equation}
+
+On $\mathcal E_0(L)$, let $v=x+c\1\in T_{0,i}^{\mathcal K}(L)$. Order the coordinates of $x$ by modulus and take the first $s_i$ coordinates as $J^\ell$ and the next $t_i-s_i$ coordinates as $J^r$. Then
+\begin{equation}\label{eq:T0-jump-shift}
+  x_{s_i}^*>4d\,x_{t_i}^*,
+  \qquad
+  |c|\le x_{n_1}^*/10\le x_{t_i}^*/10.
+\end{equation}
+For every witness row $u$, the row index and all selected coordinates other than the unique $j(u)\in J^\ell$ lie beyond the first $t_i$ coordinates. Using the exact row sum,
+\[
+  |(A_{\zeta,I}v)_u|
+  \ge x_{s_i}^*-(d-1+|\zeta|)x_{t_i}^*-(d+|\zeta|)|c|
+  \ge x_{s_i}^*-1.2d\,x_{t_i}^*
+  \ge0.7x_{s_i}^*>0
+\]
+for all large $d$. Hence
+\begin{equation}\label{eq:T0-exclusion}
+  \ker A_{\zeta,I}\cap T_0^{\mathcal K}(L)=\varnothing
+  \qquad\text{on }\mathcal E_0(L).
+\end{equation}
+
+\subsection{Uniform equal-block witness events}
+
+Fix a sufficiently small absolute constant $c_w>0$. For an integer $s\le n/(100d)$, let $\mathcal W(s)$ be the event that for every pair of disjoint sets $J^\ell,J^r\subset[n]$ with $|J^\ell|=|J^r|=s$, at least $c_wds$ rows $i\in I$ satisfy
+\begin{equation}\label{eq:equal-block-witness}
+  |\supp X_i\cap(J^\ell\cup J^r)|=1.
+\end{equation}
+For a fixed pair, the witness probability equals
+\[
+  2s\frac{\binom{n-2s}{d-1}}{\binom nd}\ge c\frac{ds}{n},
+\]
+so the mean number of witnesses is at least $cds$. Chernoff's inequality and
+\[
+  \#\set{(J^\ell,J^r)}
+  \le\binom n{2s}\binom{2s}s
+  \le\exp\left(Cs\log\frac{en}{s}\right)
+\]
+give
+\begin{equation}\label{eq:W-s-failure}
+  \Pp(\mathcal W(s)^c)
+  \le\exp\left[-cds+Cs\log\frac{en}{s}\right].
+\end{equation}
+We use
+\begin{equation}\label{eq:witness-scales}
+  s=n_1
+  \qquad\text{and}\qquad
+  s=m_0:=\floor{\frac n{200d}}.
+\end{equation}
+At these scales, respectively,
+\begin{equation}\label{eq:witness-scale-failures}
+  \Pp(\mathcal W(n_1)^c)\le e^{-cn/\sqrt d},
+  \qquad
+  \Pp(\mathcal W(m_0)^c)\le e^{-cn}.
+\end{equation}
+These uniform events are kept separate from the fixed-vector small-ball probabilities below; in particular, their failures are not multiplied by net cardinalities.
+
+\subsection{A center-invariant equal-block lemma}
+
+The next statement is the independent-row version of the fixed-vector mechanism in~\cite[Section~4.3]{LLTTY19}.
+
+\begin{lemma}[Equal-block small ball]\label{lem:equal-block}
+There is an absolute constant $C_{\mathrm{eb}}\ge1$ such that the following holds. Let $1\le m_1\le m_2\le n-m_1$, and suppose that a deterministic vector $u\in\C^n$ satisfies
+\begin{equation}\label{eq:equal-block-separation}
+  u_{m_1}^*>\frac23+u_j^*
+  \qquad\text{for every }j>m_2.
+\end{equation}
+Let $w\in\mathcal K$. Put $m_*=\min\set{m_0,m_1}$. The following estimates hold uniformly in $w$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If $m_1\le m_0$, then
+\begin{equation}\label{eq:equal-block-small}
+  \Pp\set{\norm{A_{\zeta,I}(u+w)}_2\le c\sqrt{dm_1},\ \mathcal W(m_1)}
+  \le e^{-cdm_1}.
+\end{equation}
+\item If $m_1\ge C_{\mathrm{eb}}m_0$, then
+\begin{equation}\label{eq:equal-block-large}
+  \Pp\set{\norm{A_{\zeta,I}(u+w)}_2\le c\sqrt{dm_0},\ \mathcal W(m_0)}
+  \le\exp\left[-cdm_0\log\left(\frac{dm_1}{n}\right)\right].
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For part~(i), set $q_0=1$ and $m_*=m_1$. For part~(ii), put
+\[
+  q_0=\floor{\frac{m_1}{m_0}},
+  \qquad
+  m_*=m_0.
+\]
+In the second case $q_0m_*\ge m_1/2$. Partition $q_0m_*$ of the largest coordinates into disjoint sets $J_1^\ell,\ldots,J_{q_0}^\ell$, and the same number of coordinates beyond $m_2$ into disjoint sets $J_1^r,\ldots,J_{q_0}^r$, all of size $m_*$. Set $J_q=J_q^\ell\cup J_q^r$, and write
+\[
+  \mathscr J=\set{(J_q^\ell,J_q^r):1\le q\le q_0}.
+\]
+Define the selected-block event
+\[
+  \mathcal W_{\mathscr J}
+  :=\bigcap_{q=1}^{q_0}
+  \set{\#\set{i\in I:|\supp X_i\cap J_q|=1}\ge c_wdm_*}.
+\]
+By definition, $\mathcal W(m_*)\subset\mathcal W_{\mathscr J}$. It is therefore enough to prove the asserted bounds with $\mathcal W_{\mathscr J}$ in place of $\mathcal W(m_*)$.
+
+On $\mathcal W_{\mathscr J}$, if
+\[
+  b_i=\#\set{q:|\supp X_i\cap J_q|=1},
+\]
+then
+\begin{equation}\label{eq:sum-bi}
+  \sum_{i\in I}b_i\ge c_wdm_*q_0.
+\end{equation}
+In the first case, let $I_0$ be the witness rows for the sole pair. Then $|I_0|\ge c_wdm_1$ and $b_i=1$ for every $i\in I_0$. In the second case, use $b_i\le q_0$ and set
+\[
+  a_0=\frac{c_w}{4}\frac{dm_*}{n}q_0,
+  \qquad
+  I_0=\set{i\in I:b_i\ge a_0}.
+\]
+Then
+\[
+  c_wdm_*q_0\le\sum_{i\in I}b_i\le|I_0|q_0+na_0,
+\]
+so $|I_0|\ge(3c_w/4)dm_*$. Moreover, $q_0m_*\ge m_1/2$ gives $a_0\ge(c_w/8)dm_1/n$. Thus, after adjusting the absolute constant,
+\begin{equation}\label{eq:I0-bi}
+  |I_0|\ge cdm_*,
+  \qquad
+  b_i\ge c\frac{dm_1}{n}
+  \quad(i\in I_0).
+\end{equation}
+
+Condition on the counts $Q_{i,q}=|\supp X_i\cap J_q|$ for all $i\in I$ and $q\le q_0$, on all selected coordinates outside $\bigcup_qJ_q$, and on all positions in blocks for which $Q_{i,q}\ne1$. The local event $\mathcal W_{\mathscr J}$, the values $b_i$, and the set $I_0$ are measurable with respect to this information. Conditional on it, whenever $Q_{i,q}=1$, the unique coordinate $U_{i,q}$ is uniform on $J_q^\ell\cup J_q^r$; these singleton positions are mutually independent across the disjoint blocks and across rows. By~\eqref{eq:equal-block-separation}, a disk of radius $1/3$ cannot contain coefficient values from both halves, so one witnessed block has concentration at most $1/2$. Identifying $\C$ with $\R^2$, the two-dimensional Esseen concentration inequality~\cite[Proposition~2.2]{LLTTY19} applied to the $b_i$ independent witnessed blocks gives
+\begin{equation}\label{eq:block-Esseen}
+  \sup_{\lambda\in\C}
+  \Pp\set{\left|\sum_{q:Q_{i,q}=1}u_{U_{i,q}}-\lambda\right|<\frac13}
+  \le\frac C{\sqrt{b_i}},
+\end{equation}
+with the sharper bound $1/2$ when $b_i=1$. Every remaining row contribution, including $-\zeta(u_i+w_i)$ and the exact row-sum contribution of $w$, is conditionally deterministic and merely changes the center.
+
+If the Euclidean norm is below a sufficiently small multiple of $\sqrt{dm_*}$, at least $0.9|I_0|$ retained coordinates have modulus less than $1/3$. Conditional independence across rows and a binomial large-deviation bound give $e^{-c|I_0|}$ in the first case. In the second case,~\eqref{eq:I0-bi} implies
+\[
+  p_*\le C\sqrt{\frac n{dm_1}},
+\]
+and $C_{\mathrm{eb}}$ is chosen sufficiently large that $p_*\le1/2$ and $\log(dm_1/n)$ is bounded below by a positive absolute constant. Hence the binomial estimate is
+\[
+  \exp[-c|I_0|\log(1/p_*)]
+  \le\exp\left[-cdm_0\log\left(\frac{dm_1}{n}\right)\right].
+\]
+Integrating the conditional estimate proves the same bounds with $\mathcal W_{\mathscr J}$; the inclusion $\mathcal W(m_*)\subset\mathcal W_{\mathscr J}$ then gives~\eqref{eq:equal-block-small} and~\eqref{eq:equal-block-large}.
+\end{proof}
+
+\subsection{\texorpdfstring{The shifted $T_1$ and $T_2$ classes}{The shifted T1 and T2 classes}}\label{subsec:shifted-T1T2}
+
+Normalize the nonconstant component of $T_i^{\mathcal K}(L)$ by $x_{n_i}^*=1$, $i=1,2$. The nets in~\cite[Lemma~4.5]{LLTTY19} have the form
+\[
+  \mathcal N_i=\mathcal N_i'+\mathcal N_i'',
+  \qquad
+  \mathcal N_i''\subset\mathcal K,
+\]
+with
+\begin{equation}\label{eq:shifted-net-size}
+  |\mathcal N_i|\le\exp(7n_{i+1}\log d).
+\end{equation}
+Every $u\in\mathcal N_i'$ is supported on the first $n_{i+1}$ ordered coordinates, and every normalized $x+c\1\in T_i^{\mathcal K}(L)$ has an approximant $u+w\in\mathcal N_i$ satisfying
+\begin{equation}\label{eq:shifted-net-error}
+  \norm{x-u}_\infty\le d^{-3/2},
+  \qquad
+  \norm{c\1-w}_\infty\le d^{-3/2}.
+\end{equation}
+In particular,
+\[
+  u_{n_i}^*\ge1-d^{-3/2}>\frac23,
+  \qquad
+  u_j^*=0\quad(j\ge n_{i+1}).
+\]
+For the error $h=(x+c\1)-(u+w)$, each row obeys
+\[
+  |(A_{\zeta,I}h)_j|
+  \le(d+|\zeta|)\norm h_\infty
+  \le\frac C{\sqrt d},
+\]
+so
+\begin{equation}\label{eq:shifted-net-matrix-error}
+  \norm{A_{\zeta,I}h}_2\le C\sqrt{\frac nd}.
+\end{equation}
+
+For $T_1^{\mathcal K}(L)$, apply 
+\cref{lem:equal-block} with $m_1=n_1$, $m_2=n_2$. Since $dn_1\asymp n/\sqrt d$ and $\sqrt{n/d}=o(\sqrt{dn_1})$, the net union bound, kept separate from the failure of $\mathcal W(n_1)$, gives
+\begin{align}
+  \Pp\set{\ker A_{\zeta,I}\cap T_1^{\mathcal K}(L)\ne\varnothing}
+  &\le\Pp(\mathcal W(n_1)^c)+\exp(7n_2\log d-cdn_1)\notag\\
+  &\le e^{-cn/\sqrt d}.
+  \label{eq:T1-exclusion}
+\end{align}
+Here $n_2\log d/(dn_1)=O(\log d/d^{1/6})=o(1)$.
+
+For $T_2^{\mathcal K}(L)$, apply the second part of 
+\cref{lem:equal-block} with $m_1=n_2$, $m_2=n_3$. Then $n_2/m_0\asymp d^{1/3}\ge C_{\mathrm{eb}}$ for all sufficiently large $n$, $dm_0\asymp n$, $dn_2/n\asymp d^{1/3}$, and $\sqrt{n/d}=o(\sqrt n)$. By the fixed choice of $a_3$,
+\begin{align}
+  \Pp\set{\ker A_{\zeta,I}\cap T_2^{\mathcal K}(L)\ne\varnothing}
+  &\le\Pp(\mathcal W(m_0)^c)+\exp(7n_3\log d-cn\log d)\notag\\
+  &\le e^{-cn}+e^{-c'n\log d}
+  \le e^{-c''n}.
+  \label{eq:T2-exclusion}
+\end{align}
+
+\subsection{The exact almost-constant class}\label{subsec:almost-constant}
+
+Set
+\begin{equation}\label{eq:n0-S-t}
+  n_0=\floor{\frac n{16d}},
+  \qquad
+  \mathcal S(t)=\set{x:0<x_{n_0}^*\le t x_{n_3}^*}.
+\end{equation}
+We first record the deterministic reduction used in~\cite[Lemma~4.11]{LLTTY19}.
+
+\begin{lemma}[Deterministic almost-constant reduction]\label{lem:almost-constant-reduction}
+For every $L\in\set{m,m+1}$,
+\begin{equation}\label{eq:almost-constant-reduction}
+  (\mathcal B(\vartheta_0)\setminus\mathcal S(12))\setminus\set0
+  \subset\bigcup_{i=0}^3T_i^{\mathcal K}(L).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $0\ne x\in\mathcal B(\vartheta_0)\setminus\mathcal S(12)$, and choose $\lambda_0$ such that more than $n-n_3$ coordinates satisfy $|x_j-\lambda_0|\le\vartheta_0x_{n_3}^*$. Put $y=\lambda_0\1$ and $w=x-y$.
+
+First suppose $x_{n_3}^*>0$. Then
+\begin{equation}\label{eq:lambda0-bounds}
+  (1-\vartheta_0)x_{n_3}^*
+  \le|\lambda_0|
+  \le(1+\vartheta_0)x_{n_3}^*.
+\end{equation}
+Since $x\notin\mathcal S(12)$, one has $x_{n_0}^*>12x_{n_3}^*$. Therefore
+\[
+  w_{n_1}^*\ge w_{n_0}^*
+  \ge x_{n_0}^*-|\lambda_0|
+  >(11-\vartheta_0)x_{n_3}^*,
+\]
+while
+\[
+  w_{n_3}^*\le\vartheta_0x_{n_3}^*.
+\]
+For all sufficiently large $d$,
+\[
+  (11-\vartheta_0)x_{n_3}^*
+  >10(1+\vartheta_0)x_{n_3}^*
+  \ge10|\lambda_0|,
+\]
+and, because $\vartheta_0=10/d^3$,
+\[
+  d^3w_{n_3}^*\le10x_{n_3}^*
+  <(11-\vartheta_0)x_{n_3}^*
+  <w_{n_1}^*.
+\]
+If $w\notin T_0(L)\cup T_3(L)$ and also $w\notin T_1(L)\cup T_2(L)$, the definitions would give $w_{n_1}^*\le d^{3/2}w_{n_2}^*\le d^3w_{n_3}^*$, a contradiction. Thus $w\in T(L)$. Moreover, $|\lambda_0|\le w_{n_1}^*/10$, so $x=w+y$ belongs to the corresponding shifted class.
+
+Now suppose $x_{n_3}^*=0$. More than $n-n_3$ coordinates of $x$ are zero, and more than $n-n_3$ coordinates equal $\lambda_0$; since $a_3<1/2$, the two sets intersect and $\lambda_0=0$. Thus $w=x$ and $y=0$. If $w_{n_1}^*>0$, exclusion from all four source steep classes would imply $w_{n_1}^*\le d^{3/2}w_{n_2}^*\le d^3w_{n_3}^*=0$, a contradiction. If $w_{n_1}^*=0$, then $w$ is supported on fewer than $n_1$ coordinates. If its support has size below $p_{\mathrm{st}}^{r_0}$, then $w\in T_3(L)$. Otherwise, if the support has size at least $\ceil{n_1/p_{\mathrm{st}}}$, the terminal jump in~\eqref{eq:T0r} is strict because $w_{n_1}^*=0$. If the support is smaller than $\ceil{n_1/p_{\mathrm{st}}}$, there is a first index $i\in\set{r_0,\ldots,r-1}$ for which the support lies below $p_{\mathrm{st}}^{i+1}$; the corresponding jump in~\eqref{eq:T0i} is strict. After accounting for the recursive exclusions, $w$ belongs to the first applicable $T_{0,i}(L)$. Hence $w\in T_0(L)$. In every case $x=w+0\in T_i^{\mathcal K}(L)$ for some $i$.
+\end{proof}
+
+We next construct the rectangular row-load event. For $J\subset[n]$ and $i\in I$, write
+\[
+  H_i(J)=|\supp X_i\cap J|.
+\]
+Let $\mathcal E_{\mathrm{load}}$ be the event that simultaneously
+\begin{equation}\label{eq:load-small-J}
+  \#\set{i\in I:H_i(J)\ge1}\le\frac K8
+  \qquad\text{for every }|J|\le n_0,
+\end{equation}
+and
+\begin{equation}\label{eq:load-n3-J}
+  \#\set{i\in I:H_i(J)\ge16n_3d/n}\le\frac K8
+  \qquad\text{for every }|J|\le n_3.
+\end{equation}
+For fixed $J$ with $|J|\le n_0$, the union bound within one row gives
+\[
+  \Pp\set{H_i(J)\ge1}\le\frac{d|J|}{n}\le\frac1{16}.
+\]
+For fixed $J$ with $|J|\le n_3$, the hypergeometric mean satisfies $\E H_i(J)=d|J|/n\le dn_3/n$, so Markov's inequality gives
+\[
+  \Pp\set{H_i(J)\ge16n_3d/n}\le\frac1{16}.
+\]
+The rows are independent. A binomial Chernoff bound therefore makes the probability that more than $K/8$ rows are bad at most $e^{-cK}$ for each fixed $J$. Moreover,
+\[
+  \log\sum_{j\le n_0}\binom nj
+  =O\left(\frac{n\log d}{d}\right)=o(n),
+  \qquad
+  \log\sum_{j\le n_3}\binom nj
+  \le nH(a_3)+o(n),
+\]
+where $H(t)=-t\log t-(1-t)\log(1-t)$. By the fixed choice of $a_3$, $H(a_3)<c/2$, and union bounds over all such $J$ give
+\begin{equation}\label{eq:load-failure}
+  \Pp(\mathcal E_{\mathrm{load}}^c)\le e^{-cn}.
+\end{equation}
+
+Take $x\in\mathcal B(\vartheta_0)\cap\mathcal S(12)$, choose $\lambda_0$ as above, and let $\sigma$ order the coordinates by modulus. Set
+\[
+  J_1=\set{j:|x_j-\lambda_0|\le\vartheta_0x_{n_3}^*},
+  \qquad
+  J_2=\sigma([n_0])\setminus J_1,
+\]
+\[
+  J_3=\sigma([n_3])\setminus(J_1\cup J_2),
+  \qquad
+  J_4=[n]\setminus(J_1\cup\sigma([n_3])).
+\]
+Then $|J_2|\le n_0$, $|J_3|,|J_4|\le n_3$, and
+\[
+  |x_j|\le12x_{n_3}^*\quad(j\in J_3),
+  \qquad
+  |x_j|\le x_{n_3}^*\quad(j\in J_4).
+\]
+On $\mathcal E_{\mathrm{load}}$, delete rows intersecting $J_2$, rows with load at least $16n_3d/n$ in either $J_3$ or $J_4$, and row indices in $\sigma([n_3])$. The surviving set $G\subset I$ has
+\begin{equation}\label{eq:surviving-G}
+  |G|\ge K-\frac{3K}{8}-n_3\ge\frac n2.
+\end{equation}
+For $i\in G$, at least $d-32n_3d/n$ selected coordinates lie in $J_1$. Using~\eqref{eq:lambda0-bounds}, the contribution from $J_1$ has modulus at least
+\[
+  \left(d-\frac{32n_3d}{n}\right)(1-2\vartheta_0)x_{n_3}^*,
+\]
+whereas the $J_3\cup J_4$ contribution is at most
+\[
+  \frac{208n_3d}{n}x_{n_3}^*.
+\]
+Since $i\notin\sigma([n_3])$, the diagonal term is at most $Z_0\sqrt d\,x_{n_3}^*$. By the fixed choice of $a_3$, and then for all sufficiently large $n$,
+\begin{equation}\label{eq:almost-constant-row-lower}
+  |(A_{\zeta,I}x)_i|\ge\frac d2x_{n_3}^*
+  \qquad(i\in G).
+\end{equation}
+Thus no vector in $\mathcal B(\vartheta_0)\cap\mathcal S(12)$ belongs to the kernel on $\mathcal E_{\mathrm{load}}$.
+
+Combining 
+\cref{lem:almost-constant-reduction} with~\eqref{eq:T0-exclusion}, \eqref{eq:T1-exclusion}, \eqref{eq:T2-exclusion}, and~\eqref{eq:load-failure} yields
+\begin{align}
+  &\Pp\set{(\ker A_{\zeta,I}\setminus\set0)
+  \cap\bigl(\mathcal B(\vartheta_0)\setminus T_3^{\mathcal K}(L)\bigr)\ne\varnothing}
+  \notag\\
+  &\hspace{3cm}\le e^{-cn/d^3}+e^{-cn/\sqrt d}+e^{-c'n\log d}+e^{-cn}.
+  \label{eq:almost-constant-exclusion}
+\end{align}
+The zero vector is excluded from~\eqref{eq:almost-constant-exclusion}: it belongs to $\mathcal B(\vartheta_0)$, while the compatibility theorem concerns only nonzero kernel vectors.
+
+\subsection{Compatibility with the exact gradual class}
+
+We can now state the precise theorem needed by the profile argument.
+
+\begin{theorem}[Rectangular right-kernel compatibility]\label{thm:kernel-compatibility}
+There exists an absolute $C_*>0$, depending only on the fixed constants in the LLTTY decomposition and on $a$, such that the following holds. Fix $\sigma\in(0,1)$ and $Z_0<\infty$. Let $d$ satisfy~\eqref{eq:lower-band}, let $L\in\set{m,m+1}$, let $I\subset[n]$ be deterministic with $|I|=n-L$, and let $|\zeta|\le Z_0\sqrt d$. Then, for all sufficiently large $n$, where the threshold may depend on $\sigma$ and $Z_0$,
+\begin{equation}\label{eq:kernel-compatibility}
+  \Pp\set{\ker A_{\zeta,I}\setminus\set0\subset V_L\cup\cone{S_L}}
+  \ge1-\frac Cn.
+\end{equation}
+The constants and the probability bound are uniform for $L=m,m+1$.
+\end{theorem}
+
+\begin{proof}
+Let $\mathcal E_L$ be the event on which
+\[
+  \ker A_{\zeta,I}\cap T_i^{\mathcal K}(L)=\varnothing,
+  \qquad i=0,1,2,
+\]
+and
+\[
+  (\ker A_{\zeta,I}\setminus\set0)
+  \cap\bigl(\mathcal B(\vartheta_0)\setminus T_3^{\mathcal K}(L)\bigr)
+  =\varnothing.
+\]
+The estimates above give
+\begin{equation}\label{eq:EL-failure}
+  \Pp(\mathcal E_L^c)
+  \le e^{-cn/d^3}+e^{-cn/\sqrt d}+e^{-c'n\log d}+e^{-cn}
+  \le\frac Cn.
+\end{equation}
+The last inequality is uniform in the lower band because $d\le(\log n)^{1+\sigma}$ implies $n/d^3\gg\log n$.
+
+Take $0\ne v\in\ker A_{\zeta,I}$ on $\mathcal E_L$. If $v\in T_3^{\mathcal K}(L)$, then~\eqref{eq:T3-in-VL} gives $v\in V_L$. Otherwise $v\notin\mathcal B(\vartheta_0)$, and $v\notin T(L)$: membership in any unshifted $T_i(L)$ would imply membership in $T_i^{\mathcal K}(L)$ by taking the constant vector equal to zero. Moreover, $v_{n_3}^*>0$, since otherwise $v\in\mathcal B(\vartheta_0)$ with center zero. By homogeneity,
+\[
+  \frac{v}{v_{n_3}^*}\in S_L.
+\]
+Thus $v\in\cone{S_L}$, proving~\eqref{eq:kernel-compatibility}.
+\end{proof}
+
+\begin{remark}\label{rem:final-Cstar}
+The final lower bound on $C_*$ must dominate the constants in the support-diameter estimate, the smallest-singular-value theorem, the rectangular restricted-norm estimate, and the witness and net arguments above. It is not introduced solely by the max-weight lemma. The constant $C_*$ is independent of $\sigma$ and of the fixed shift bound $Z_0$; only the threshold from which the estimates hold may depend on them, because $Z_0\sqrt d=o(d)$.
+\end{remark}

@@ -1,0 +1,211 @@
+\appendix
+
+\section{Source extraction for the LLTTY deterministic consequences}\label{app:LLTTY-extraction}
+
+This appendix proves \cref{prop:LLTTY-package} as an author-derived result. Page and equation locators refer to \cite{LLTTY19}, arXiv:1801.05575v4. The table below separates exact source statements, immediate corollaries, and conclusions reconstructed from source proofs. No item is presented as a verbatim theorem unless it is one.
+
+\small
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.13\linewidth}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.35\linewidth}}
+\toprule
+\textbf{Item} & \textbf{Source locator} & \textbf{Status} & \textbf{Deduction recorded here}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Item} & \textbf{Source locator} & \textbf{Status} & \textbf{Deduction recorded here}\\
+\midrule
+\endhead
+\eqref{eq:class-cardinality} and class count
+& pp.~34--35, Lemma~5.1, (14)--(16); p.~37, Lemmas~5.4--5.5
+& direct restatement after reindexing
+& Restriction to $\mathcal A_k(\mathcal X)$ cannot increase the number of nonempty equivalence classes.\\
+$S_L=\bigcup K_u(L)\cup P_v(L)$
+& p.~38, Theorem~5.6
+& verbatim after notation change
+& Codimension enters only through the previously defined gradual class.\\
+\eqref{eq:factorial-compression}
+& p.~55, Lemma~7.2
+& stated ``in particular'' consequence
+& Reindex the four source families by the manuscript's part index $q$.\\
+\eqref{eq:small-bin-mass}
+& p.~61, start of Case~2 in the proof of Lemma~7.7
+& proof-level consequence
+& Each of four geometrically decreasing families contributes $O(d^{-\kappa}n)$ below the cutoff.\\
+\eqref{eq:K1} and \eqref{eq:K1-product}
+& pp.~60--61, proof of Lemma~7.7, source (32)--(33), (38), Case~1
+& author-derived packaging
+& Multiply the three source families and use $n/s_q\le d^\kappa$.\\
+\eqref{eq:K2} and \eqref{eq:K2-separation}
+& p.~61, Case~2 in the proof of Lemma~7.7
+& intermediate proof conclusion
+& Define the first lower and last upper occupied weight orders and divide the total small-part mass by the per-order bound.\\
+Low-order conclusion in part~(v)
+& p.~62, Lemma~7.8
+& direct source conclusion
+& A repeated rounded value produces a weight set of mass at least $\delta/36$.\\
+High-order conclusion and \eqref{eq:Pv-separation}
+& pp.~62--63, Lemma~7.9 and its proof
+& intermediate proof conclusion
+& The height lower bound and $\wt w_q\ge h_q/d$ yield the separated upper order.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+Throughout the appendix, the source's gradual class $S$ is our codimension-dependent class $S_L$, and its families $K_u,P_u$ are denoted by $K_u(L),P_u(L)$. The codimension enters only through the definition of the steep classes and hence through $S_L$; the arguments in source Sections~5--7 are otherwise unchanged.
+
+For a fixed canonical $k$-approximation, reindex all nonempty regular and spread $\ell$-parts as $L^{(q)}$, and write
+\[
+  s_q=\abs{L^{(q)}},
+  \qquad
+  h_q=h(L^{(q)}).
+\]
+The source's truncated weight $\wt w_q$ is exactly \eqref{eq:truncated-weights}; its $w$-set $W_b$ is the union of the parts with $2^b\le\wt w_q<2^{b+1}$. Thus the random dyadic order $B$ used here satisfies
+\[
+  \Pp\set{B=b}=\frac{\abs{W_b}}n.
+\]
+No rescaling or rebinning of the source weights is made.
+
+\subsection{Equivalence classes and the gradual decomposition}
+
+Source Lemma~5.1 states that, when $d\le n^{1/3}$ and
+$1\le k\le\sqrt n/d^{3/2}$, the normalized canonical $k$-approximations form at most $e^n$ equivalence classes under equality of the coordinate multiset. This is precisely the relation $\sim_k$ on $\mathcal A_k(L)$. Restricting an equivalence relation to a subset cannot increase the number of nonempty classes, which gives the corresponding assertion for $\mathcal A_k(\mathcal X)$.
+
+Source Lemma~5.4 shows that permutation of a canonical approximation preserves, order by order, the type, height, and cardinality of every nonempty $\ell$-part. Hence these data are well defined on each equivalence class. Source Lemma~5.5 then separates spread and regular parts by their orders and gives, in its notation,
+\[
+  \abs{\mathcal C}
+  \le n!\prod_{j\ge0}
+  \frac{(h_j^S)^{c_j^S}(h_j^R)^{c_j^R}}{c_j^S!c_j^R!}.
+\]
+After reindexing every nonempty spread or regular part by $q$, this is exactly
+\[
+  \abs{\mathcal C}
+  \le\frac{n!}{\prod_qs_q!}\prod_qh_q^{s_q},
+\]
+which is \eqref{eq:class-cardinality}. Finally, source Theorem~5.6 states, for every integer $v\ge5$,
+\[
+  S_L=\bigcup_{u=4}^{v}K_u(L)\cup P_v(L).
+\]
+This proves parts~(i) and~(ii) of \cref{prop:LLTTY-package}.
+
+\subsection{Factorial compression inside one weight order}
+
+Fix a dyadic order $b$, put
+\[
+  I(b)=\set{q:2^b\le\wt w_q<2^{b+1}},
+  \qquad
+  t_b=\sum_{q\in I(b)}s_q=\abs{W_b}.
+\]
+Source Lemma~7.2 shows that the part sizes in a fixed $w$-set, arranged in nonincreasing order, are controlled by a geometric sequence. Its stated ``in particular'' conclusion is
+\[
+  \prod_{q\in I(b)}s_q!\ge t_b!e^{-Ct_b},
+\]
+which is \eqref{eq:factorial-compression}.
+
+We also need the small-part consequence used in the second case of the proof of source Lemma~7.7. Let
+\[
+  T=d^{-\kappa}n,
+  \qquad
+  J(b)=\set{q\in I(b):s_q<T}.
+\]
+The proof of source Lemma~7.2 splits the parts in one $w$-set into four families according to regular/spread type and large/small status. Within each family, the sizes decrease geometrically with the order at which the parts were created. Consequently, the sum of the members of that family below the cutoff $T$ is $O(T)$. Summing the four families gives
+\[
+  \abs{\bigcup_{q\in J(b)}L^{(q)}}\le CT=Cd^{-\kappa}n.
+\]
+This is also the estimate written explicitly at the start of Case~2 in the proof of source Lemma~7.7. It proves part~(iii) of \cref{prop:LLTTY-package}.
+
+\subsection{\texorpdfstring{The two $K_u$ alternatives}{The two Ku alternatives}}
+
+Let $y$ be the $d^u$-approximation of a vector in $K_u(L)$. By the source definition of $K_u$, the union of its spread $\ell$-parts has size at least $\cK n_3$. Set
+\[
+  \kappa=\frac{\cK a_3}{16}<\frac13,
+  \qquad
+  \mathscr I=\set{q:s_q\ge d^{-\kappa}n}.
+\]
+Either
+\[
+  \sum_{q\in\mathscr I}s_q\ge n-\frac{\cK n_3}{4}
+\]
+or its complement has mass at least $\cK n_3/4$. These are alternatives \eqref{eq:K1} and \eqref{eq:K2}.
+
+Assume \eqref{eq:K1}. Write $\mathscr I_1$ for the large spread parts, $\mathscr I_2$ for the large regular parts, and $\mathscr I_3=(\mathscr I_1\cup\mathscr I_2)^c$. Since the total spread mass is at least $\cK n_3$,
+\[
+  \sum_{q\in\mathscr I_1}s_q\ge\frac{3\cK n_3}{4},
+  \qquad
+  \sum_{q\in\mathscr I_3}s_q\le\frac{\cK n_3}{4}.
+\]
+For these three families, the definition of the truncated weights and the source lower bounds corresponding to its equations~(32)--(33) give
+\begin{align*}
+  \wt w_q^{-s_q}
+  &\le d^{-s_q/2}\left(\frac n{s_q}\right)^{s_q/2}h_q^{-s_q},
+  &&q\in\mathscr I_1,\\
+  \wt w_q^{-s_q}
+  &=\left(\frac n{s_q}\right)^{s_q}h_q^{-s_q},
+  &&q\in\mathscr I_2,\\
+  \wt w_q^{-s_q}
+  &\le d^{s_q}h_q^{-s_q},
+  &&q\in\mathscr I_3.
+\end{align*}
+Because $n/s_q\le d^\kappa$ on $\mathscr I_1\cup\mathscr I_2$, the same three-family calculation as in Case~1 of the proof of source Lemma~7.7 yields
+\begin{align*}
+  \prod_qh_q^{s_q}\prod_q\wt w_q^{-s_q}
+  &\le C^n d^{-3\cK n_3/8}d^{\kappa n}d^{\cK n_3/4}\\
+  &\le C^n d^{-\cK n_3/16}
+  \le C^n d^{-c_1n}
+\end{align*}
+for an absolute $c_1>0$, after a harmless adjustment for $n_3=\floor{a_3n}$. This is \eqref{eq:K1-product}.
+
+Assume now \eqref{eq:K2}. For each $b$, let
+\[
+  J(b)=\mathscr I^c\cap I(b).
+\]
+The preceding subsection gives
+\[
+  \abs{\bigcup_{q\in J(b)}L^{(q)}}\le C'd^{-\kappa}n.
+\]
+Following Case~2 in the proof of source Lemma~7.7, define $b_1$ to be the first order for which the cumulative lower $w$-sets have mass at least $\cK n_3/16$, and $b_2$ to be the last order for which the cumulative upper $w$-sets have the same mass. Then
+\[
+  \Pp\set{B\le b_1}\ge\frac{\cK n_3}{16n},
+  \qquad
+  \Pp\set{B\ge b_2}\ge\frac{\cK n_3}{16n}.
+\]
+The small parts between these two cutoffs have total mass at least $\cK n_3/8$. Since each intervening order contributes at most $C'd^{-\kappa}n$,
+\[
+  b_2-b_1+1
+  \ge\frac{\cK n_3}{8C'd^{-\kappa}n}
+  \ge cd^\kappa.
+\]
+After reducing fixed constants and taking $n$ large, this gives
+\[
+  \Pp\set{B\le b_1}\ge c_0,
+  \qquad
+  \Pp\set{B\ge b_2}\ge c_0,
+  \qquad
+  b_2-b_1\ge c_1d^\kappa.
+\]
+This proves part~(iv) of \cref{prop:LLTTY-package}.
+
+\subsection{\texorpdfstring{The clustered $P_v$ alternative}{The clustered Pv alternative}}
+
+Let $x\in P_v(L)$ have at least $\delta n$ coordinates in a disk of radius $\rho\le d^{-v}$, and let $y$ be its $d^v$-approximation. Source Lemma~7.8 shows that one value of $y$ is repeated on at least $\delta n/9$ coordinates and therefore produces a $w$-set of mass at least $\delta n/36$ and order at most
+\[
+  b_1=\log_2\left(\frac{72\sqrt d}{\delta}\right),
+\]
+with the integer rounding used in the source.
+
+By the source definition of $P_v$, at least $\cP n_3$ coordinates belong to parts whose heights are at least
+\[
+  \cP a_3\,2^{\cP a_3(v-4)}.
+\]
+Since every truncated weight satisfies $\wt w_q\ge h_q/d$, these coordinates lie in $w$-sets above the high order used in the proof of source Lemma~7.9. The separation hypothesis \eqref{eq:Pv-separation-hyp} is exactly the hypothesis under which that proof establishes the intermediate conclusion
+\[
+  b_2-b_1\ge\frac{\cP a_3}{2}(v-4).
+\]
+Thus
+\[
+  \Pp\set{B\le b_1}\ge\frac\delta{36},
+  \qquad
+  \Pp\set{B\ge b_2}\ge\frac{\cP n_3}{n}\ge c_0
+\]
+for all sufficiently large $n$, after reducing the common absolute constant $c_0$ used above. The size condition \eqref{eq:Pv-delta} and the displayed separation condition are precisely the remaining assumptions of source Lemma~7.9. This proves part~(v) of \cref{prop:LLTTY-package} and completes the source extraction.

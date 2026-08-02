@@ -1,0 +1,587 @@
+\section{Hermitization and the superlogarithmic bridge}\label{sec:hermitization}
+
+We combine \cref{thm:intermediate,prop:row-replacement} with the smallest-singular-value inputs and the optimal sparse i.i.d. circular law. Throughout this section, fix an arbitrary deterministic integer sequence $d=d(n)$ satisfying the degree assumptions of the result under consideration, and set $p_n=d(n)/n$. Every assertion is made for this fixed sequence. The Bernoulli logarithmic-potential interface below is valid for every fixed $z\ne0$, so no sequence-dependent exceptional set of shifts is needed.
+
+\subsection{A logarithmic-tail lemma}
+
+\begin{lemma}[Negative logarithmic uniform integrability]\label{lem:negative-log-tail}
+Let
+\[
+  \nu_n=\frac1n\sum_{j=1}^n\delta_{s_{j,n}}
+\]
+be a random probability measure on $[0,\infty)$, where $s_{1,n}\ge\cdots\ge s_{n,n}\ge0$. Suppose that, for a deterministic probability measure $\nu$,
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\nu_n$ converges weakly to $\nu$ in probability;
+\item
+\[
+  \int\log t\,\dd\nu_n(t)
+  \xrightarrow{\Pp}
+  \int\log t\,\dd\nu(t)\in\R;
+\]
+\item
+\[
+  \int t^2\,\dd\nu_n(t)=\bigOP.
+\]
+\end{enumerate}
+Then, for every $\eps>0$,
+\begin{equation}\label{eq:negative-log-UI}
+  \lim_{T\to\infty}\limsup_{n\to\infty}
+  \Pp\set{
+    \int_{\set{\logm t>T}}\logm t\,\dd\nu_n(t)>\eps
+  }=0.
+\end{equation}
+Consequently, if $r_n=o(n)$, then
+\begin{equation}\label{eq:bottom-r-log-tail}
+  \frac1n\sum_{j=n-r_n+1}^n\logm s_{j,n}
+  \xrightarrow{\Pp}0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We first control positive logarithms. For $R\ge e$, put
+\[
+  c_R:=\sup_{t\ge R}\frac{\log t}{t^2},
+\]
+so $c_R\to0$. Then
+\[
+  \int_{t>R}\log t\,\dd\nu_n(t)
+  \le c_R\int t^2\,\dd\nu_n(t),
+\]
+which tends to zero in the iterated limit $n\to\infty$, $R\to\infty$, in probability. Weak convergence applied to $\min(\logp t,\log R)$ therefore gives
+\begin{equation}\label{eq:positive-log-convergence}
+  \int\logp t\,\dd\nu_n(t)
+  \xrightarrow{\Pp}
+  \int\logp t\,\dd\nu(t).
+\end{equation}
+
+The bounded-in-probability second moments also imply
+\[
+  \int t^2\,\dd\nu(t)<\infty.
+\]
+Indeed, for each $L<\infty$, weak convergence in probability gives
+\[
+  \int(t^2\wedge L)\,\dd\nu_n(t)
+  \xrightarrow{\Pp}
+  \int(t^2\wedge L)\,\dd\nu(t).
+\]
+Choose $M<\infty$ such that
+\[
+  \limsup_{n\to\infty}
+  \Pp\set{\int t^2\,\dd\nu_n(t)>M}<\frac12.
+\]
+Because the truncated integral is bounded above by the full second moment, its deterministic probability limit cannot exceed $M$. Hence
+\[
+  \int(t^2\wedge L)\,\dd\nu(t)\le M
+\]
+for every $L$, and monotone convergence proves the claim.
+
+Since $\log t=\logp t-\logm t$, assumption~(ii) and \eqref{eq:positive-log-convergence} imply
+\begin{equation}\label{eq:negative-log-total}
+  \int\logm t\,\dd\nu_n(t)
+  \xrightarrow{\Pp}
+  \int\logm t\,\dd\nu(t)<\infty.
+\end{equation}
+For fixed $T$, the function
+\[
+  f_T(t)=\min(\logm t,T),
+  \qquad f_T(0)=T,
+\]
+is bounded and continuous. Thus
+\[
+  \int f_T\,\dd\nu_n
+  \xrightarrow{\Pp}
+  \int f_T\,\dd\nu.
+\]
+Subtracting from \eqref{eq:negative-log-total} yields
+\[
+  \int(\logm-f_T)\,\dd\nu_n
+  \xrightarrow{\Pp}
+  \int(\logm-f_T)\,\dd\nu.
+\]
+The deterministic right-hand side tends to zero by monotone convergence. On $\set{\logm t>2T}$,
+\[
+  \logm t\le2(\logm t-T)=2(\logm t-f_T(t)).
+\]
+This proves \eqref{eq:negative-log-UI}, after renaming $2T$ as $T$.
+
+Finally, for fixed $T$,
+\[
+  \frac1n\sum_{j=n-r_n+1}^n\logm s_{j,n}
+  \le T\frac{r_n}{n}
+  +\int_{\set{\logm t>T}}\logm t\,\dd\nu_n(t).
+\]
+Let $n\to\infty$ and then $T\to\infty$.
+\end{proof}
+
+\subsection{The Bernoulli hermitization interface}
+
+Let $B_n$ denote an $n\times n$ matrix with i.i.d. $\Ber(d/n)$ entries. For fixed $z\in\C$, write
+\[
+  H_{n,z}:=\frac{B_n}{\sqrt d}-zI_n,
+  \qquad
+  \nu^B_{n,z}:=\frac1n\sum_{j=1}^n\delta_{s_j(H_{n,z})}.
+\]
+Let $\nu_z^G$ denote the deterministic limiting singular-value law of
+$n^{-1/2}G_n-zI_n$, where $G_n$ has i.i.d. standard complex Gaussian entries, and put
+\begin{equation}\label{eq:Gaussian-log-potential}
+  U^\circ(z):=-\int_\C\log\abs{z-w}\,\dd\mu_{\mathrm{circ}}(w)
+  =-\int_0^\infty\log t\,\dd\nu_z^G(t).
+\end{equation}
+
+\begin{proposition}[Bernoulli hermitization interface]\label{prop:Bernoulli-hermitization}
+Assume $d\to\infty$ and $d=o(n)$. For every fixed $z\in\C\setminus\set{0}$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\nu^B_{n,z}\Rightarrow\nu_z^G$ in probability;
+\item
+\begin{equation}\label{eq:Bernoulli-full-log}
+  -\int_0^\infty\log t\,\dd\nu^B_{n,z}(t)
+  \xrightarrow{\Pp}U^\circ(z),
+\end{equation}
+equivalently, the full untruncated logarithmic integral converges to the finite value
+$\int\log t\,\dd\nu_z^G(t)$;
+\item
+\begin{equation}\label{eq:Bernoulli-second-moment}
+  \int_0^\infty t^2\,\dd\nu^B_{n,z}(t)=\bigOP.
+\end{equation}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i) is \cite[Fact~10.2]{SSS25}, applied to the deterministic sequence $p_n=d/n$ and to the Bernoulli model. The Gaussian limit in that fact is $\nu_z^G$. By \cite[Fact~10.1]{SSS25}, the measure $\nu_z^G$ is compactly supported and satisfies
+\[
+  \nu_z^G([0,t))\le Ct,
+  \qquad t>0,
+\]
+and \eqref{eq:Gaussian-log-potential} holds. The mass bound at zero and compact support imply that the limiting logarithmic integral is finite.
+
+We reproduce the squeeze that gives the full, untruncated convergence in part~(ii). Define
+\begin{equation}\label{eq:Bernoulli-Un}
+  U_n(z):=-\frac1n\sum_{j=1}^n\log s_j(H_{n,z}),
+\end{equation}
+with the extended value $+\infty$ when $H_{n,z}$ is singular. Choose a deterministic sequence $\eps_n\downarrow0$ sufficiently slowly for the estimates in Sections~8--10 of \cite{SSS25}, and write $\eps=\eps_n$. Set
+\[
+  m=\floor{(1-\eps)n},
+  \qquad
+  \ell=\floor{(1-\eps/4)m},
+  \qquad
+  a=\ceil{2\eps n},
+  \qquad
+  b=\floor{(1-\eps)n}.
+\]
+Let $H_{m,z}$ be the top-left $m\times m$ principal minor of $H_{n,z}$. Thus its entries retain the normalization $d^{-1/2}$ used for $H_{n,z}$. Define
+\begin{align}
+  T_n(z)&:=-\frac1n\sum_{j=1}^{\ell}\log s_j(H_{m,z}),
+  \label{eq:SSS-T}\\
+  T_n^{(1)}(z)&:=-\frac1n\sum_{j=1}^{\ell}\log s_j(H_{n,z}),
+  \label{eq:SSS-T1}\\
+  T_n^{(2)}(z)&:=-\frac1n\sum_{j=a}^{b}\log s_j(H_{n,z})
+  -\frac{\ell-\floor{(1-3\eps)n}}{n}\log s_{\ell}(H_{m,z}).
+  \label{eq:SSS-T2}
+\end{align}
+These are the integer-rounded versions of the quantities in Sections~8--10 of \cite{SSS25}.
+
+For every fixed $z\ne0$, \cite[Lemma~8.2]{SSS25} gives
+\begin{equation}\label{eq:SSS-upper-squeeze}
+  U_n(z)\le T_n(z)+\littleoP.
+\end{equation}
+The first deterministic comparison in \cite[Fact~9.1]{SSS25} gives
+\begin{equation}\label{eq:SSS-T-upper}
+  T_n(z)\le T_n^{(2)}(z).
+\end{equation}
+For completeness, we derive the lower comparison directly from monotonicity of the ordered singular values. Put
+\[
+  x_j=-\log s_j(H_{n,z}),\qquad 1\le j\le n.
+\]
+Since the singular values are nonincreasing, $x_1\le\cdots\le x_n$. Hence
+\begin{equation}\label{eq:SSS-U-lower-exact}
+  U_n(z)=\frac1n\sum_{j=1}^n x_j
+  \ge\frac1\ell\sum_{j=1}^{\ell}x_j
+  =\frac n\ell T_n^{(1)}(z).
+\end{equation}
+Moreover,
+\[
+  \frac\ell n=(1-\eps/4)(1-\eps)+O(n^{-1}).
+\]
+Finally, \cite[Lemma~9.3]{SSS25}, proved there from Facts~10.1--10.2 and Lemmas~10.3--10.5, yields
+\begin{equation}\label{eq:SSS-truncated-convergence}
+  T_n^{(1)}(z)\xrightarrow{\Pp}U^\circ(z),
+  \qquad
+  T_n^{(2)}(z)\xrightarrow{\Pp}U^\circ(z)
+\end{equation}
+when $\eps_n\downarrow0$ sufficiently slowly. Since $n/\ell\to1$, \eqref{eq:SSS-U-lower-exact} and the first convergence in \eqref{eq:SSS-truncated-convergence} give
+\[
+  U_n(z)\ge U^\circ(z)-\littleoP.
+\]
+On the other hand, \eqref{eq:SSS-upper-squeeze}, \eqref{eq:SSS-T-upper}, and the second convergence in \eqref{eq:SSS-truncated-convergence} give
+\[
+  U_n(z)\le U^\circ(z)+\littleoP.
+\]
+Therefore $U_n(z)\to U^\circ(z)$ in probability. In particular,
+\[
+  \Pp\set{H_{n,z}\text{ is singular}}\to0.
+\]
+Redefining $U_n(z)$ arbitrarily on that event does not change the conclusion. This proves \eqref{eq:Bernoulli-full-log} for every fixed $z\ne0$.
+
+For part~(iii),
+\begin{align*}
+  \int t^2\,\dd\nu^B_{n,z}(t)
+  &=\frac1n\norm{H_{n,z}}_{\HS}^2\\
+  &\le \frac{2}{nd}\sum_{i,j=1}^n(B_n)_{ij}+2\abs z^2.
+\end{align*}
+The sum has mean $nd$ and is $O_{\Pp}(nd)$, proving \eqref{eq:Bernoulli-second-moment}.
+\end{proof}
+
+\begin{corollary}[Bernoulli bottom tail]\label{cor:Bernoulli-bottom-tail}
+Fix $z\in\C\setminus\set{0}$. For every deterministic integer sequence $r_n=o(n)$,
+\begin{equation}\label{eq:Bernoulli-bottom-tail}
+  \frac1n\sum_{j=n-r_n+1}^n
+  \logm s_j\!\left(\frac{B_n}{\sqrt d}-zI_n\right)
+  =\littleoP.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Apply \cref{lem:negative-log-tail} to the three conclusions of
+\cref{prop:Bernoulli-hermitization}.
+\end{proof}
+
+\subsection{Lower-band regularized comparison of a large prefix}
+
+Fix $\sigma\in(0,1)$, assume \eqref{eq:lower-band}, fix $z\in\C\setminus\set{0}$, and define the unnormalized shifted matrices
+\begin{equation}\label{eq:shifted-comparators}
+  A=M_n-z\sqrt d\,I_n,
+  \qquad
+  \wt A=B_n-z\sqrt d\,I_n.
+\end{equation}
+Here $B_n$ is independent of $M_n$ and has i.i.d. $\Ber(p)$ entries, $p=d/n$.
+
+By \cref{prop:LLY-smallest}, for a sufficiently large absolute constant $C_L$,
+\begin{equation}\label{eq:lower-tau}
+  \tau_n=n^{-C_L\log\log n}
+\end{equation}
+satisfies
+\begin{equation}\label{eq:lower-good-event}
+  \Pp(\mathcal L_n(z)^c)=O(d^{-1/2})=o(1),
+  \qquad
+  \mathcal L_n(z)=\set{s_n(A)\ge\tau_n}\cap\set{s_n(\wt A)\ge\tau_n}.
+\end{equation}
+The shift restriction in \cref{prop:LLY-smallest} holds because
+$\abs z\sqrt d\le\sqrt d\log\log d$ for fixed $z\ne0$ and all sufficiently large $n$.
+
+Choose
+\begin{equation}\label{eq:lower-prefix-parameters}
+  r=\ceil{\frac n{\sqrt d}},
+  \qquad
+  k=n-r,
+  \qquad
+  \eta=\frac{\tau_n}{n}.
+\end{equation}
+Let $C_M$ and $C_B$ be the first $k$ rows of $A$ and $\wt A$, respectively. In \cref{prop:row-replacement},
+\[
+  Q_n=p(1-p)(r+1)\asymp\sqrt d,
+\]
+and the deterministic shifts are $u_i=-z\sqrt d\,e_i$. Thus
+\[
+  U\le\sqrt{\eta^2+(\sqrt n+\abs z\sqrt d)^2}\le2(1+\abs z)\sqrt n
+\]
+and
+\begin{equation}\label{eq:lower-U-over-eta}
+  \log\frac U\eta=O(\log n\,\log\log n)=O(d\log d).
+\end{equation}
+Consequently,
+\begin{align}
+  \frac1n\E\abs{\Psi_\eta(C_M)-\Psi_\eta(C_B)}
+  &\le O\!\left(d^{-1/4}\sqrt{\log d}\right)
+  +O\!\left(d^{3/2}\log d\,e^{-c\sqrt d}\right)
+  \notag\\
+  &=o(1).
+  \label{eq:lower-regularized-comparison}
+\end{align}
+Markov's inequality gives
+\begin{equation}\label{eq:lower-regularized-op}
+  \frac1n\abs{\Psi_\eta(C_M)-\Psi_\eta(C_B)}=\littleoP.
+\end{equation}
+
+\subsection{Removing the lower-band regularization}
+
+Let $t_1(C)\ge\cdots\ge t_k(C)$ be the singular values of a $k\times n$ prefix. Cauchy interlacing gives
+\[
+  t_i(C_M)\ge s_{i+r}(A)\ge s_n(A),
+\]
+and similarly for $C_B$. On $\mathcal L_n(z)$, every prefix singular value is at least $\tau_n$. Hence
+\begin{align*}
+  0\le\Psi_\eta(C)-\log\vol(C)
+  &=\frac12\sum_{i=1}^k\log\left(1+\frac{\eta^2}{t_i(C)^2}\right)\\
+  &\le\frac{k\eta^2}{2\tau_n^2}
+  \le\frac1{2n}.
+\end{align*}
+After division by $n$, the error is at most $1/(2n^2)$. Combining this with
+\eqref{eq:lower-regularized-op} and \eqref{eq:lower-good-event}, and extending both logarithmic-volume random variables by zero on $\mathcal L_n(z)^c$, gives
+\begin{equation}\label{eq:lower-prefix-volume-comparison}
+  \frac1n\abs{\log\vol(C_M)-\log\vol(C_B)}=\littleoP.
+\end{equation}
+
+\subsection{From lower-band prefix volumes to square determinants}
+
+Let $H$ be an invertible $n\times n$ matrix, and let $C$ be its first $n-r$ rows. Interlacing implies
+\[
+  \sum_{j=r+1}^n\log s_j(H)
+  \le\log\vol(C)
+  \le\sum_{j=1}^{n-r}\log s_j(H).
+\]
+Therefore
+\begin{equation}\label{eq:prefix-square-error}
+  \abs{\log\abs{\det H}-\log\vol(C)}
+  \le\sum_{j=1}^r\logp s_j(H)
+  +\sum_{j=n-r+1}^n\logm s_j(H).
+\end{equation}
+For the positive logarithms, concavity gives
+\begin{equation}\label{eq:positive-prefix-tail}
+  \frac1n\sum_{j=1}^r\logp s_j(H)
+  \le\frac r{2n}\log\left(1+\frac{\norm H_{\HS}^2}{r}\right).
+\end{equation}
+Since $\norm A_{\HS}^2\le2(1+\abs z^2)nd$ deterministically and
+$\norm{\wt A}_{\HS}^2=O_{\Pp}(nd)$,
+\begin{equation}\label{eq:lower-positive-tail}
+  \frac1n\sum_{j=1}^r\logp s_j(A)
+  =O\!\left(\frac{\log d}{\sqrt d}\right)=o(1),
+\end{equation}
+with the analogous $o_{\Pp}(1)$ estimate for $\wt A$.
+
+For the negative row-slice tail, use bottom-up indexing
+$a_j=s_{n-j+1}(A)$. On $\mathcal L_n(z)$ and the event in \cref{thm:intermediate},
+\begin{equation}\label{eq:lower-bottom-q0}
+  \frac1n\sum_{j=1}^{q_0}\logm a_j
+  \le\frac{q_0}{n}\log\frac1{\tau_n}
+  =O\!\left(\frac{\log n\,\log\log n}{d^2}\right)=o(1),
+\end{equation}
+and
+\begin{equation}\label{eq:lower-bottom-intermediate}
+  \frac1n\sum_{j=q_0+1}^{r}\logm a_j
+  \le\frac rn C_{\isv}(z)d^{1/96}
+  =O(d^{-47/96})=o(1).
+\end{equation}
+Thus
+\begin{equation}\label{eq:lower-row-bottom-tail}
+  \frac1n\sum_{j=n-r+1}^n\logm s_j(A)=\littleoP.
+\end{equation}
+By \cref{cor:Bernoulli-bottom-tail}, and because multiplication by $\sqrt d\ge1$ can only decrease $\logm$,
+\begin{equation}\label{eq:lower-Bernoulli-bottom-tail}
+  \frac1n\sum_{j=n-r+1}^n\logm s_j(\wt A)=\littleoP.
+\end{equation}
+Applying \eqref{eq:prefix-square-error} to $(A,C_M)$ and $(\wt A,C_B)$, and using \eqref{eq:lower-prefix-volume-comparison}, yields
+\begin{equation}\label{eq:lower-unnormalized-det-comparison}
+  \frac1n\log\abs{\det A}
+  -\frac1n\log\abs{\det\wt A}
+  \xrightarrow{\Pp}0.
+\end{equation}
+On the event where a determinant vanishes, define its normalized logarithm arbitrarily; by \eqref{eq:lower-good-event}, this changes a random variable only on an event of probability $o(1)$. Since the common factor $d^{-n/2}$ cancels,
+\begin{equation}\label{eq:lower-normalized-det-comparison}
+  \frac1n\log\abs{\det\!\left(\frac{M_n}{\sqrt d}-zI_n\right)}
+  -\frac1n\log\abs{\det\!\left(\frac{B_n}{\sqrt d}-zI_n\right)}
+  \xrightarrow{\Pp}0
+\end{equation}
+for every fixed $z\ne0$, hence for Lebesgue-almost every fixed shift.
+
+\subsection{The lower-polylogarithmic circular law}
+
+\begin{theorem}[Lower-polylogarithmic regime]\label{thm:lower-band-circular}
+Fix $\sigma\in(0,1)$. There exists an absolute constant $C_*>0$ such that, whenever
+\[
+  C_*\log n\le d\le(\log n)^{1+\sigma},
+\]
+one has
+\[
+  \mu_{M_n/\sqrt{d(1-d/n)}}\xrightarrow{\Pp}\mu_{\mathrm{circ}}.
+\]
+The constant $C_*$ is independent of $\sigma$; the threshold from which the conclusion holds may depend on $\sigma$.
+\end{theorem}
+
+\begin{proof}
+Set
+\[
+  X_n=\frac{M_n}{\sqrt d},
+  \qquad
+  Y_n=\frac{B_n}{\sqrt d}.
+\]
+Then
+\[
+  \frac1n\norm{X_n}_{\HS}^2=1
+\]
+deterministically and
+\[
+  \E\frac1n\norm{Y_n}_{\HS}^2=1.
+\]
+Thus the Hilbert--Schmidt condition in the replacement principle
+\cite[Theorem~2.1]{TV10} is satisfied. Equation~\eqref{eq:lower-normalized-det-comparison} gives its logarithmic-determinant condition for every fixed $z\ne0$, and therefore for Lebesgue-almost every fixed $z$. No estimate uniform in $z$ and no union bound over shifts is required. Consequently,
+\begin{equation}\label{eq:BL-row-Bernoulli}
+  d_{\BL}(\mu_{X_n},\mu_{Y_n})\xrightarrow{\Pp}0.
+\end{equation}
+The optimal sparse i.i.d. circular law \cite{RT19,SSS25} applies because
+\[
+  p=d/n\to0,
+  \qquad
+  np=d\to\infty,
+\]
+and gives
+\[
+  d_{\BL}(\mu_{Y_n},\mu_{\mathrm{circ}})\xrightarrow{\Pp}0.
+\]
+The triangle inequality therefore yields
+\begin{equation}\label{eq:sqrt-d-circular}
+  \mu_{M_n/\sqrt d}\xrightarrow{\Pp}\mu_{\mathrm{circ}}.
+\end{equation}
+
+For every square matrix $H$, Schur triangularization gives
+\[
+  \sum_{j=1}^n\abs{\lambda_j(H)}^2\le\norm H_{\HS}^2.
+\]
+Consequently,
+\[
+  \int\abs z\,\dd\mu_H(z)
+  \le\left(\frac1n\norm H_{\HS}^2\right)^{1/2}.
+\]
+Let $c_n=(1-d/n)^{-1/2}\to1$ and write $\mu_n=\mu_{M_n/\sqrt d}$. For any bounded $1$-Lipschitz function $f$,
+\begin{align*}
+  \abs{\int f(c_nz)\,\dd\mu_n(z)-\int f(z)\,\dd\mu_n(z)}
+  &\le\abs{c_n-1}\int\abs z\,\dd\mu_n(z)\\
+  &\le\abs{c_n-1}
+  \left(\frac1n\norm{M_n/\sqrt d}_{\HS}^2\right)^{1/2}\\
+  &=\abs{c_n-1}.
+\end{align*}
+Thus the bounded-Lipschitz distance between the ESDs at the two normalizations tends to zero deterministically. Combining this with \eqref{eq:sqrt-d-circular} proves the theorem.
+\end{proof}
+
+\subsection{The superlogarithmic bridge}\label{subsec:superlog-bridge}
+
+\begin{proposition}[Superlogarithmic bridge]\label{prop:superlog-bridge}
+Fix $\eps>0$. Let $d=d(n)$ be an integer sequence satisfying
+\[
+  (\log n)^{1+\eps}\le d,
+  \qquad
+  d=o(n).
+\]
+Then
+\[
+  \mu_{M_n/\sqrt{d(1-d/n)}}\xrightarrow{\Pp}\mu_{\mathrm{circ}}.
+\]
+\end{proposition}
+
+\begin{proof}
+For all sufficiently large $n$, one has $d\le n/2$. Let $B_\eps$ be supplied by \cref{cor:uniform-polynomial}, fix $z\in\C\setminus\set{0}$, and define $A,\wt A$ by \eqref{eq:shifted-comparators}. Put
+\[
+  \tau_{n,\eps}=n^{-B_\eps},
+  \qquad
+  \mathcal L_{n,\eps}(z)
+  =\set{s_n(A)\ge\tau_{n,\eps}}
+  \cap\set{s_n(\wt A)\ge\tau_{n,\eps}}.
+\]
+By \cref{cor:uniform-polynomial},
+\begin{equation}\label{eq:superlog-good-event}
+  \Pp(\mathcal L_{n,\eps}(z)^c)=O(d^{-1/2})=o(1).
+\end{equation}
+Choose the balanced exponent
+\begin{equation}\label{eq:balanced-a}
+  a=a_\eps:=\frac{2+\eps}{2(1+\eps)}.
+\end{equation}
+Then
+\begin{equation}\label{eq:a-identities}
+  1-a=\frac{\eps}{2(1+\eps)},
+  \qquad
+  a(1+\eps)-1=\frac\eps2.
+\end{equation}
+Set
+\begin{equation}\label{eq:superlog-prefix-parameters}
+  r=\ceil{\frac n{d^a}},
+  \qquad
+  k=n-r,
+  \qquad
+  \eta=\frac{\tau_{n,\eps}}n.
+\end{equation}
+Let $C_M^{(\eps)}$ and $C_B^{(\eps)}$ be the first $k$ rows of $A$ and $\wt A$. Since $p=d/n=o(1)$,
+\begin{equation}\label{eq:superlog-Q}
+  Q=p(1-p)(r+1)\asymp d^{1-a}
+  \ge c(\log n)^{\eps/2}\to\infty.
+\end{equation}
+Moreover, $U\le2(1+\abs z)\sqrt n$ and
+\[
+  \log\frac U\eta=O_\eps(\log n).
+\]
+Therefore \cref{prop:row-replacement} gives
+\begin{align}
+  \frac1n\E\abs{
+    \Psi_\eta(C_M^{(\eps)})-\Psi_\eta(C_B^{(\eps)})
+  }
+  &\le C\sqrt{\frac{\log(ed)}{d^{1-a}}}
+  +C_\eps\sqrt d\,\log n\,e^{-cd^{1-a}}
+  \notag\\
+  &=o(1).
+  \label{eq:superlog-replacement}
+\end{align}
+Indeed, $\log d=o(d^{1-a})$. Also
+\[
+  \log(\sqrt d\log n)=\tfrac12\log d+\log\log n
+  =O_\eps(\log d)=o(d^{1-a}),
+\]
+where $d\ge(\log n)^{1+\eps}$ is used in the middle estimate. Thus the exponential term dominates its prefactor uniformly in the stated range.
+
+Markov's inequality and the same interlacing calculation used in the lower band yield, after extending both log-volume random variables by zero on $\mathcal L_{n,\eps}(z)^c$,
+\begin{equation}\label{eq:superlog-prefix-volume}
+  \frac1n\abs{
+    \log\vol(C_M^{(\eps)})-\log\vol(C_B^{(\eps)})
+  }=\littleoP.
+\end{equation}
+Here the regularization is removed on $\mathcal L_{n,\eps}(z)$ exactly as before because $\eta=\tau_{n,\eps}/n$.
+
+It remains to pass from prefixes to square determinants. By \eqref{eq:positive-prefix-tail},
+\begin{equation}\label{eq:superlog-positive-tail}
+  \frac1n\sum_{j=1}^r\logp s_j(A)
+  =O(d^{-a}\log d)=o(1),
+\end{equation}
+with the analogous $o_{\Pp}(1)$ estimate for $\wt A$. On $\mathcal L_{n,\eps}(z)$, every one of the bottom $r$ row-slice singular values may pay the polynomial smallest-singular-value cost:
+\begin{align}
+  \frac1n\sum_{j=n-r+1}^n\logm s_j(A)
+  &\le\frac rn B_\eps\log n
+  \notag\\
+  &\le C_\eps d^{-a}\log n
+  \le C_\eps(\log n)^{-\eps/2}=o(1),
+  \label{eq:superlog-row-bottom-tail}
+\end{align}
+where \eqref{eq:a-identities} is used in the last step. Since $r=o(n)$, \cref{cor:Bernoulli-bottom-tail} gives the corresponding estimate for $B_n/\sqrt d-zI_n$; multiplication by $\sqrt d\ge1$ can only decrease $\logm$, so the same estimate holds for $\wt A$.
+
+Applying \eqref{eq:prefix-square-error} to both matrices and using \eqref{eq:superlog-prefix-volume}, we obtain
+\begin{equation}\label{eq:superlog-det-comparison}
+  \frac1n\log\abs{\det\!\left(\frac{M_n}{\sqrt d}-zI_n\right)}
+  -\frac1n\log\abs{\det\!\left(\frac{B_n}{\sqrt d}-zI_n\right)}
+  \xrightarrow{\Pp}0
+\end{equation}
+for every fixed $z\ne0$.
+
+The Hilbert--Schmidt estimates, the replacement principle, and the optimal sparse i.i.d. circular law now give
+\[
+  \mu_{M_n/\sqrt d}\xrightarrow{\Pp}\mu_{\mathrm{circ}}
+\]
+exactly as in the proof of \cref{thm:lower-band-circular}. Finally, $d=o(n)$ implies $(1-d/n)^{-1/2}\to1$, and the same Schur/Hilbert--Schmidt argument transfers the conclusion to the variance normalization.
+\end{proof}
+
+\begin{remark}[Relation to the Li--Litvak--Yu range]
+For every fixed $\eta\in(0,1)$, \cite[Theorem~1.3]{LLY26a} already gives the circular law when
+\[
+  d\ge(\log n)^{2+\eta},
+  \qquad
+  d=o(n).
+\]
+Thus, to connect the lower band to the previously available result, \cref{prop:superlog-bridge} is needed only on the intervening range between $(\log n)^{1+\eps}$ and a threshold of the form $(\log n)^{2+\eta}$. We stated and proved the bridge for the entire superlogarithmic range because the same argument is uniform there and requires no additional input.
+\end{remark}
+
+\subsection{Completion of the main theorem}
+
+\begin{proof}[Proof of \cref{thm:main}]
+Fix $\sigma=1/2$ and split the indices into two sets:
+\[
+  d\le(\log n)^{3/2}
+  \qquad\text{and}\qquad
+  d>(\log n)^{3/2}.
+\]
+On the first set, apply \cref{thm:lower-band-circular}. On the second set, apply \cref{prop:superlog-bridge} with $\eps=1/2$. Each subsequence converges in probability to the same deterministic circular law. Therefore the original sequence does as well.
+\end{proof}
