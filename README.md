@@ -9,6 +9,8 @@ This repository contains the source and compiled PDF of the preprint
 
 > **Status:** Preprint, revised July 2026. This manuscript has not been peer reviewed.
 
+**DOI:** [10.5281/zenodo.21752784](https://doi.org/10.5281/zenodo.21752784)
+
 ## Abstract
 
 Let \(M_n\) be an \(n \times n\) random \(0\)-\(1\) matrix with independent rows, each uniform over vectors having exactly \(d\) ones. We prove that the empirical spectral distribution of
@@ -34,7 +36,7 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 ## Citation
 
-Use the **Cite this repository** menu on GitHub or the metadata in [`CITATION.cff`](CITATION.cff). A DOI or arXiv identifier will be added when one becomes available.
+Use the **Cite this repository** menu on GitHub or the metadata in [`CITATION.cff`](CITATION.cff). Cite this version using DOI [`10.5281/zenodo.21752784`](https://doi.org/10.5281/zenodo.21752784).
 
 ## Copyright
 
