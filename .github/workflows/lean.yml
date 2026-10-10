@@ -1,0 +1,43 @@
+name: Lean formalization
+
+on:
+  push:
+    paths:
+      - 'formalization/**'
+      - 'sections/**'
+      - '*.tex'
+      - '.github/workflows/lean.yml'
+  pull_request:
+    paths:
+      - 'formalization/**'
+      - 'sections/**'
+      - '*.tex'
+      - '.github/workflows/lean.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  formalization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: leanprover/lean-action@f061402b660e0c34644504b324e830f2991d4865 # v1
+        with:
+          lake-package-directory: formalization
+          auto-config: 'false'
+          build: 'true'
+          use-mathlib-cache: 'true'
+      - name: Audit proof dependencies
+        working-directory: formalization
+        run: lake env lean -DwarningAsError=true Audit.lean
+      - name: Check coverage guard integrity
+        working-directory: formalization
+        run: python3 scripts/test_paper_coverage.py
+      - name: Check axiom rejection
+        working-directory: formalization
+        run: python3 scripts/test_axiom_audit.py
+      - name: Require full manuscript verification
+        working-directory: formalization
+        run: python3 scripts/paper_coverage.py --require-complete

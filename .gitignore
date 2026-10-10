@@ -12,3 +12,7 @@
 # Editor and operating-system files
 *~
 .DS_Store
+
+# Lean build products and downloaded dependencies
+formalization/.lake/
+formalization/**/__pycache__/

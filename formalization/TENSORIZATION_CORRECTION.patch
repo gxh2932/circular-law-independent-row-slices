@@ -1,0 +1,15 @@
+--- a/sections/02_preliminaries.tex
++++ b/sections/02_preliminaries.tex
+@@ -388,9 +388,9 @@
+   \mathcal Q(\xi_i,\tau t)\le A\tau^2
+   \qquad\text{for all }\tau\ge1\text{ and all }i,
+ \]
+-then, for an absolute $C$ and every $\tau\ge1$,
+-\[
+-  \Pp\set{\sum_{i=1}^K|\xi_i|^2\le C\tau^2t^2K}
++then, for an absolute $C>0$ and every $\tau\ge1$,
++\[
++  \Pp\set{\sum_{i=1}^K|\xi_i|^2\le\tau^2t^2K}
+   \le(CA\tau^2)^K.
+ \]
+ The statement remains valid after deterministic shifts of the $\xi_i$.

@@ -162,31 +162,20 @@ with the extended value $+\infty$ when $H_{n,z}$ is singular. Choose a determini
 \[
   m=\floor{(1-\eps)n},
   \qquad
-  \ell=\floor{(1-\eps/4)m},
-  \qquad
-  a=\ceil{2\eps n},
-  \qquad
-  b=\floor{(1-\eps)n}.
+  \ell=\floor{(1-\eps/4)m}.
 \]
 Let $H_{m,z}$ be the top-left $m\times m$ principal minor of $H_{n,z}$. Thus its entries retain the normalization $d^{-1/2}$ used for $H_{n,z}$. Define
 \begin{align}
   T_n(z)&:=-\frac1n\sum_{j=1}^{\ell}\log s_j(H_{m,z}),
   \label{eq:SSS-T}\\
-  T_n^{(1)}(z)&:=-\frac1n\sum_{j=1}^{\ell}\log s_j(H_{n,z}),
-  \label{eq:SSS-T1}\\
-  T_n^{(2)}(z)&:=-\frac1n\sum_{j=a}^{b}\log s_j(H_{n,z})
-  -\frac{\ell-\floor{(1-3\eps)n}}{n}\log s_{\ell}(H_{m,z}).
-  \label{eq:SSS-T2}
+  T_n^{(1)}(z)&:=-\frac1n\sum_{j=1}^{\ell}\log s_j(H_{n,z}).
+  \label{eq:SSS-T1}
 \end{align}
-These are the integer-rounded versions of the quantities in Sections~8--10 of \cite{SSS25}.
+Both prefixes retain the displayed integer floors and the ambient denominator $n$.
 
 For every fixed $z\ne0$, \cite[Lemma~8.2]{SSS25} gives
 \begin{equation}\label{eq:SSS-upper-squeeze}
   U_n(z)\le T_n(z)+\littleoP.
-\end{equation}
-The first deterministic comparison in \cite[Fact~9.1]{SSS25} gives
-\begin{equation}\label{eq:SSS-T-upper}
-  T_n(z)\le T_n^{(2)}(z).
 \end{equation}
 For completeness, we derive the lower comparison directly from monotonicity of the ordered singular values. Put
 \[
@@ -202,17 +191,21 @@ Moreover,
 \[
   \frac\ell n=(1-\eps/4)(1-\eps)+O(n^{-1}).
 \]
-Finally, \cite[Lemma~9.3]{SSS25}, proved there from Facts~10.1--10.2 and Lemmas~10.3--10.5, yields
+We use the convergence of the minor prefix directly. The weak singular-value limit, its linear small-value mass bound, and the bounded-in-probability second moment supply a common logarithmic clipping argument for the full and minor arrays. For the minor, whose entries keep the ambient normalization, the limiting Gaussian scale at $m/n\to r>0$ is $\sqrt r$; hence its limiting ambient-normalized negative logarithmic integral is
+\[
+  r\left(U^\circ\left(\frac z{\sqrt r}\right)-\frac12\log r\right).
+\]
+This tends to $U^\circ(z)$ as $r\to1$, by continuity of the circular potential. The linear small-value mass bound controls the retained negative logarithms, and the second moment controls the positive logarithmic tail. Choose $\eps_n\downarrow0$ sufficiently slowly for these clipped limits, the vanishing omitted-prefix errors, and the upper estimate~\eqref{eq:SSS-upper-squeeze} to hold simultaneously. This gives
 \begin{equation}\label{eq:SSS-truncated-convergence}
   T_n^{(1)}(z)\xrightarrow{\Pp}U^\circ(z),
   \qquad
-  T_n^{(2)}(z)\xrightarrow{\Pp}U^\circ(z)
+  T_n(z)\xrightarrow{\Pp}U^\circ(z).
 \end{equation}
-when $\eps_n\downarrow0$ sufficiently slowly. Since $n/\ell\to1$, \eqref{eq:SSS-U-lower-exact} and the first convergence in \eqref{eq:SSS-truncated-convergence} give
+The full-prefix argument is also the one in \cite[Lemma~9.3]{SSS25}; here the minor limit keeps its actual normalization and integer prefix length. Since $n/\ell\to1$, \eqref{eq:SSS-U-lower-exact} and the first convergence in \eqref{eq:SSS-truncated-convergence} give
 \[
   U_n(z)\ge U^\circ(z)-\littleoP.
 \]
-On the other hand, \eqref{eq:SSS-upper-squeeze}, \eqref{eq:SSS-T-upper}, and the second convergence in \eqref{eq:SSS-truncated-convergence} give
+On the other hand, \eqref{eq:SSS-upper-squeeze} and the second convergence in \eqref{eq:SSS-truncated-convergence} give
 \[
   U_n(z)\le U^\circ(z)+\littleoP.
 \]

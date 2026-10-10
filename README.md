@@ -7,9 +7,9 @@ Email: [gh7775@rit.edu](mailto:gh7775@rit.edu)
 This repository contains the source and compiled PDF of the preprint
 *The circular law for independent row slices down to logarithmic degree*.
 
-> **Status:** Preprint, revised July 2026. This manuscript has not been peer reviewed.
+> **Status:** Preprint, revised October 10, 2026. This manuscript has not been peer reviewed.
 
-**DOI:** [10.5281/zenodo.21752784](https://doi.org/10.5281/zenodo.21752784)
+**Earlier deposited version DOI:** [10.5281/zenodo.21752784](https://doi.org/10.5281/zenodo.21752784)
 
 ## Abstract
 
@@ -24,7 +24,9 @@ converges in probability to the circular law whenever \(C_*\log n \leq d\) and \
 - [`paper.pdf`](paper.pdf): compiled manuscript
 - [`main.tex`](main.tex): main LaTeX file
 - [`sections/`](sections): section and bibliography source files
-- [`CITATION.cff`](CITATION.cff): citation metadata for GitHub
+- [`formalization/`](formalization/): Lean proofs and statement mappings
+- [`REVISION_NOTES.md`](REVISION_NOTES.md): October corrections and verification
+- [`CITATION.cff`](CITATION.cff): citation metadata for the deposited version
 
 ## Build
 
@@ -32,11 +34,43 @@ The manuscript uses no external figures or nonstandard style files. Build it wit
 
 ```sh
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+cp main.pdf paper.pdf
 ```
+
+## Lean formalization
+
+[The Lean 4/mathlib development](formalization/) proves **all 29 named
+manuscript results**, including the main circular-law theorem, both degree
+regimes, and both quantitative joint minimum estimates. It uses the actual
+independent row-slice and Bernoulli laws and the paper's variance normalization.
+The main theorem requires one sufficiently large absolute C; its value has
+not been optimized.
+
+The main proof is
+[`main_circular_law_theorem`](formalization/CircularLaw/CircularLawProvedRegimes.lean).
+The [coverage ledger](formalization/paper-coverage.json) and
+[statement review](formalization/CIRCULAR_LAW_STATEMENT_REVIEW.md) map the
+written claims to their formal targets and proofs.
+
+The full build, transitive axiom audit, strict completion check, and eight
+integrity tests pass locally. Only `propext`, `Classical.choice`, and
+`Quot.sound` are permitted. [GitHub Actions](.github/workflows/lean.yml)
+runs these checks for manuscript and formalization changes. Follow the
+[build and audit instructions](formalization/README.md#build-and-audit)
+to reproduce them with the pinned Lean 4.28.0/mathlib v4.28.0 dependencies.
+
+[The October revision note](REVISION_NOTES.md) explains the three manuscript
+corrections found during formalization. The compiled PDF matches the corrected
+source. Matching each written statement to its Lean target remains a
+mathematical review obligation in addition to the machine checks.
 
 ## Citation
 
-Use the **Cite this repository** menu on GitHub or the metadata in [`CITATION.cff`](CITATION.cff). Cite this version using DOI [`10.5281/zenodo.21752784`](https://doi.org/10.5281/zenodo.21752784).
+Use the **Cite this repository** menu on GitHub or
+[`CITATION.cff`](CITATION.cff) for the deposited preprint. DOI
+[10.5281/zenodo.21752784](https://doi.org/10.5281/zenodo.21752784) identifies
+that earlier deposited version. For the October GitHub revision, also record
+the repository commit or tag. This update does not create a new Zenodo deposit.
 
 ## Copyright
 
