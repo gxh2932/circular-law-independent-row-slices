@@ -106,5 +106,6 @@ The Lean sources, verification scripts, and Lean package configuration are
 licensed under [Apache 2.0](formalization/LICENSE). See
 [`formalization/NOTICE`](formalization/NOTICE) for the exact scope.
 
-The manuscript retains its separate copyright: © 2026 Griffin P. Hurt, all
-rights reserved. See [`COPYRIGHT.md`](COPYRIGHT.md) for the repository's terms.
+The manuscript and its LaTeX sources are licensed under
+[CC BY 4.0](LICENSE-MANUSCRIPT), with copyright retained by Griffin P. Hurt.
+See [`COPYRIGHT.md`](COPYRIGHT.md) for the repository's license scopes.

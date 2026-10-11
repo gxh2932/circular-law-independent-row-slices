@@ -10,8 +10,10 @@ version: "v1.1-preprint"
 date-released: 2026-10-10
 doi: "10.5281/zenodo.23289935"
 repository-code: "https://github.com/gxh2932/circular-law-independent-row-slices"
+license: "Apache-2.0"
 preferred-citation:
   type: article
+  license: "CC-BY-4.0"
   authors:
     - family-names: Hurt
       given-names: Griffin P.

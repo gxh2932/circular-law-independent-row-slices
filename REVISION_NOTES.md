@@ -58,3 +58,14 @@ The October revision is deposited on Zenodo as
 with the revised PDF and complete manuscript and Lean source archive. The
 [earlier v1.0 deposit](https://doi.org/10.5281/zenodo.21752784) remains available.
 The manuscript remains a preprint and has not been peer reviewed.
+
+## Licensing update
+
+The manuscript PDF and LaTeX sources are licensed under CC BY 4.0; the Lean
+code, verification scripts, and package configuration are licensed under
+Apache 2.0. [COPYRIGHT.md](COPYRIGHT.md) identifies the scopes and links to
+both full licenses. The PDF includes the manuscript license on its first page.
+The mathematical content and all 29 statement-to-proof mappings are unchanged.
+The Zenodo record's license metadata states these grants for its deposited
+files, superseding the older blanket copyright notice for those materials
+in the source archive.

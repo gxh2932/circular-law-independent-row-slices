@@ -11,8 +11,9 @@ audit, strict completion check, and eight integrity tests pass locally.
 The Lean sources, verification and audit scripts, and Lean package configuration
 are licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE)
 for the exact file scope. Third-party dependencies retain their respective
-licenses. The manuscript's separate copyright and the terms for other repository
-material are described in [COPYRIGHT.md](../COPYRIGHT.md).
+licenses. The manuscript and its LaTeX sources are separately licensed under
+[CC BY 4.0](../LICENSE-MANUSCRIPT). See [COPYRIGHT.md](../COPYRIGHT.md) for the
+terms for other repository material.
 
 ## Main theorem and models
 
