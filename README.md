@@ -20,7 +20,7 @@ sufficiently large logarithmic degree, with the manuscript, LaTeX source,
 
 ## Abstract
 
-Let $M_n$ be an $n \times n$ random $0$–$1$ matrix with independent rows, each
+Let $M_n$ be an $n \times n$ random zero–one matrix with independent rows, each
 uniform over vectors having exactly $d$ ones. We prove that, for an absolute
 constant $C_*>0$, the empirical spectral distribution of
 
