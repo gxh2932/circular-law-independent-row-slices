@@ -117,7 +117,7 @@
 \title[The circular law down to logarithmic degree]{The circular law for independent row slices down to logarithmic degree}
 \author{Griffin P. Hurt}
 \email{gh7775@rit.edu}
-\date{Revised July 2026}
+\date{Revised October 10, 2026}
 \subjclass[2020]{60B20, 15B52, 05C80, 60F05}
 \keywords{circular law, sparse random matrices, row-regular matrices, intermediate singular values, random normals, small-ball probability}
 
@@ -134,6 +134,20 @@ The main obstacle is the lack of column regularity, which removes the aggregate-
 \end{abstract}
 
 \maketitle
+\begingroup
+\emergencystretch=2em
+\noindent\textbf{Revision note.}
+This revision corrects the tensorization threshold in \cref{lem:tensorization},
+makes the sufficiently large dimension condition explicit in
+\cref{cor:uniform-polynomial}, and replaces the rounded-prefix comparison
+in the proof of \cref{prop:Bernoulli-hermitization} by direct convergence
+of the actual minor prefix. Accompanying Lean 4 proofs check all 29 named
+results, including \cref{thm:main}, using the standard Lean/mathlib
+foundations. The statement mappings, proof sources, and revision details
+are available in the \href{https://github.com/gxh2932/circular-law-independent-row-slices}{repository}.
+\par
+\endgroup
+
 \tableofcontents
 
 \input{sections/01_intro}
