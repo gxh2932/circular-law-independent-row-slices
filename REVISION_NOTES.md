@@ -53,6 +53,8 @@ review obligation.
 changes to the formalization and manuscript. See the
 [build instructions](formalization/README.md#build-and-audit) to reproduce them.
 
-The existing Zenodo DOI identifies the earlier deposited version. This note
-describes the October GitHub revision; it does not claim a new Zenodo deposit
-or peer review.
+The October revision is deposited on Zenodo as
+[v1.1-preprint, DOI 10.5281/zenodo.23289935](https://doi.org/10.5281/zenodo.23289935),
+with the revised PDF and complete manuscript and Lean source archive. The
+[earlier v1.0 deposit](https://doi.org/10.5281/zenodo.21752784) remains available.
+The manuscript remains a preprint and has not been peer reviewed.

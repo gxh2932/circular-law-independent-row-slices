@@ -6,9 +6,9 @@ authors:
   - family-names: Hurt
     given-names: Griffin P.
     email: gh7775@rit.edu
-version: "1.0-preprint"
-date-released: 2026-08-01
-doi: "10.5281/zenodo.21752784"
+version: "v1.1-preprint"
+date-released: 2026-10-10
+doi: "10.5281/zenodo.23289935"
 repository-code: "https://github.com/gxh2932/circular-law-independent-row-slices"
 preferred-citation:
   type: article
@@ -18,4 +18,4 @@ preferred-citation:
       email: gh7775@rit.edu
   title: "The circular law for independent row slices down to logarithmic degree"
   year: 2026
-  doi: "10.5281/zenodo.21752784"
+  doi: "10.5281/zenodo.23289935"

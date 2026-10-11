@@ -4,20 +4,44 @@
 
 Email: [gh7775@rit.edu](mailto:gh7775@rit.edu)
 
-This repository contains the source and compiled PDF of the preprint
-*The circular law for independent row slices down to logarithmic degree*.
+The circular law for sparse random matrices with independent row slices at
+sufficiently large logarithmic degree, with the manuscript, LaTeX source,
+**Lean 4/mathlib proofs**, and reproducible verification.
+
+[**Research page**](https://gxh2932.github.io/circular-law-independent-row-slices/)
+· [**Read the PDF**](https://gxh2932.github.io/circular-law-independent-row-slices/paper.pdf)
+· [**Lean proofs**](formalization/)
+· [**Zenodo v1.1 & source archive**](https://zenodo.org/records/23289935)
 
 > **Status:** Preprint, revised October 10, 2026. This manuscript has not been peer reviewed.
 
-**Earlier deposited version DOI:** [10.5281/zenodo.21752784](https://doi.org/10.5281/zenodo.21752784)
+**Current version:** v1.1-preprint · DOI
+[10.5281/zenodo.23289935](https://doi.org/10.5281/zenodo.23289935).
 
 ## Abstract
 
-Let \(M_n\) be an \(n \times n\) random \(0\)-\(1\) matrix with independent rows, each uniform over vectors having exactly \(d\) ones. We prove that the empirical spectral distribution of
-\[
+Let $M_n$ be an $n \times n$ random $0$–$1$ matrix with independent rows, each
+uniform over vectors having exactly $d$ ones. We prove that, for an absolute
+constant $C_*>0$, the empirical spectral distribution of
+
+$$
 \frac{M_n}{\sqrt{d(1-d/n)}}
-\]
-converges in probability to the circular law whenever \(C_*\log n \leq d\) and \(d=o(n)\), for an absolute constant \(C_*>0\).
+$$
+
+converges in probability to the circular law whenever $C_*\log n \leq d$ and
+$d=o(n)$. This lowers the known $\log^{2+\varepsilon}n$ threshold to sufficiently
+large logarithmic degree throughout the sparse range.
+
+The main obstacle is the lack of column regularity, which removes the
+aggregate-profile identities available for random regular digraphs. In the
+lower polylogarithmic range, we replace those identities by an averaged
+multinomial row-profile estimate and combine it with a rectangular right-kernel
+analysis to control all but $O(n/d^2)$ of the smallest singular values. A
+regularized row-replacement argument then compares logarithmic determinants
+with those of an i.i.d. Bernoulli matrix. Above every fixed superlogarithmic
+cutoff, the same comparison is combined instead with a uniform polynomial
+smallest-singular-value bound. Girko hermitization and the sparse i.i.d. circular
+law complete the proof.
 
 ## Files
 
@@ -27,6 +51,7 @@ converges in probability to the circular law whenever \(C_*\log n \leq d\) and \
 - [`formalization/`](formalization/): Lean proofs and statement mappings
 - [`REVISION_NOTES.md`](REVISION_NOTES.md): October corrections and verification
 - [`CITATION.cff`](CITATION.cff): citation metadata for the deposited version
+- [`docs/`](docs/): research page, search metadata, and publishing instructions
 
 ## Build
 
@@ -43,6 +68,8 @@ cp main.pdf paper.pdf
 manuscript results**, including the main circular-law theorem, both degree
 regimes, and both quantitative joint minimum estimates. It uses the actual
 independent row-slice and Bernoulli laws and the paper's variance normalization.
+The main theorem requires one sufficiently large absolute constant C; this
+revision does not optimize its value.
 
 The main proof is
 [`main_circular_law_theorem`](formalization/CircularLaw/CircularLawProvedRegimes.lean).
@@ -64,11 +91,14 @@ mathematical review obligation in addition to the machine checks.
 
 ## Citation
 
+Hurt, Griffin P. (2026). *The circular law for independent row slices down to
+logarithmic degree* (v1.1-preprint). Zenodo.
+[doi:10.5281/zenodo.23289935](https://doi.org/10.5281/zenodo.23289935).
+
 Use the **Cite this repository** menu on GitHub or
-[`CITATION.cff`](CITATION.cff) for the deposited preprint. DOI
-[10.5281/zenodo.23289935](https://doi.org/10.5281/zenodo.23289935) identifies
-that earlier deposited version. For the October GitHub revision, also record
-the repository commit or tag. This update does not create a new Zenodo deposit.
+[`CITATION.cff`](CITATION.cff) for this deposited version. For the evolving Lean
+code, also record the repository commit or tag. The
+[earlier v1.0 deposit](https://doi.org/10.5281/zenodo.21752784) remains available.
 
 ## Copyright
 
