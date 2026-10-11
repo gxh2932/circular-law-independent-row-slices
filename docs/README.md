@@ -18,9 +18,11 @@ preview metadata, and Google Scholar citation tags. The full author-written
 abstract is visible without an account or interactive controls. The sitemap
 contains the research page and the PDF; it does not establish indexing.
 
-To use Google Search Console, add the URL-prefix property for the research
-page URL. Obtain your own HTML verification tag from Search Console and insert
-it into the page's `<head>`, then deploy and complete verification. Submit
-`sitemap.xml` and inspect the page URL to request indexing. These steps require
-your Google account; this repository does not include a verification token or
-claim that Google or Google Scholar has indexed the page.
+The page includes a Google Search Console HTML verification tag for the
+research page's URL-prefix property. Keep that tag in the published `<head>`:
+Google periodically checks it to confirm ownership. Sign in with the Google
+account that registered the property to inspect indexing and search performance.
+If another owner needs a verification tag, add it without removing the existing
+tag. The sitemap is `sitemap.xml`; URL Inspection can request indexing for the
+research page and PDF. Verification and submission do not establish that Google
+or Google Scholar has indexed either URL.
