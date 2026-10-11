@@ -4,7 +4,7 @@ GitHub Pages serves this static research page at
 <https://gxh2932.github.io/circular-law-independent-row-slices/>.
 The repository's Pages publishing source is **GitHub Actions**.
 [The workflow](../.github/workflows/pages.yml) publishes the HTML, CSS, favicon,
-and sitemap, and copies the repository's `paper.pdf` into the same directory.
+and both sitemap formats, and copies the repository's `paper.pdf` into the same directory.
 It runs on changes to the page, PDF, citation metadata, or workflow on `main`,
 and can also be run manually. No JavaScript or package installation is needed.
 
@@ -23,6 +23,10 @@ research page's URL-prefix property. Keep that tag in the published `<head>`:
 Google periodically checks it to confirm ownership. Sign in with the Google
 account that registered the property to inspect indexing and search performance.
 If another owner needs a verification tag, add it without removing the existing
-tag. The sitemap is `sitemap.xml`; URL Inspection can request indexing for the
+tag. The XML sitemap is `sitemap.xml`; `sitemap.txt` provides the same two URLs
+in Google's supported plain-text format. Keep the URL lists in both files in
+sync. The text version provides an alternative endpoint when troubleshooting
+Search Console fetch failures; its submission alone does not confirm that a
+fetch problem has been resolved. URL Inspection can request indexing for the
 research page and PDF. Verification and submission do not establish that Google
 or Google Scholar has indexed either URL.

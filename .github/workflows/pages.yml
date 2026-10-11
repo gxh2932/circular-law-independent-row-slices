@@ -26,7 +26,7 @@ jobs:
       - name: Assemble the research page and current manuscript
         run: |
           mkdir -p _site
-          cp docs/index.html docs/styles.css docs/favicon.svg docs/sitemap.xml _site/
+          cp docs/index.html docs/styles.css docs/favicon.svg docs/sitemap.xml docs/sitemap.txt _site/
           cp paper.pdf _site/paper.pdf
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
