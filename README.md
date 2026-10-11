@@ -66,7 +66,7 @@ mathematical review obligation in addition to the machine checks.
 
 Use the **Cite this repository** menu on GitHub or
 [`CITATION.cff`](CITATION.cff) for the deposited preprint. DOI
-[10.5281/zenodo.21752784](https://doi.org/10.5281/zenodo.21752784) identifies
+[10.5281/zenodo.23289935](https://doi.org/10.5281/zenodo.23289935) identifies
 that earlier deposited version. For the October GitHub revision, also record
 the repository commit or tag. This update does not create a new Zenodo deposit.
 
