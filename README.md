@@ -43,8 +43,6 @@ cp main.pdf paper.pdf
 manuscript results**, including the main circular-law theorem, both degree
 regimes, and both quantitative joint minimum estimates. It uses the actual
 independent row-slice and Bernoulli laws and the paper's variance normalization.
-The main theorem requires one sufficiently large absolute C; its value has
-not been optimized.
 
 The main proof is
 [`main_circular_law_theorem`](formalization/CircularLaw/CircularLawProvedRegimes.lean).
