@@ -100,6 +100,11 @@ Use the **Cite this repository** menu on GitHub or
 code, also record the repository commit or tag. The
 [earlier v1.0 deposit](https://doi.org/10.5281/zenodo.21752784) remains available.
 
-## Copyright
+## Licensing
 
-Copyright © 2026 Griffin P. Hurt. All rights reserved. See [`COPYRIGHT.md`](COPYRIGHT.md).
+The Lean sources, verification scripts, and Lean package configuration are
+licensed under [Apache 2.0](formalization/LICENSE). See
+[`formalization/NOTICE`](formalization/NOTICE) for the exact scope.
+
+The manuscript retains its separate copyright: © 2026 Griffin P. Hurt, all
+rights reserved. See [`COPYRIGHT.md`](COPYRIGHT.md) for the repository's terms.

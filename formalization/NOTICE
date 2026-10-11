@@ -1,0 +1,12 @@
+Circular-law Lean formalization
+Copyright 2026 Griffin P. Hurt
+
+The following project files are licensed under the Apache License, Version 2.0:
+- All Lean source files (*.lean) in this directory and its subdirectories.
+- The verification and audit scripts in scripts/.
+- lakefile.toml, lake-manifest.json, and lean-toolchain.
+
+The license text is provided in LICENSE. This grant is limited to the files
+listed above; the manuscript and other repository material retain the terms
+described in ../COPYRIGHT.md. Third-party dependencies and other third-party
+material remain subject to their respective licenses and notices.
